@@ -9,24 +9,29 @@ import { Provider } from 'react-redux';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
+
+// default initial state:
+// navbar: true,
+// dashboards: [],
+// user_id: null
 const initialState = {
   navbar: true,
-  dashboards: 1,
-  user_id: 1,
+  dashboards: [],
+  user_id: 2,
 }
 
 function reducer(state = initialState, action) {
-  console.log('%c reducer:', 'color: orange', state, action);
+  // console.log('%c reducer:', 'color: orange', state, action);
 
   switch (action.type) {
     case "TOGGLE_NAVBAR":
       return { ...state, navbar: !state.navbar }
-    case "ADD_DASHBOARD":
-      return { ...state, doashboards: action.payload }
+    case "SET_DASHBOARDS":
+      return { ...state, dashboards: action.payload }
     case "SET_USER":
       return { ...state, user_id: action.payload }
     default:
-      console.log('default case', state);
+      // console.log('default case', state);
       return state;
   }
 }

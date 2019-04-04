@@ -1,3 +1,5 @@
+/* ORGANIZED BY ALPHABETICAL ORDER */
+
 .App {
   text-align: center;
   border-color: black;
@@ -12,6 +14,28 @@
   border-color: pink;
   border-style: solid;
   border-radius: 1px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.dashboard {
+  background-color: rgba(228, 241, 254, 1);
+  padding: 10px;
+  margin: 10px;
+}
+
+.newsfeed {
+  border-color: rgba(92, 151, 191, 1);
+  border-style: solid;
+  background-color: rgba(197, 239, 247, 1);
+  padding: 10px;
+  margin: 10px;
+}
+
+.summary-card {
+  border-color: rgba(92, 151, 191, 1);
+  border-style: solid;
+  background-color: rgba(197, 239, 247, 1);
   padding: 10px;
   margin: 10px;
 }

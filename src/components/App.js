@@ -15,20 +15,16 @@ class App extends Component {
   }
 
 
-/**********************************************
-              FETCH FUNCTIONS
-**********************************************/
-
-  componentDidMount() {
-    fetch("http://localhost:3000/api/v1/dashboards")
-    .then(res => res.json())
-    .then( json => {
-      console.log(json);
-    })
+  /**********************************************
+                RENDER FUNCTIONS
+  **********************************************/
+  renderLandingPage() {
+    return (
+      <Fragment>
+        <h1> This will be a landing page </h1>
+      </Fragment>
+    )
   }
-
-
-
 
   renderLoggedIn() {
     return (
@@ -40,8 +36,7 @@ class App extends Component {
           :
           null
         }
-        <button onClick={this.showNavbar}>show nav</button>
-
+        <button onClick={this.showNavbar}>{this.props.navbar ? "hide nav" : "show nav"}</button>
         <h1>App Component</h1>
         <DashboardContainer />
       </Fragment>
@@ -49,14 +44,14 @@ class App extends Component {
   }
 
   render() {
-    console.log("app render", this.props);
     return (
       <div className="App">
+
         {
           !!this.props.user_id ?
           this.renderLoggedIn()
           :
-          null
+          this.renderLandingPage()
         }
       </div>
     );
@@ -65,7 +60,7 @@ class App extends Component {
 
 
 function mapStateToProps(state) {
-  console.log('%c mapStateToProps', 'color: yellow', state);
+  // console.log('%c mapStateToProps', 'color: yellow', state);
   // maps the state from the store to the props
   return {
     navbar: state.navbar,
