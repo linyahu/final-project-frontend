@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+  border-color: black;
+  border-style: dashed;
+  border-radius: 2px;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+.dash-container {
+  border-color: pink;
+  border-style: solid;
+  border-radius: 1px;
+  padding: 10px;
+  margin: 10px;
+}
