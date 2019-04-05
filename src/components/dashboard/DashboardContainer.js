@@ -3,11 +3,11 @@ import React, { Component, Fragment } from 'react'
 import Dashboard from './Dashboard'
 
 import { connect } from 'react-redux';
+import { NavLink, Switch } from 'react-router-dom';
 
 class DashboardContainer extends Component {
   state = {
     currentDash: "main",
-    createDash: false,
   }
 
   /**********************************************
@@ -98,6 +98,7 @@ class DashboardContainer extends Component {
 
 
   render() {
+    console.log("what is state?", this.state);
     return (
       <div className="dash-container">
         {this.renderDashboardNav()}
@@ -118,3 +119,21 @@ function mapStateToProps(state) {
 const HOC = connect(mapStateToProps)
 
 export default HOC(DashboardContainer);
+
+// OLD RENDER DASHBOARD NAV
+// renderDashboardNav = () => {
+  // if (!!this.props.dashboards) {
+  //   return (
+  //     <div className="dash-nav">
+  //     {
+  //       this.props.dashboards.map( dashboard => {
+  //         return (
+  //           <button onClick={this.changeDashboard} value={dashboard.name}>{dashboard.name}</button>
+  //         )
+  //       })
+  //     }
+  //     <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
+  //     </div>
+  //   )
+  // }
+// }

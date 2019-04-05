@@ -4,8 +4,7 @@ import DashboardContainer from './dashboard/DashboardContainer'
 import EquityContainer from './equity/EquityContainer'
 
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import { NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import '../assets/App.css';
 
@@ -23,9 +22,8 @@ class App extends Component {
   renderNavbar() {
     return (
       <nav className="navbar">
-        <Link to="/dashboards">Dashboards</Link>
-        <Link to="/equities">Equities</Link>
-        <Link to="/profile">Profile</Link>
+        <p><NavLink to="/dashboards">Dashboards</NavLink></p>
+        <p><NavLink to="/equities">Equities</NavLink></p>
       </nav>
     )
   }
@@ -48,11 +46,13 @@ class App extends Component {
           :
           null
         }
-        <button onClick={this.showNavbar}>{this.props.navbar ? "hide nav" : "show nav"}</button>
+        <button onClick={this.showNavbar}>{this.props.navbar ? "^" : "v"}</button>
         <h4>App Component</h4>
 
-        <Route path="/dashboards" component={() => <DashboardContainer />} />
-        <Route path="/equities" component={() => <EquityContainer />} />
+        <Switch>
+          <Route path="/dashboards" render={() => <DashboardContainer />} />
+          <Route path="/equities" render={() => <EquityContainer />} />
+        </Switch>
 
       </Fragment>
     )
