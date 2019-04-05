@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
+import Home from './Home'
 import DashboardContainer from './dashboard/DashboardContainer'
 import EquityContainer from './equity/EquityContainer'
 
@@ -20,6 +21,8 @@ class App extends Component {
                 RENDER FUNCTIONS
   **********************************************/
   renderNavbar() {
+    // the portfolio & logout nav is not currently working
+    // neither is the home & login
     return (
       <nav className="navbar">
         {
@@ -27,10 +30,14 @@ class App extends Component {
           <Fragment>
             <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/dashboards">Dashboards</NavLink>
             <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/equities">Equities</NavLink>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/portfolio">Portfolio</NavLink>
             <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/home">Logout</NavLink>
           </Fragment>
           :
-          <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/login">Login</NavLink>
+          <Fragment>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/home">Home</NavLink>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/login">Login</NavLink>
+          </Fragment>
         }
       </nav>
     )

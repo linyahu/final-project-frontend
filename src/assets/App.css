@@ -6,7 +6,17 @@
   float: right;
 }
 
-
+.eq-chart {
+  background-color: white;
+  border-color: red;
+  border-style: solid;
+  border-radius: 1px;
+  padding: 10px;
+  margin: auto;
+  width: 300px;
+  height: 180px;
+  color: white;
+}
 
 /********************************************
                   CLASSES
@@ -55,15 +65,7 @@
   grid-template-rows: 100px 100px 100px 100px 100px; */
 }
 
-.eq-chart {
-  border-color: red;
-  border-style: solid;
-  border-radius: 1px;
-  padding: 10px;
-  margin: auto;
-  width: 180px;
-  height: 180px;
-}
+
 
 .eq-container {
   border-color: rgba(31, 58, 147, 1);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Equity from './Equity'
+import Top from './Top'
 
 class EquityContainer extends Component {
   // this container is going to contain the equity list
@@ -21,7 +22,7 @@ class EquityContainer extends Component {
     return (
       <div className="eq-container">
       { this.renderEquityNav() }
-      <Equity />
+      <Top />
       </div>
     )
   }

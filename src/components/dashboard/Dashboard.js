@@ -52,6 +52,7 @@ class Dashboard extends Component {
           <Equity
             key={equity.id}
             ticker={equity.symbol}
+            companyName={equity.company_name}
           />
         )
       })}
