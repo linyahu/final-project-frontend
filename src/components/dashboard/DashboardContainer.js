@@ -98,7 +98,7 @@ class DashboardContainer extends Component {
 
 
   render() {
-    console.log("what is state?", this.state);
+    // console.log("what are props?", this.props);
     return (
       <div className="dash-container">
         {this.renderDashboardNav()}

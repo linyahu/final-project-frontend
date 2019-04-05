@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 class EquityChart extends Component {
 
   render() {
+    console.log("props in equity chart", this.props);
     return(
-      <div className="eq-chart">
-        <h4>equity chart</h4>
-      </div>
+      <canvas className="eq-chart">
+      </canvas>
     )
   }
 

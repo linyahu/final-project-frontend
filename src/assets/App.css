@@ -6,6 +6,8 @@
   float: right;
 }
 
+
+
 /********************************************
                   CLASSES
 ********************************************/
@@ -75,6 +77,13 @@
   padding: 10px;
   margin: 10px;
   display: inline-inline-block;
+}
+
+.navlink {
+  padding: 5px;
+  margin: 15px;
+  text-decoration: none;
+  color: rgba(92, 151, 191, 1);
 }
 
 .new-dash {

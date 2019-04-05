@@ -1,8 +1,14 @@
 import React, { Component, Fragment } from 'react'
 
-import SummaryCard from "./SummaryCard"
+import SummaryCard from './SummaryCard'
+import Newsfeed from './Newsfeed'
+import Equity from '../equity/Equity'
 
 class Dashboard extends Component {
+
+
+
+
 
   /**********************************************
                 RENDER FUNCTIONS
@@ -13,9 +19,7 @@ class Dashboard extends Component {
       // console.log(otherDashes);
       return (
         <Fragment>
-          <div className="newsfeed">
-            <h4> newsfeed list </h4>
-          </div>
+          <Newsfeed />
           {
             otherDashes.map( dashboard => {
               return (
@@ -32,11 +36,31 @@ class Dashboard extends Component {
 
   }
 
+  renderNewsfeed = () => {
+    if (this.props.dashboard.newsfeed) {
+      return <Newsfeed />
+    }
+  }
+
   renderCustom = () => {
-    console.log("gonna render a custom one!");
+    return (
+      <Fragment>
+      { this.renderNewsfeed() }
+      {
+        this.props.dashboard.equities.map( equity => {
+        return (
+          <Equity
+            key={equity.id}
+            ticker={equity.symbol}
+          />
+        )
+      })}
+      </Fragment>
+    )
   }
 
   render() {
+    // console.log("props in dashboard", this.props.dashboard);
     return (
       <div className="dashboard">
         <h3>{this.props.dashboard.name} dashboard</h3>

@@ -22,8 +22,16 @@ class App extends Component {
   renderNavbar() {
     return (
       <nav className="navbar">
-        <p><NavLink to="/dashboards">Dashboards</NavLink></p>
-        <p><NavLink to="/equities">Equities</NavLink></p>
+        {
+          !!this.props.user_id ?
+          <Fragment>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/dashboards">Dashboards</NavLink>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/equities">Equities</NavLink>
+            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/home">Logout</NavLink>
+          </Fragment>
+          :
+          <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/login">Login</NavLink>
+        }
       </nav>
     )
   }
@@ -39,19 +47,14 @@ class App extends Component {
   renderLoggedIn() {
     return (
       <Fragment>
-        {
-          this.props.navbar
-          ?
-          this.renderNavbar()
-          :
-          null
-        }
+
         <button onClick={this.showNavbar}>{this.props.navbar ? "^" : "v"}</button>
         <h4>App Component</h4>
 
         <Switch>
-          <Route path="/dashboards" render={() => <DashboardContainer />} />
-          <Route path="/equities" render={() => <EquityContainer />} />
+          <Route exact path="/dashboards" render={() => <DashboardContainer />} />
+
+          <Route exact path="/equities" render={() => <EquityContainer />} />
         </Switch>
 
       </Fragment>
@@ -61,6 +64,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {
+          this.props.navbar
+          ?
+          this.renderNavbar()
+          :
+          null
+        }
 
         {
           !!this.props.user_id ?

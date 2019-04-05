@@ -18,6 +18,8 @@ const initialState = {
   navbar: true,
   dashboards: [],
   user_id: 2,
+  // dashboardEquities: [], ?? probably don't have access to this
+  portfolioEquities: []
 }
 
 function reducer(state = initialState, action) {
@@ -30,6 +32,8 @@ function reducer(state = initialState, action) {
       return { ...state, dashboards: action.payload }
     case "SET_USER":
       return { ...state, user_id: action.payload }
+    case "SET_PORTFOLIO_EQUITIES":
+      return { ...state, portfolioEquities: action.payload }
     default:
       // console.log('default case', state);
       return state;
