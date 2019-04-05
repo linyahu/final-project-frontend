@@ -7,13 +7,22 @@ import { connect } from 'react-redux';
 class DashboardContainer extends Component {
   state = {
     currentDash: "main",
+    createDash: false,
   }
 
   /**********************************************
               CHANGE STATE FUNCTIONS
   **********************************************/
   changeDashboard = (e) => {
-    this.setState({ currentDash: e.target.value })
+    if (this.state.currentDash === "create" && e.target.value !== "create") {
+      // if the current dashboard is the create new
+      // and you haven't saved yet, it will pop up an alert to ask
+      // the user if you're sure
+      let a = window.confirm("you haven't saved, are you sure you want to exit?")
+      a && this.setState({ currentDash: e.target.value })
+    } else {
+      this.setState({ currentDash: e.target.value })
+    }
   }
 
   /**********************************************
@@ -41,10 +50,23 @@ class DashboardContainer extends Component {
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
+  renderNewDashboard = () => {
+    return (
+      <form className="new-dash">
+        <input type="text" placeholder="enter dashboard name" />
+        <br />
+        <button>save</button>
+      </form>
+    )
+  }
+
+
+  // creates the "navbar" of the different dashboards
+  // maps through each of them and creates a little "tab" button
   renderDashboardNav = () => {
     if (!!this.props.dashboards) {
       return (
-        <Fragment>
+        <div className="dash-nav">
         {
           this.props.dashboards.map( dashboard => {
             return (
@@ -52,23 +74,28 @@ class DashboardContainer extends Component {
             )
           })
         }
-        <button>create new</button>
-        </Fragment>
+        <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
+        </div>
       )
     }
   }
 
   renderDashboards = () => {
     if (this.props.dashboards != "") {
-      let dashboard = this.props.dashboards.find( d => d.name === this.state.currentDash)
-      return (
-        <Dashboard
-          dashboard={dashboard}
-          allDashboards={this.props.dashboards}
-        />
-      )
+      if (this.state.currentDash === "create") {
+        return this.renderNewDashboard()
+      } else {
+        let dashboard = this.props.dashboards.find( d => d.name === this.state.currentDash)
+        return (
+          <Dashboard
+            dashboard={dashboard}
+            allDashboards={this.props.dashboards}
+          />
+        )
+      }
     }
   }
+
 
   render() {
     return (

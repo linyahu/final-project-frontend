@@ -1,27 +1,64 @@
 /* ORGANIZED BY ALPHABETICAL ORDER */
 
+#plus-btn {
+  width: 20px;
+  padding: 2px;
+  float: right;
+}
+
+/********************************************
+                  CLASSES
+********************************************/
 .App {
   text-align: center;
-  border-color: black;
+  /* border-color: black;
   border-style: dashed;
-  border-radius: 2px;
+  border-radius: 2px; */
   padding: 10px;
-  margin: 10px;
+  /* margin: 10px; */
 }
 
 
 .dash-container {
-  border-color: pink;
+  border-color: rgba(31, 58, 147, 1);
   border-style: solid;
   border-radius: 1px;
   padding: 10px;
   margin: 10px;
 }
 
+.dash-nav {
+  padding: 10px;
+}
+
+.dash-nav button {
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+  width: 100px;
+}
+
 .dashboard {
   background-color: rgba(228, 241, 254, 1);
-  padding: 10px;
-  margin: 10px;
+  padding: 25px;
+  margin: 25px;
+  /* display: table; */
+  /* height: 800px;
+  display: grid;
+  grid-template-columns: 200px 200px 200px 200px;
+  grid-template-rows: 100px 100px 100px 100px 100px; */
+}
+
+.new-dash {
+  background-color: rgba(228, 241, 254, 1);
+  padding: 25px;
+  margin: 25px;
+}
+
+.new-dash input {
+  width: 200px;
+  margin: 5px;
 }
 
 .newsfeed {
@@ -30,6 +67,12 @@
   background-color: rgba(197, 239, 247, 1);
   padding: 10px;
   margin: 10px;
+  /* grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 6; */
+  /* float: left; */
+  /* display: table-cell; */
 }
 
 .summary-card {
@@ -38,4 +81,8 @@
   background-color: rgba(197, 239, 247, 1);
   padding: 10px;
   margin: 10px;
+  /* grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 4; */
 }
