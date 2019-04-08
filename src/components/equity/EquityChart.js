@@ -4,23 +4,7 @@ import { Line } from 'react-chartjs-2';
 
 class EquityChart extends Component {
   state = {
-    data: {
-      labels: [],
-      datasets: [{
-            label: '',
-            backgroundColor: 'rgb(0,0,0,0)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: []
-        }]
-    },
-    legend: {
-      display: false,
-    },
-    options: {
-      scales: {
 
-      }
-    }
 
   }
 
@@ -43,11 +27,11 @@ class EquityChart extends Component {
       <div className="eq-chart">
         { this.renderChart() }
         <Line
-          data={this.state.data}
-          width={300}
+          data={this.props.data}
+          width={600}
           height={180}
-          legend={this.state.legend}
-          options={this.state.options}
+          legend={this.props.legend}
+          options={this.props.options}
         />
       </div>
     )

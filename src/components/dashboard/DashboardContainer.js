@@ -132,11 +132,12 @@ class DashboardContainer extends Component {
       } else {
         let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
         // debugger
-        console.log("my dashboard!", dashboard);
+        // console.log("my dashboard!", dashboard);
         return (
           <Dashboard
             dashboard={dashboard}
             allDashboards={this.props.dashboards}
+            edit={this.editDashboard}
           />
         )
       }

@@ -6,7 +6,7 @@ class Top extends Component {
 
   renderTenEquities = (prop) => {
     // debugger
-    console.log("%c render ten equities", "color: green", prop, this.props[prop]);
+    // console.log("%c render ten equities", "color: green", prop, this.props[prop]);
     return (
       <Fragment>
         <h3> top {prop} </h3>
@@ -24,7 +24,7 @@ class Top extends Component {
 
   render() {
     // debugger
-    console.log("%c top", "color: orange", this.props);
+    // console.log("%c top", "color: orange", this.props);
     return (
       <div>
         {

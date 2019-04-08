@@ -40,7 +40,7 @@ class Dashboard extends Component {
   renderCustom = () => {
     return (
       <Fragment>
-      <button>edit</button>
+      <button onClick={this.props.edit}>edit</button>
       <h3>{this.props.dashboard.name} dashboard</h3>
       { this.renderNewsfeed() }
       {

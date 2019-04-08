@@ -8,7 +8,7 @@ class TopSummary extends Component {
 
   render() {
     // debugger
-    console.log("%c top", "color: orange", this.props);
+    // console.log("%c top", "color: orange", this.props);
     return (
       <div className="card">
         <Equity

@@ -84,10 +84,6 @@ class App extends Component {
   renderLoggedIn() {
     return (
       <Fragment>
-
-        <button onClick={this.showNavbar}>{this.props.navbar ? "^" : "v"}</button>
-        <h4>App Component</h4>
-
         <Switch>
 
           <Route path="/dashboards/:name" component={DashboardContainer} />
@@ -96,7 +92,6 @@ class App extends Component {
           <Route path="/equities/:view" component={ props => <EquityContainer {...props} />} />
 
         </Switch>
-
       </Fragment>
     )
   }
