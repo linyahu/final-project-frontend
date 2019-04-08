@@ -12,14 +12,13 @@ class EquityContainer extends Component {
   // on the equities page
   state = {
     search: "",
-    showEquityProfile: false,
     equities: [],
     losers: [],
     gainers: [],
     infocus: [],
-    volume: [],
+    // volume: [],
     mostActive: [],
-    percent: [],
+    // percent: [],
   }
 
   /**********************************************
@@ -31,8 +30,7 @@ class EquityContainer extends Component {
 
   handleSearch = (e) => {
     e.preventDefault()
-    // this.props.history.push("/equities/profiles")
-    console.log("handlesearch", this.props);
+    this.props.history.push(`/equities/search?=${this.state.search}`)
     this.fetchEquitiesFromDatabase()
   }
 
@@ -44,8 +42,8 @@ class EquityContainer extends Component {
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()
-    this.fetchVolume()
-    this.fetchPercent()
+    // this.fetchVolume()
+    // this.fetchPercent()
     this.fetchInFocus()
   }
 
@@ -60,7 +58,7 @@ class EquityContainer extends Component {
       // finding equities that match search
       // either ticker or company name includes search
       let equities = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search))
-      this.setState({ equities, showEquityProfile: true })
+      this.setState({ equities })
     })
   }
 
@@ -124,10 +122,13 @@ class EquityContainer extends Component {
   **********************************************/
   renderEquityProfile = () => {
     // console.log("what is the state right now", this.state.equities);
+    // console.log("can i get access to params");
+
     return this.state.equities.map( equity => {
-      console.log(equity);
+      // console.log(equity);
       return (
         <EquityProfile
+          key={equity.id}
           equity={equity}
         />
       )
@@ -170,23 +171,19 @@ class EquityContainer extends Component {
   }
 
   render() {
-    // console.log(this.state.equities);
-    // console.log("%c props in here", "color: blue", this.props);
     return (
       <div className="eq-container">
         { this.renderSearchBar() }
         {
-          this.state.showEquityProfile ?
-          this.renderEquityProfile()
-          :
+          this.props.match.params.view === "top" ?
           <Top
             gainers={this.state.gainers}
             losers={this.state.losers}
             infocus={this.state.infocus}
             mostActive={this.state.mostActive}
-            percent={this.state.percent}
-            volume={this.state.volume}
           />
+          :
+          this.renderEquityProfile()
         }
       </div>
     )
@@ -195,3 +192,16 @@ class EquityContainer extends Component {
 } // end of EquityContainer
 
 export default EquityContainer
+
+// previous render
+// {
+//   this.state.showEquityProfile ?
+//   this.renderEquityProfile()
+//   :
+//   <Top
+//     gainers={this.state.gainers}
+//     losers={this.state.losers}
+//     infocus={this.state.infocus}
+//     mostActive={this.state.mostActive}
+//   />
+// }
