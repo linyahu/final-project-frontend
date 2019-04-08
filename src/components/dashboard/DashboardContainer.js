@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 
 import Dashboard from './Dashboard'
+import CreateNewDashboard from './CreateNewDashboard'
 
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -9,10 +10,7 @@ class DashboardContainer extends Component {
   state = {
     // currentDash: "main",
     editDash: false,
-    search: "",
-    dashName: "",
-    addNewsfeed: false,
-    newEquities: [],
+    showNewForm: false,
   }
 
   /**********************************************
@@ -22,16 +20,20 @@ class DashboardContainer extends Component {
     console.log("gonna edit this dashboard");
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  showForm = () => {
+    this.setState({ showNewForm: true })
   }
 
-  /**********************************************
-              CHANGE STATE FUNCTIONS
-  **********************************************/
+  closeForm = () => {
+    this.setState({ showNewForm: false })
+  }
 
+  goToNewlyCreatedDashboard = (name, equities) => {
+    this.setState({ showNewForm: false })
+    // this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: [...this.props.dashboardEquities, equities] })
+    this.props.history.push(`/dashboards/${name}`)
+    window.location.reload()
+  }
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
@@ -50,54 +52,25 @@ class DashboardContainer extends Component {
     .then(res => res.json())
     .then( json => {
       let dashboards = json.filter( d => d.user_id === this.props.user_id)
-      // console.log('%c in fetchDashboards', 'color: blue', dashboards);
-      this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards})
+      let equities = dashboards.map( d => d.equities ).flat()
+
+      // console.log('%c in fetchDashboards', 'color: blue', dashboards, 'equities', equities);
+      this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards })
+      this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: equities })
     })
   }
 
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
-  renderNewDashboard = () => {
+  renderNewForm = () => {
     return (
-      <div className="new-dash">
-        <form>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="dashName"
-            value={this.state.dashName}
-            placeholder="enter dashboard name"
-          />
-          <br />
-          <div className="droppable">
-            <h4>this elemet will be a blank dashboard to drag elements to </h4>
-          </div>
-          <button>save</button>
-
-        </form>
-
-        <div className="draggable">
-          <div className="newsfeed">
-            <h4> newsfeed component </h4>
-          </div>
-
-          <form>
-            <label>search for equities</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              name="search"
-              value={this.state.search}
-              placeholder="type a ticker or company name" />
-          </form>
-
-        </div>
-
-      </div>
+      <CreateNewDashboard
+        closeForm={this.closeForm}
+        goToNewDashboard={this.goToNewlyCreatedDashboard}
+      />
     )
   }
-
 
   // creates the "navbar" of the different dashboards
   // maps through each of them and creates a little "tab" button
@@ -115,32 +88,41 @@ class DashboardContainer extends Component {
             )
           })
         }
-        <NavLink
-        id="plus-btn"
-        activeStyle={{ background: "rgba(0,153,153,0.2)", color: "white"}}
-        to="/dashboards/new">+</NavLink>
+        <button
+          onClick={this.showForm}
+          id="plus-btn"
+          >+</button>
+        {/*
+          <NavLink
+            id="plus-btn"
+            activeStyle={{ background: "rgba(0,153,153,0.2)", color: "white"}}
+            to="/dashboards/new">+</NavLink>
+        */}
         </div>
       )
     }
   }
 
   renderDashboards = () => {
-    // console.log("props.match?", this.props.match);
     if (!!this.props.match.params.name) {
-      if (this.props.match.params.name === "new") {
-        return this.renderNewDashboard()
-      } else {
-        let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
-        // debugger
-        // console.log("my dashboard!", dashboard);
-        return (
+      let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
+      return (
+        <Fragment>
+          {
+            this.state.showNewForm ?
+            this.renderNewForm()
+            :
+            null
+          }
+
           <Dashboard
+            equities={this.props.dashboardEquities}
             dashboard={dashboard}
             allDashboards={this.props.dashboards}
             edit={this.editDashboard}
           />
-        )
-      }
+        </Fragment>
+      )
     } else {
       this.props.history.push("/dashboards/main")
     }
@@ -148,12 +130,11 @@ class DashboardContainer extends Component {
 
 
   render() {
-
+    console.log("%c dashboards", "color: blue", this.props.dashboards, "dashboard equities", this.props.dashboardEquities);
     return (
       <div className="dash-container">
         {this.renderDashboardNav()}
         {this.renderDashboards()}
-
       </div>
     )
   }
@@ -163,26 +144,11 @@ class DashboardContainer extends Component {
 function mapStateToProps(state) {
   return {
     user_id: state.user_id,
-    dashboards: state.dashboards
+    dashboards: state.dashboards,
+    dashboardEquities: state.dashboardEquities,
   }
 }
 
 const HOC = connect(mapStateToProps)
 
 export default HOC(DashboardContainer);
-
-// OLD RENDER DASHBOARD NAV
-// if (!!this.props.dashboards) {
-//   return (
-//     <div className="nav-dash">
-//     {
-//       this.props.dashboards.map( dashboard => {
-//         return (
-//           <button onClick={this.changeDashboard} value={dashboard.name}>{dashboard.name}</button>
-//         )
-//       })
-//     }
-//     <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
-//     </div>
-//   )
-// }

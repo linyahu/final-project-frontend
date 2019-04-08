@@ -5,16 +5,13 @@ import EquityChart from './EquityChart'
 class Equity extends Component {
   state ={
     data: {
-      borderColor: 'rgb(255,255,255,1)',
-      lineColor: 'rgb(255,255,255,1)',
       labels: [],
       datasets: [{
             label: '',
-            // backgroundColor: 'rgb(255, 205, 86)',
-            borderColor: 'rgb(255, 205, 86)',
+            borderColor: 'rgb(255,255,255,1)',
+            backgroundColor:'rgb(255,255,255,1)',
+            showLine: true,
             pointBorderColor: 'rgb(255,255,255,1)',
-            // pointBackgroundColor: 'rgb(255,255,255,1)',
-            lineColor: 'rgb(255,255,255,1)',
             data: []
         }]
     },
@@ -26,6 +23,7 @@ class Equity extends Component {
       scales: {
         xAxes: [{
           ticks: {
+            display: false, // show label
             fontColor: 'rgba(255,255,255,1)'
           },
           gridLines: {
@@ -59,36 +57,32 @@ class Equity extends Component {
                   FETCH FUNCTIONS
   **********************************************/
   fetchIntradayData() {
-
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/dynamic`)
     .then(res => res.json())
     .then( json => {
-      console.log(json);
-      // this.setState({ data: json.data })
-      // let datapoints = []
-      let datapoints = json.data.map( d => {
-        if (d.average > -1) {
-          return d.average
-        } else if (d.marketAverage > -1){
-          return d.marketAverage
-        }
-      })
+      if(!!json.data) {
+        let datapoints = json.data.map( d => {
+          if (d.average > -1) {
+            return d.average
+          } else if (d.marketAverage > -1){
+            return d.marketAverage
+          }
+        })
 
-      let labels = json.data.map( d => d.label)
+        let labels = json.data.map( d => d.label)
 
-      console.log("fetch intraday data", datapoints, labels)
-
-      this.setState({
-        data: {
-          labels: labels,
-          datasets: [{
-                label: '',
-                backgroundColor: 'rgb(0,0,0,0)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: datapoints
-            }]
-        }
-      })
+        this.setState({
+          data: {
+            labels: labels,
+            datasets: [{
+                  label: '',
+                  backgroundColor: 'rgb(0,0,0,0)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: datapoints
+              }]
+          }
+        })
+      }
     })
   }
 
@@ -116,9 +110,7 @@ class Equity extends Component {
   **********************************************/
 
   render() {
-    // console.log("setting state with stats", this.state.stats);
-    // console.log("what are props again", this.props);
-    console.log(this.state.data);
+
     return (
       <div className="equity-card">
         <h5>{this.props.ticker} - {this.props.companyName}</h5>

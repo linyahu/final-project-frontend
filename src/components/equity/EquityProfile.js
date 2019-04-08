@@ -6,7 +6,7 @@ import Equity from './Equity'
 class EquityProfile extends Component {
 
   render() {
-    console.log("%c props in equity profile?", "color: orange", this.props);
+    // console.log("%c props in equity profile?", "color: orange", this.props);
     return (
       <div className="eq-profile">
         <h3>{this.props.equity.company_name}</h3>

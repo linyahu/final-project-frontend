@@ -4,6 +4,7 @@ import Home from './Home'
 import Login from './Login'
 import DashboardContainer from './dashboard/DashboardContainer'
 import Dashboard from './dashboard/Dashboard'
+import EditDashboard from './dashboard/EditDashboard'
 import EquityContainer from './equity/EquityContainer'
 
 import { connect } from 'react-redux';
@@ -37,7 +38,7 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/equities/top">Equities</NavLink>
+              to="/equities">Equities</NavLink>
 
           {/*
             <NavLink
@@ -85,11 +86,12 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
-
+          <Route exact path="/dashboards/:name/edit" component={EditDashboard} />
           <Route path="/dashboards/:name" component={DashboardContainer} />
           <Route path="/dashboards" component={DashboardContainer} />
 
           <Route path="/equities/:view" component={ props => <EquityContainer {...props} />} />
+          <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
         </Switch>
       </Fragment>

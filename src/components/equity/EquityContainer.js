@@ -136,23 +136,10 @@ class EquityContainer extends Component {
   }
 
   renderTop = () => {
-
+    if (this.props.view === "top") {
+      this.props.history.push("/equities/top")
+    }
   }
-
-  // renderEquityNav = () => {
-  //   return (
-  //     <div className="navbar">
-  //       <NavLink
-  //         className="navlink-dash"
-  //         activeStyle={{ fontWeight: "bold"}}
-  //         to={"/equities/top"}>top</NavLink>
-  //       <NavLink
-  //         className="navlink-dash"
-  //         activeStyle={{ fontWeight: "bold"}}
-  //         to={"/equities/top"}>top</NavLink>
-  //     </div>
-  //   )
-  // }
 
   renderSearchBar = () => {
     return (
@@ -171,9 +158,11 @@ class EquityContainer extends Component {
   }
 
   render() {
+    // console.log(this.props);
     return (
       <div className="eq-container">
         { this.renderSearchBar() }
+        { this.renderTop() }
         {
           this.props.match.params.view === "top" ?
           <Top

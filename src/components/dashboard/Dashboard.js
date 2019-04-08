@@ -4,9 +4,9 @@ import SummaryCard from './SummaryCard'
 import Newsfeed from './Newsfeed'
 import Equity from '../equity/Equity'
 
+import { NavLink } from 'react-router-dom';
+
 class Dashboard extends Component {
-
-
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
@@ -16,7 +16,7 @@ class Dashboard extends Component {
       return (
         <Fragment>
           <h3>{this.props.dashboard.name} dashboard</h3>
-          <Newsfeed />
+          <Newsfeed equities={this.props.equities}/>
           {
             otherDashes.map( dashboard => {
               return (
@@ -33,16 +33,26 @@ class Dashboard extends Component {
 
   renderNewsfeed = () => {
     if (this.props.dashboard.newsfeed) {
-      return <Newsfeed />
+      return (
+        <Newsfeed
+          equities={this.props.dashboard.equities}
+        />
+      )
     }
   }
 
   renderCustom = () => {
     return (
       <Fragment>
-      <button onClick={this.props.edit}>edit</button>
+
+      <NavLink
+      className="navlink-dash"
+      activeStyle={{ fontWeight: "bold"}}
+      to={`/dashboards/${this.props.dashboard.name}/edit`}> edit </NavLink>
+
       <h3>{this.props.dashboard.name} dashboard</h3>
       { this.renderNewsfeed() }
+      <div className="dashboard-equities">
       {
         this.props.dashboard.equities.map( equity => {
         return (
@@ -53,11 +63,13 @@ class Dashboard extends Component {
           />
         )
       })}
+      </div>
       </Fragment>
     )
   }
 
   render() {
+    console.log("%c props in dashboard", "color: orange", this.props);
     return (
       <div className="dashboard">
       {

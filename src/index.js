@@ -15,10 +15,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // dashboards: [],
 // user_id: null
 const initialState = {
+  user_id: 2,
   navbar: true,
   dashboards: [],
-  user_id: 2,
-  // dashboardEquities: [], ?? probably don't have access to this
+  dashboardEquities: [],
   hasPortfolio: false,
   portfolioEquities: []
 }
@@ -35,6 +35,8 @@ function reducer(state = initialState, action) {
       return { ...state, user_id: action.payload }
     case "SET_PORTFOLIO_EQUITIES":
       return { ...state, portfolioEquities: action.payload }
+    case "SET_DASHBOARD_EQUITIES":
+      return { ...state, dashboardEquities: action.payload }
     default:
       // console.log('default case', state);
       return state;
