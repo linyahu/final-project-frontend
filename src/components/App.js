@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 
 import Home from './Home'
+import Login from './Login'
 import DashboardContainer from './dashboard/DashboardContainer'
+import Dashboard from './dashboard/Dashboard'
 import EquityContainer from './equity/EquityContainer'
 
 import { connect } from 'react-redux';
@@ -28,25 +30,53 @@ class App extends Component {
         {
           !!this.props.user_id ?
           <Fragment>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/dashboards">Dashboards</NavLink>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/equities">Equities</NavLink>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/portfolio">Portfolio</NavLink>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/home">Logout</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/dashboards">Dashboards</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/equities">Equities</NavLink>
+
+          {/*
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/portfolio">Portfolio</NavLink>
+          */}
+
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/home">Logout</NavLink>
           </Fragment>
           :
           <Fragment>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/home">Home</NavLink>
-            <NavLink className="navlink" activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}} to="/login">Login</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/home">Home</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/login">Login</NavLink>
           </Fragment>
         }
       </nav>
     )
   }
 
-  renderLandingPage() {
+  renderNotLoggedIn() {
     return (
       <Fragment>
         <h1> This will be a landing page </h1>
+        <Switch>
+          <Route exact path="/home" render={() => <Home />} />
+
+          <Route exact path="/login" render={() => <Login />} />
+
+        </Switch>
       </Fragment>
     )
   }
@@ -59,9 +89,13 @@ class App extends Component {
         <h4>App Component</h4>
 
         <Switch>
-          <Route exact path="/dashboards" render={() => <DashboardContainer />} />
 
-          <Route exact path="/equities" render={() => <EquityContainer />} />
+          <Route path="/dashboards/:name" component={DashboardContainer} />
+          <Route path="/dashboards" component={DashboardContainer} />
+
+          <Route path="/equities/:view" component={EquityContainer} />
+          <Route path="/equities" render={() => <EquityContainer view="top"/>} />
+
         </Switch>
 
       </Fragment>
@@ -83,7 +117,7 @@ class App extends Component {
           !!this.props.user_id ?
           this.renderLoggedIn()
           :
-          this.renderLandingPage()
+          this.renderNotLoggedIn()
         }
       </div>
     );

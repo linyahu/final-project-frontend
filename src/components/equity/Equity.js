@@ -33,6 +33,7 @@ class Equity extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
     .then(res => res.json())
     .then( json => {
+      console.log(json);
       this.setState({
         stats: {
           open: json.open,
@@ -54,15 +55,20 @@ class Equity extends Component {
 
   render() {
     // console.log("setting state with stats", this.state.stats);
-    console.log("what are props again", this.props);
+    // console.log("what are props again", this.props);
     return (
-      <div className="equity card">
-        <h5>{this.props.ticker} </h5>
+      <div className="equity-card">
+        <h5>{this.props.ticker} - {this.props.companyName}</h5>
         <EquityChart
           ticker={this.props.ticker}
           equityData={this.state.data}
         />
-        <p> last price | % change </p>
+        <h6>
+          open: {this.state.stats.open} |
+          close: {this.state.stats.close} |
+          high: {this.state.stats.high} |
+          low: {this.state.stats.low}
+        </h6>
       </div>
     )
   }

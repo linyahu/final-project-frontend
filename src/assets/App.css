@@ -4,6 +4,9 @@
   width: 20px;
   padding: 2px;
   float: right;
+  text-decoration: none;
+  color: rgba(0, 181, 204, 1);
+  /* background-color: rgba(0,153,153,0.2); */
 }
 
 .eq-chart {
@@ -31,6 +34,10 @@
 }
 
 .card {
+  border-color: black;
+  border-style: dashed;
+  margin: 20px;
+  padding: 20px;
 
 }
 
@@ -40,18 +47,6 @@
   border-radius: 1px;
   padding: 10px;
   margin: 10px;
-}
-
-.dash-nav {
-  padding: 10px;
-}
-
-.dash-nav button {
-  margin: auto;
-  margin-left: 10px;
-  margin-right: 10px;
-  float: left;
-  width: 100px;
 }
 
 .dashboard {
@@ -65,7 +60,21 @@
   grid-template-rows: 100px 100px 100px 100px 100px; */
 }
 
+.draggable {
+  border-style: solid;
+  border-color: black;
+  padding: 20px;
+  margin: 20px;
 
+}
+
+.droppable {
+  border-style: dashed;
+  border-color: red;
+  padding: 20px;
+  margin: 20px;
+  height: 150px;
+}
 
 .eq-container {
   border-color: rgba(31, 58, 147, 1);
@@ -75,10 +84,35 @@
   margin: 10px;
 }
 
+.eq-profile {
+  width: 800px;
+  border-color: rgba(31, 58, 147, 1);
+  border-style: solid;
+  padding: 10px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.eq-profile-details {
+  align-content: center;
+  text-align: left;
+  width: 500px;
+  margin: auto;
+}
+
+.eq-top {
+  margin: auto;
+}
+
 .navbar {
   padding: 10px;
   margin: 10px;
   display: inline-inline-block;
+}
+
+.nav-dash {
+  padding: 10px;
 }
 
 .navlink {
@@ -86,6 +120,17 @@
   margin: 15px;
   text-decoration: none;
   color: rgba(92, 151, 191, 1);
+}
+
+.navlink-dash  {
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: rgba(0, 181, 204, 1);
+  padding: 2px;
+  float: left;
+  width: 100px;
 }
 
 .new-dash {
@@ -112,6 +157,18 @@
   /* float: left; */
   /* display: table-cell; */
 }
+
+
+.searchbar {
+  width: 150px;
+  float: right;
+  margin: auto;
+}
+
+.searchbar-btn {
+  float: right;
+}
+
 
 .summary-card {
   border-color: rgba(92, 151, 191, 1);

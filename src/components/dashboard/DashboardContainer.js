@@ -3,27 +3,35 @@ import React, { Component, Fragment } from 'react'
 import Dashboard from './Dashboard'
 
 import { connect } from 'react-redux';
-import { NavLink, Switch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class DashboardContainer extends Component {
   state = {
-    currentDash: "main",
+    // currentDash: "main",
+    editDash: false,
+    search: "",
+    dashName: "",
+    addNewsfeed: false,
+    newEquities: [],
+  }
+
+  /**********************************************
+                  EVENT FUNCTIONS
+  **********************************************/
+  editDashboard = () => {
+    console.log("gonna edit this dashboard");
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   /**********************************************
               CHANGE STATE FUNCTIONS
   **********************************************/
-  changeDashboard = (e) => {
-    if (this.state.currentDash === "create" && e.target.value !== "create") {
-      // if the current dashboard is the create new
-      // and you haven't saved yet, it will pop up an alert to ask
-      // the user if you're sure
-      let a = window.confirm("you haven't saved, are you sure you want to exit?")
-      a && this.setState({ currentDash: e.target.value })
-    } else {
-      this.setState({ currentDash: e.target.value })
-    }
-  }
+
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
@@ -52,11 +60,41 @@ class DashboardContainer extends Component {
   **********************************************/
   renderNewDashboard = () => {
     return (
-      <form className="new-dash">
-        <input type="text" placeholder="enter dashboard name" />
-        <br />
-        <button>save</button>
-      </form>
+      <div className="new-dash">
+        <form>
+          <input
+            onChange={this.handleChange}
+            type="text"
+            name="dashName"
+            value={this.state.dashName}
+            placeholder="enter dashboard name"
+          />
+          <br />
+          <div className="droppable">
+            <h4>this elemet will be a blank dashboard to drag elements to </h4>
+          </div>
+          <button>save</button>
+
+        </form>
+
+        <div className="draggable">
+          <div className="newsfeed">
+            <h4> newsfeed component </h4>
+          </div>
+
+          <form>
+            <label>search for equities</label>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="search"
+              value={this.state.search}
+              placeholder="type a ticker or company name" />
+          </form>
+
+        </div>
+
+      </div>
     )
   }
 
@@ -66,26 +104,35 @@ class DashboardContainer extends Component {
   renderDashboardNav = () => {
     if (!!this.props.dashboards) {
       return (
-        <div className="dash-nav">
+        <div className="navbar">
         {
           this.props.dashboards.map( dashboard => {
             return (
-              <button onClick={this.changeDashboard} value={dashboard.name}>{dashboard.name}</button>
+              <NavLink
+              className="navlink-dash"
+              activeStyle={{ fontWeight: "bold"}}
+              to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>
             )
           })
         }
-        <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
+        <NavLink
+        id="plus-btn"
+        activeStyle={{ background: "rgba(0,153,153,0.2)", color: "white"}}
+        to="/dashboards/new">+</NavLink>
         </div>
       )
     }
   }
 
   renderDashboards = () => {
-    if (this.props.dashboards != "") {
-      if (this.state.currentDash === "create") {
+    // console.log("props.match?", this.props.match);
+    if (!!this.props.match.params.name) {
+      if (this.props.match.params.name === "new") {
         return this.renderNewDashboard()
       } else {
-        let dashboard = this.props.dashboards.find( d => d.name === this.state.currentDash)
+        let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
+        // debugger
+        console.log("my dashboard!", dashboard);
         return (
           <Dashboard
             dashboard={dashboard}
@@ -93,16 +140,19 @@ class DashboardContainer extends Component {
           />
         )
       }
+    } else {
+      this.props.history.push("/dashboards/main")
     }
   }
 
 
   render() {
-    // console.log("what are props?", this.props);
+
     return (
       <div className="dash-container">
         {this.renderDashboardNav()}
         {this.renderDashboards()}
+
       </div>
     )
   }
@@ -121,19 +171,17 @@ const HOC = connect(mapStateToProps)
 export default HOC(DashboardContainer);
 
 // OLD RENDER DASHBOARD NAV
-// renderDashboardNav = () => {
-  // if (!!this.props.dashboards) {
-  //   return (
-  //     <div className="dash-nav">
-  //     {
-  //       this.props.dashboards.map( dashboard => {
-  //         return (
-  //           <button onClick={this.changeDashboard} value={dashboard.name}>{dashboard.name}</button>
-  //         )
-  //       })
-  //     }
-  //     <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
-  //     </div>
-  //   )
-  // }
+// if (!!this.props.dashboards) {
+//   return (
+//     <div className="nav-dash">
+//     {
+//       this.props.dashboards.map( dashboard => {
+//         return (
+//           <button onClick={this.changeDashboard} value={dashboard.name}>{dashboard.name}</button>
+//         )
+//       })
+//     }
+//     <button id="plus-btn" onClick={this.changeDashboard} value="create">+</button>
+//     </div>
+//   )
 // }

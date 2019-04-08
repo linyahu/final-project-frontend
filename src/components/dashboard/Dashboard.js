@@ -7,18 +7,15 @@ import Equity from '../equity/Equity'
 class Dashboard extends Component {
 
 
-
-
-
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
   renderMain = () => {
-    // if (this.props.dashboard.name === "main") {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
       // console.log(otherDashes);
       return (
         <Fragment>
+          <h3>{this.props.dashboard.name} dashboard</h3>
           <Newsfeed />
           {
             otherDashes.map( dashboard => {
@@ -32,8 +29,6 @@ class Dashboard extends Component {
           }
         </Fragment>
       )
-    // }
-
   }
 
   renderNewsfeed = () => {
@@ -45,6 +40,8 @@ class Dashboard extends Component {
   renderCustom = () => {
     return (
       <Fragment>
+      <button>edit</button>
+      <h3>{this.props.dashboard.name} dashboard</h3>
       { this.renderNewsfeed() }
       {
         this.props.dashboard.equities.map( equity => {
@@ -61,17 +58,21 @@ class Dashboard extends Component {
   }
 
   render() {
-    // console.log("props in dashboard", this.props.dashboard);
     return (
       <div className="dashboard">
-        <h3>{this.props.dashboard.name} dashboard</h3>
-        {
-          this.props.dashboard.name === "main" ?
-          this.renderMain()
-          :
-          this.renderCustom()
-        }
-
+      {
+        !!this.props.dashboard ?
+        <Fragment>
+          {
+            this.props.dashboard.name === "main" ?
+            this.renderMain()
+            :
+            this.renderCustom()
+          }
+        </Fragment>
+        :
+        null
+      }
       </div>
     )
   }

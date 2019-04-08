@@ -19,6 +19,7 @@ const initialState = {
   dashboards: [],
   user_id: 2,
   // dashboardEquities: [], ?? probably don't have access to this
+  hasPortfolio: false,
   portfolioEquities: []
 }
 
