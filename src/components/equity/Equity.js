@@ -49,39 +49,64 @@ class Equity extends Component {
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
-    this.fetchIntradayData()
+    // if current time is between market hours, fetch intraday
+    // else fetch from /1d
+    // let url = `https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`
+
+    // this.fetchIntradayData()
+
+    this.fetchPostCloseTradeData()
+
     this.fetchStatsData()
+  }
+
+  /**********************************************
+              CHANGE STATE FUNCTIONS
+  **********************************************/
+  setDatapoints = (json) => {
+    // debugger
+    let datapoints = json.map( d => {
+      if (d.average > -1) {
+        return d.average
+      } else if (d.marketAverage > -1){
+        return d.marketAverage
+      }
+    })
+
+    let labels = json.map( d => d.label)
+
+    this.setState({
+      data: {
+        labels: labels,
+        datasets: [{
+              label: '',
+              backgroundColor: 'rgb(0,0,0,0)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: datapoints
+          }]
+      }
+    })
   }
 
   /**********************************************
                   FETCH FUNCTIONS
   **********************************************/
+  fetchPostCloseTradeData() {
+    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`)
+    .then(res => res.json())
+    .then( json => {
+      // console.log(json);
+      this.setDatapoints(json)
+    })
+  }
+
   fetchIntradayData() {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/dynamic`)
     .then(res => res.json())
     .then( json => {
+      // console.log(json);
       if(!!json.data) {
-        let datapoints = json.data.map( d => {
-          if (d.average > -1) {
-            return d.average
-          } else if (d.marketAverage > -1){
-            return d.marketAverage
-          }
-        })
-
-        let labels = json.data.map( d => d.label)
-
-        this.setState({
-          data: {
-            labels: labels,
-            datasets: [{
-                  label: '',
-                  backgroundColor: 'rgb(0,0,0,0)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: datapoints
-              }]
-          }
-        })
+        this.setDatapoints(json.data)
       }
     })
   }
