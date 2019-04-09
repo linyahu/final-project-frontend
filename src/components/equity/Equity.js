@@ -8,10 +8,11 @@ class Equity extends Component {
       labels: [],
       datasets: [{
             label: '',
-            borderColor: 'rgb(255,255,255,1)',
-            backgroundColor:'rgb(255,255,255,1)',
-            showLine: true,
-            pointBorderColor: 'rgb(255,255,255,1)',
+            borderColor: 'rgba(0, 0, 0, 0.1)',
+            // backgroundColor:'rgb(255,255,255,1)',
+            pointBorderColor: 'rgb(255,255,255,0)',
+            // pointBackgroundColor:'rgb(255,255,255,1)',
+            lineTension: 1,
             data: []
         }]
     },
@@ -19,7 +20,6 @@ class Equity extends Component {
       display: false,
     },
     options: {
-      borderColor: 'rgb(255,255,255,1)',
       scales: {
         xAxes: [{
           ticks: {

@@ -10,6 +10,8 @@ class EditDashboard extends Component {
   state = {
     dashboard: {},
     search: "",
+    sector: "",
+    noResults: false,
     searchResults: [],
     addedEquities: [],
     removedEquityIds: [],
@@ -162,11 +164,28 @@ class EditDashboard extends Component {
     fetch("http://localhost:3000/api/v1/equities")
     .then(res => res.json())
     .then(json => {
-      // finding equities that match search
-      // either ticker or company name includes search
-      let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search))
-      console.log("these are my search results", searchResults);
-      this.setState({ searchResults })
+      let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search) )
+
+      if (this.state.sector !== "") {
+        let filteredResults = searchResults.filter( eq => {
+          if (!!eq.sector) {
+            return eq.sector === this.state.sector
+          }
+        })
+        if (filteredResults == "") {
+          this.setState({ searchResults: [], noResults: true })
+        } else {
+          this.setState({ searchResults: filteredResults, noResults: false })
+        }
+
+      } else {
+        if (searchResults == "") {
+          this.setState({ searchResults: [], noResults: true })
+        } else {
+          this.setState({ searchResults, noResults: false })
+        }
+
+      }
     })
   }
 
@@ -342,6 +361,20 @@ class EditDashboard extends Component {
         { this.renderDashboardForm() }
 
         <form onSubmit={this.searchEquities}>
+          <label>filter sector </label>
+
+          <select name="sector" onChange={this.handleChange}>
+            <option value="">All</option>
+            <option value="Technology">Technology</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Industrials">Industrials</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Basic Materials">Basic Materials</option>
+            <option value="Consumer Cyclical">Consumer Cyclical</option>
+          </select>
+
+          <br />
+
           <label>search for equities</label>
           <input
             onChange={this.handleChange}
@@ -349,6 +382,7 @@ class EditDashboard extends Component {
             name="search"
             value={this.state.search}
             placeholder="type a ticker or company name" />
+          <input type="submit" value="search" />
         </form>
 
         {
@@ -357,6 +391,7 @@ class EditDashboard extends Component {
           :
           null
         }
+        { this.state.noResults ? <h5> no results </h5> : null }
       </div>
     )
   }

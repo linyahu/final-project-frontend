@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 class CreateNewDashboard extends Component {
   state = {
     search: "",
+    noResults: false,
+    sector: "",
     dashName: "",
     addNewsfeed: false,
     searchResults: [],
@@ -49,11 +51,29 @@ class CreateNewDashboard extends Component {
     fetch("http://localhost:3000/api/v1/equities")
     .then(res => res.json())
     .then(json => {
-      // finding equities that match search
-      // either ticker or company name includes search
-      let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search))
-      // console.log("these are my search results", searchResults);
-      this.setState({ searchResults })
+      let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search) )
+
+      if (this.state.sector !== "") {
+        let filteredResults = searchResults.filter( eq => {
+          if (!!eq.sector) {
+            return eq.sector === this.state.sector
+          }
+        })
+        if (filteredResults == "") {
+          this.setState({ searchResults: [], noResults: true })
+        } else {
+          this.setState({ searchResults: filteredResults, noResults: false })
+        }
+
+      } else {
+        if (searchResults == "") {
+          this.setState({ searchResults: [], noResults: true })
+        } else {
+          this.setState({ searchResults, noResults: false })
+        }
+
+      }
+
     })
   }
 
@@ -115,8 +135,7 @@ class CreateNewDashboard extends Component {
   renderAddedEquities = () => {
     return (
       <Fragment>
-        {
-          this.state.addedEquities.map( equity => {
+        { this.state.addedEquities.map( equity => {
             return (
               <span key={equity.id}>
                 <h5>{equity.symbol} - {equity.company_name}</h5>
@@ -134,9 +153,9 @@ class CreateNewDashboard extends Component {
     // won't have the ability to add the equity
     let currentIds = [this.state.addedEquities.map(eq => eq.id), this.props.dashboardEquities.map(eq => eq.id)].flat()
 
-    return this.state.searchResults.map(equity => {
-      return (
-        <Fragment key={equity.id}>
+      return this.state.searchResults.map(equity => {
+        return (
+          <Fragment key={equity.id}>
           <h5>{equity.symbol} - {equity.company_name}</h5>
           {
             !currentIds.includes(equity.id) ?
@@ -144,9 +163,10 @@ class CreateNewDashboard extends Component {
             :
             <h6>[cannot add: already existing on another dashboard]</h6>
           }
-        </Fragment>
-      )
-    })
+          </Fragment>
+        )
+      })
+
   }
 
   render() {
@@ -188,21 +208,32 @@ class CreateNewDashboard extends Component {
           </form>
 
           <form onSubmit={this.searchEquities}>
+
+            <label>filter sector </label>
+
+            <select name="sector" onChange={this.handleChange}>
+              <option value="">All</option>
+              <option value="Technology">Technology</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Industrials">Industrials</option>
+              <option value="Financial Services">Financial Services</option>
+              <option value="Basic Materials">Basic Materials</option>
+              <option value="Consumer Cyclical">Consumer Cyclical</option>
+            </select>
+
+            <br />
             <label>search for equities</label>
             <input
               onChange={this.handleChange}
               type="text"
               name="search"
               value={this.state.search}
-              placeholder="type a ticker or company name" />
+              placeholder="type ticker or company name" />
+            <input type="submit" value="search" />
           </form>
 
-          {
-            this.state.searchResults != "" ?
-            this.renderSearchResults()
-            :
-            null
-          }
+          { this.renderSearchResults() }
+          { this.state.noResults ? <h5> no results </h5> : null }
 
         </div>
       </div>

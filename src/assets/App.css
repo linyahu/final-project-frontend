@@ -71,7 +71,7 @@
 }
 
 .eq-chart {
-  background-color: rgba(100,100,100,1);
+  /* background-color: rgba(100,100,100,1); */
   /* border-color: red; */
   border-style: solid;
   border-radius: 1px;
@@ -230,7 +230,7 @@
 }
 
 .modal-content input {
-  width: 250px;
+  /* width: 250px; */
   /* height: 20px; */
   /* font-size: 14px; */
 }
