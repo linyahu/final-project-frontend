@@ -91,7 +91,6 @@ class CreateNewDashboard extends Component {
         dashboard_id: dashboard.id,
         equity_id: equity.id
       }
-
       fetch("http://localhost:3000/api/v1/equity_dashboards", {
         method: "POST",
         headers: {

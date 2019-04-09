@@ -82,6 +82,7 @@ class DashboardContainer extends Component {
           this.props.dashboards.map( dashboard => {
             return (
               <NavLink
+              key={dashboard.id}
               className="navlink-dash"
               activeStyle={{ fontWeight: "bold"}}
               to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>

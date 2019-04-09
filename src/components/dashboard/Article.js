@@ -22,7 +22,7 @@ class Article extends Component {
         {
           this.state.articles.map( article => {
             return (
-              <div className="article">
+              <div key={article.headline} className="article">
                 <a href={article.url}>{article.headline}</a>
                 <h5>source: {article.source}</h5>
                 <h6>{article.summary}</h6>

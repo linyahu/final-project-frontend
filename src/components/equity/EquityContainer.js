@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { NavLink, Switch } from 'react-router-dom';
+// import { NavLink, Switch } from 'react-router-dom';
 
-import Equity from './Equity'
+// import Equity from './Equity'
 import EquityProfile from './EquityProfile'
 import Top from './Top'
 

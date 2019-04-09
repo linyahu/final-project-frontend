@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import Home from './Home'
 import Login from './Login'
 import DashboardContainer from './dashboard/DashboardContainer'
-import Dashboard from './dashboard/Dashboard'
+// import Dashboard from './dashboard/Dashboard'
 import EditDashboard from './dashboard/EditDashboard'
 import EquityContainer from './equity/EquityContainer'
 

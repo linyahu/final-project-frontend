@@ -12,7 +12,7 @@ class Newsfeed extends Component {
         <h4>newsfeed</h4>
         {
           this.props.equities.map( equity => {
-            return <Article equity={equity}/>
+            return <Article key={equity.id} equity={equity}/>
           })
         }
       </div>
