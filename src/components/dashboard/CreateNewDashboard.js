@@ -62,7 +62,7 @@ class CreateNewDashboard extends Component {
 
     let data = {
       user_id: this.props.user_id,
-      name: this.state.dashName,
+      name: this.state.dashName.replace(/[^\w\s]/gi, '').replace(/^\s+/g, '').replace(/\s+$/g, ''),
       newsfeed: this.state.addNewsfeed
     }
 

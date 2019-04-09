@@ -85,7 +85,7 @@ class EditDashboard extends Component {
     console.log("clicked save button, will save dashboard", this.state);
 
     let data = {
-      name: this.state.dashboard.name,
+      name: this.state.dashboard.name.replace(/^\s+/g, '').replace(/\s+$/g, ''),
       newsfeed: this.state.dashboard.newsfeed
     }
 
