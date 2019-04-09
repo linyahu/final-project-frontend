@@ -29,8 +29,16 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case "TOGGLE_NAVBAR":
       return { ...state, navbar: !state.navbar }
-    case "SET_DASHBOARDS":
-      return { ...state, dashboards: action.payload }
+    case "SET_DASHBOARDS": // returns the dashboards in the order by id
+      return { ...state, dashboards: action.payload.sort( (a, b) => {
+        if (a.id < b.id){
+          return -1
+        } else if (b.id < a.id) {
+          return 1
+        }
+        return 0
+      }) }
+      // return {...state, dashboards: action.payload }
     case "SET_USER":
       return { ...state, user_id: action.payload }
     case "SET_PORTFOLIO_EQUITIES":

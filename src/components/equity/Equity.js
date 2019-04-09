@@ -135,9 +135,14 @@ class Equity extends Component {
   **********************************************/
 
   render() {
-
     return (
-      <div className="equity-card">
+      <div className="eq-card">
+        {
+          !!this.props.delete ?
+          <button onClick={() => this.props.delete(this.props.ticker, this.props.id)}>X</button>
+          :
+          null
+        }
         <h5>{this.props.ticker} - {this.props.companyName}</h5>
         <EquityChart
           ticker={this.props.ticker}

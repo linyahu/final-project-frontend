@@ -27,13 +27,7 @@
   color: rgba(255,255,255,1);
 }
 
-.card {
-  border-color: black;
-  border-style: dashed;
-  margin: 20px;
-  padding: 20px;
 
-}
 
 .dash-container {
   border-color: rgba(31, 58, 147, 1);
@@ -57,6 +51,23 @@
 
 .dashboard-equities {
   width: 500px;
+}
+
+.edit-dashname {
+  min-width: 220px;
+  width: auto;
+  height: 22px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.eq-card {
+  border-color: black;
+  border-style: dashed;
+  margin: 20px;
+  padding: 20px;
+  width: 650px;
+  height: auto;
 }
 
 .eq-chart {
@@ -125,7 +136,7 @@
   color: rgba(0, 181, 204, 1);
   padding: 2px;
   float: left;
-  width: 100px;
+  width: 150px;
 }
 
 .new-dash {

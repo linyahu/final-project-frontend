@@ -42,8 +42,6 @@ class EquityContainer extends Component {
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()
-    // this.fetchVolume()
-    // this.fetchPercent()
     this.fetchInFocus()
   }
 

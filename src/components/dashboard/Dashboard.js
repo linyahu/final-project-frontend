@@ -16,7 +16,9 @@ class Dashboard extends Component {
       return (
         <Fragment>
           <h3>{this.props.dashboard.name} dashboard</h3>
-          <Newsfeed equities={this.props.equities}/>
+          <Newsfeed
+            equities={this.props.equities}
+          />
           {
             otherDashes.map( dashboard => {
               return (

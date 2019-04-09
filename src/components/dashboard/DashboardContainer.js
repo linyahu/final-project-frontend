@@ -93,12 +93,6 @@ class DashboardContainer extends Component {
           onClick={this.showForm}
           id="plus-btn"
           >+</button>
-        {/*
-          <NavLink
-            id="plus-btn"
-            activeStyle={{ background: "rgba(0,153,153,0.2)", color: "white"}}
-            to="/dashboards/new">+</NavLink>
-        */}
         </div>
       )
     }

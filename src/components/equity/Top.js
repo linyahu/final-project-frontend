@@ -13,6 +13,7 @@ class Top extends Component {
         { this.props[prop].map(equity => {
           return (
             <TopSummary
+              key={equity.symbol}
               equity={equity}
             />
           )
@@ -24,13 +25,13 @@ class Top extends Component {
 
   render() {
     // debugger
-    // console.log("%c top", "color: orange", this.props);
+    console.log("%c top", "color: orange", this.props);
     return (
       <div>
         {
           Object.keys(this.props).map(prop => {
             return (
-              <div className="eq-top">
+              <div key={prop} className="eq-top">
               {this.renderTenEquities(prop) }
               </div>
             )

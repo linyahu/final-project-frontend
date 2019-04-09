@@ -27,7 +27,7 @@ class CreateNewDashboard extends Component {
   }
 
   addEquity = (equity) => {
-    console.log("adding this equity", equity);
+    // console.log("adding this equity", equity);
     this.setState(prevState => {
       return { addedEquities: [...prevState.addedEquities, equity] }
     })
@@ -130,7 +130,9 @@ class CreateNewDashboard extends Component {
   }
 
   renderSearchResults = () => {
-    let currentIds = this.state.addedEquities.map(eq => eq.id)
+    // if the search results already exist on a dashboard
+    // won't have the ability to add the equity
+    let currentIds = [this.state.addedEquities.map(eq => eq.id), this.props.dashboardEquities.map(eq => eq.id)].flat()
 
     return this.state.searchResults.map(equity => {
       return (
@@ -140,7 +142,7 @@ class CreateNewDashboard extends Component {
             !currentIds.includes(equity.id) ?
             <button onClick={() => this.addEquity(equity)}>add</button>
             :
-            null
+            <h6>[cannot add: already existing on another dashboard]</h6>
           }
         </Fragment>
       )
@@ -148,8 +150,8 @@ class CreateNewDashboard extends Component {
   }
 
   render() {
-    // console.log("%c what is my current state", "color: green", this.state);
-    console.log("%c what are my props", "color: green", this.props);
+    console.log("%c what is my current state", "color: green", this.state);
+    // console.log("%c what are my props", "color: green", this.props);
     return (
       <div className="modal">
         <div className="modal-content">
@@ -196,7 +198,7 @@ class CreateNewDashboard extends Component {
           </form>
 
           {
-            !!this.state.searchResults ?
+            this.state.searchResults != "" ?
             this.renderSearchResults()
             :
             null
