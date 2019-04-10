@@ -8,8 +8,8 @@ class Login extends Component {
     lastname: "",
     username: "",
     password: "",
-    confirmPassword: "",
     email: "",
+    passwordConfirmation: "",
   }
 
   handleChange = (e) => {
@@ -42,6 +42,43 @@ class Login extends Component {
           this.props.history.push("/dashboards")
         }
       })
+  }
+
+  handleCreateAccount = (e) => {
+    e.preventDefault()
+    if (this.state.password === this.state.passwordConfirmation) {
+      let data = {
+        first_name: this.state.firstname,
+        last_name: this.state.lastname,
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password
+      }
+      this.fetchCreateUser(data)
+    } else {
+      alert("passwords don't match")
+    }
+  }
+
+  fetchCreateUser(data) {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.errors) {
+        alert(response.errors)
+      } else {
+        this.props.setCurrentUser(response.user.id)
+        localStorage.setItem('jwt', response.jwt)
+        this.props.history.push("/dashboards")
+      }
+    })
   }
 
   renderLoginForm() {
@@ -82,7 +119,7 @@ class Login extends Component {
   renderSignupForm() {
     return (
       <div className="signup">
-        <form>
+        <form onSubmit={this.handleCreateAccount}>
           <label> First Name </label>
           <input
             value={this.state.firstname}
@@ -123,6 +160,15 @@ class Login extends Component {
             type="password"
           />
           <br />
+          <label> Confirm Password </label>
+          <input
+            value={this.state.passwordConfirmation}
+            name="passwordConfirmation"
+            onChange={this.handleChange}
+            type="password"
+          />
+          <br />
+          <button onClick={this.handleCreateAccount}> create account </button>
         </form>
         <br />
 

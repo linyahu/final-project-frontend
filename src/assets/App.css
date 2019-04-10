@@ -42,6 +42,12 @@
   float: left;
 }
 
+.signup button {
+  /* position: relative; */
+  margin: auto;
+
+}
+
 .login {
   margin: auto;
   margin-top: 10%;
