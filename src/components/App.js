@@ -115,7 +115,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/home" render={() => <Home />} />
 
-          <Route exact path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} />} />
+          <Route path="/login/signup" component={props => <Login {...props} view="signup" setCurrentUser={this.setCurrentUser} />} />
+          <Route path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} />} />
 
         </Switch>
       </Fragment>

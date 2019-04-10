@@ -15,6 +15,58 @@
 }
 
 /********************************************
+                  all my forms
+********************************************/
+.signup {
+  margin: auto;
+  margin-top: 10%;
+  width: 30%;
+  padding: 2%;
+  background-color: rgba(18, 22, 25, 0.5);
+  color: white;
+  display: block;
+  height: auto;
+  overflow: auto;
+}
+
+.signup input {
+  width: 50%;
+  margin: 2%;
+  float: right;
+}
+
+.signup label {
+  text-align: right;
+  margin: 2%;
+  width: 40%;
+  float: left;
+}
+
+.login {
+  margin: auto;
+  margin-top: 10%;
+  width: 30%;
+  padding: 3%;
+  background-color: rgba(18, 22, 25, 0.5);
+  color: white;
+  display: block;
+  height: auto;
+  overflow: auto;
+}
+
+.login input {
+  margin: 2%;
+
+}
+
+.login label {
+  margin: 2%;
+
+}
+
+
+
+/********************************************
                   all my buttons
 ********************************************/
 .delete-btn {
@@ -251,7 +303,7 @@
 
 .sm-card {
   background-color: rgba(0,0,0,0.2);
-  min-height: 170px;
+  min-height: 190px;
   width: 30%;
   float: left;
   margin: 1.5%;
