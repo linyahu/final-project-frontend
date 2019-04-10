@@ -4,39 +4,32 @@ import TopSummary from './TopSummary'
 
 class Top extends Component {
 
-  renderTenEquities = (prop) => {
-    // debugger
-    // console.log("%c render ten equities", "color: green", prop, this.props[prop]);
-    return (
-      <Fragment>
-        <h3> top {prop} </h3>
-        { this.props[prop].map(equity => {
-          return (
-            <TopSummary
-              key={equity.symbol}
-              equity={equity}
-            />
-          )
-        }) }
-      </Fragment>
-    )
-
+  renderEquities = () => {
+    if (this.props.equities) {
+      return (
+        <Fragment>
+          { this.props.equities.map(equity => {
+            if (equity.avgTotalVolume > 100000) {
+              return (
+                <TopSummary
+                  key={equity.symbol}
+                  equity={equity}
+                />
+              )
+            }
+          })
+          }
+        </Fragment>
+      )
+    }
   }
 
   render() {
     // debugger
     console.log("%c top", "color: orange", this.props);
     return (
-      <div>
-        {
-          Object.keys(this.props).map(prop => {
-            return (
-              <div key={prop} className="eq-top">
-              {this.renderTenEquities(prop) }
-              </div>
-            )
-          })
-        }
+      <div className="small-padding">
+        {this.renderEquities() }
       </div>
     )
   }

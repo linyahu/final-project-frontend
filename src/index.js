@@ -20,7 +20,8 @@ const initialState = {
   dashboards: [],
   dashboardEquities: [],
   hasPortfolio: false,
-  portfolioEquities: []
+  portfolioEquities: [],
+  search: "",
 }
 
 function reducer(state = initialState, action) {
@@ -45,6 +46,8 @@ function reducer(state = initialState, action) {
       return { ...state, portfolioEquities: action.payload }
     case "SET_DASHBOARD_EQUITIES":
       return { ...state, dashboardEquities: action.payload }
+    case "SEARCH_EQUITY":
+      return { ...state, search: action.payload }
     default:
       // console.log('default case', state);
       return state;

@@ -7,14 +7,14 @@ class Newsfeed extends Component {
 
   render() {
     return (
-      <div className="newsfeed">
+      <div className="newsfeed grey-border">
         {
           !!this.props.delete ?
-          <button onClick={this.props.delete}>X</button>
+          <button className="delete-btn" onClick={this.props.delete}>X</button>
           :
           null
         }
-        <h4>newsfeed</h4>
+        <h3>newsfeed</h3>
         {
           this.props.equities.map( equity => {
             return <Article key={equity.id} equity={equity}/>

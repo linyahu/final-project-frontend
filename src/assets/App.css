@@ -9,14 +9,31 @@
   /* background-color: rgba(0,153,153,0.2); */
 }
 
+#eq-chart {
+  height: 150px;
+  width: 300px;
+}
 
+/********************************************
+                  all my buttons
+********************************************/
+.delete-btn {
+  float: right;
+}
+
+.edit-btn {
+  float: right;
+}
 
 /********************************************
                   CLASSES
 ********************************************/
 .App {
   text-align: center;
-  padding: 20px 50px 50px 50px;
+  /* align-content: center; */
+  /* padding: 20px 50px 50px 50px; */
+  /* padding: 2% 0% 2% 0%;
+  margin: 2% 0% 2% 0%; */
 }
 
 .article a {
@@ -24,20 +41,28 @@
 }
 
 
+.clearfix{
+  clear: both;
+}
 
 .dash-container {
-  border-color: rgba(31, 58, 147, 1);
-  border-style: solid;
-  border-radius: 1px;
-  padding: 10px;
-  margin: 10px;
+  /* border-color: "white" */
+  /* border-style: solid; */
+  /* border-radius: 1px; */
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  align-content: center;
+  padding: 2% 0px 2% 0px;
+  margin: auto;
 }
 
 .dashboard {
-  /* background-color: rgba(100,100,100,1); */
-  padding: 25px;
-  margin: 25px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   color: white;
+  height: auto;
+  padding: 2% 0px 2% 0px;
+  /* align-content: center; */
   /* display: table; */
   /* height: 800px;
   display: grid;
@@ -45,8 +70,16 @@
   grid-template-rows: 100px 100px 100px 100px 100px; */
 }
 
+
+
 .dashboard-equities {
-  width: 500px;
+  width: 40%;
+  height: 750px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 1%;
+  overflow-y: auto;
+  float: left;
 }
 
 .edit-dashname {
@@ -55,26 +88,34 @@
   height: 22px;
   font-size: 18px;
   text-align: center;
+  margin: 20px;
+  /* float: left; */
+  /* align-self: center; */
+
 }
 
 .eq-card {
-  border-color: black;
-  border-style: dashed;
-  margin: 20px;
-  padding: 20px;
-  width: 650px;
+  /* align-self: center; */
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 1%;
+  /* width: 600px; */
+  /* background-color: rgba(255,255,255,0.1); */
   height: auto;
 }
+
+
 
 .eq-chart {
   /* background-color: rgba(100,100,100,1); */
   /* border-color: red; */
-  border-style: solid;
+  /* border-style: solid; */
   border-radius: 1px;
   padding: 10px;
   margin: auto;
-  width: 600px;
-  height: 180px;
+  height: 30%;
+  width: 70%;
   color: white;
 }
 
@@ -89,12 +130,10 @@
 
 .eq-profile {
   width: 800px;
-  border-color: rgba(31, 58, 147, 1);
-  border-style: solid;
-  padding: 10px;
+  padding: 30px;
   margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .eq-profile-details {
@@ -102,16 +141,24 @@
   text-align: left;
   width: 500px;
   margin: auto;
+  margin-top: 20px;
+  padding: 25px 5px 5px 5px;
 }
 
 .eq-top {
   margin: auto;
 }
 
+.grey-border {
+  border-color: rgba(111, 188, 184, 0.9);
+  border-style: solid;
+  /* border-radius: 5px; */
+  border-width: 1.5px;
+}
+
 .navbar {
   padding: 10px;
   margin: 10px;
-  display: inline-inline-block;
 }
 
 .nav-dash {
@@ -120,9 +167,9 @@
 
 .navlink {
   padding: 5px;
-  margin: 15px;
+  margin: 10px 40px 10px 40px;
   text-decoration: none;
-  color: rgba(92, 151, 191, 1);
+  color: rgb(132, 165, 163);
 }
 
 .navlink-dash  {
@@ -130,10 +177,14 @@
   margin-left: 10px;
   margin-right: 10px;
   text-decoration: none;
-  color: rgba(0, 181, 204, 1);
+  color: rgb(111, 188, 184);
   padding: 2px;
   float: left;
   width: 150px;
+}
+
+.navlink-dash:hover {
+  color: rgb(255, 225, 201);
 }
 
 .new-dash {
@@ -152,7 +203,7 @@
   border-style: dashed;
   border-radius: 1px;
   min-height: 200px;
-  width: 700px;
+  width: 750px;
   padding: 10px;
   margin: auto;
   margin-top: 20px;
@@ -160,12 +211,13 @@
 }
 
 .newsfeed {
-  border-color: rgba(92, 151, 191, 1);
-  border-style: solid;
-  width: 300px;
-  /* background-color: rgba(197, 239, 247, 1); */
-  padding: 10px;
-  margin: 10px;
+  width: 20%;
+  height: 750px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  overflow-y: auto;
+  float: left;
   /* grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
@@ -174,6 +226,18 @@
   /* display: table-cell; */
 }
 
+
+
+.search-form-container {
+  width: 20%;
+  height: 750px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 1%;
+  /* margin-right: 2.5%; */
+  overflow-y: auto;
+  float: left;
+}
 
 .searchbar {
   width: 150px;
@@ -185,17 +249,43 @@
   float: right;
 }
 
+.sm-card {
+  background-color: rgba(0,0,0,0.2);
+  min-height: 170px;
+  width: 30%;
+  float: left;
+  margin: 1.5%;
+}
+
+.back {
+  display: none;
+}
+
+.sm-card:hover .back {
+  display: block;
+}
+
+.sm-card:hover .front {
+  display: none;
+}
+
+.summary-card-container {
+  width: 62.5%;
+  height: 750px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  overflow-y: auto;
+  float: left;
+}
 
 .summary-card {
-  border-color: rgba(92, 151, 191, 1);
-  border-style: solid;
-  background-color: rgba(197, 239, 247, 1);
-  padding: 10px;
-  margin: 10px;
-  /* grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 4; */
+  background-color: rgba(197, 239, 247, 0.1);
+  padding: 1%;
+  margin: 2%;
+  min-height: 20%;
+  display: block;
+  overflow-x: auto;
 }
 
 

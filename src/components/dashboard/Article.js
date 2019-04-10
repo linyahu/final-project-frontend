@@ -24,8 +24,7 @@ class Article extends Component {
             return (
               <div key={article.headline} className="article">
                 <a href={article.url}>{article.headline}</a>
-                <h5>source: {article.source}</h5>
-                <h6>{article.summary}</h6>
+                <h5>{article.summary}</h5>
               </div>
             )
           })

@@ -14,14 +14,13 @@ class TopSummary extends Component {
         <Equity
           ticker={this.props.equity.symbol}
           companyName={this.props.equity.companyName}
+          showProfile={true}
         />
-          {/* <h6> sector: {this.props.equity.sector}</h6> */}
-          <h6> average volume: {Math.round(this.props.equity.avgTotalVolume/100000)/10}m</h6>
-          <h6> market cap: ${Math.round(this.props.equity.marketCap/100000)/10}m</h6>
-          {/* <h6> PE ratio: {this.props.equity.peRatio}</h6> */}
-          <h6> previous close: {this.props.equity.previousClose}</h6>
-          <h6> 52 week high: {this.props.equity.week52High}</h6>
-          <h6> 52 week low: {this.props.equity.week52Low}</h6>
+          <h5> average volume: {Math.round(this.props.equity.avgTotalVolume/100000)/10}m |
+              market cap: ${Math.round(this.props.equity.marketCap/100000)/10}m </h5>
+          <h5> previous close: ${this.props.equity.previousClose} |
+              52 week high: ${this.props.equity.week52High} |
+              52 week low: ${this.props.equity.week52Low}</h5>
 
       </div>
     )

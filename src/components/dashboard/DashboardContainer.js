@@ -16,10 +16,6 @@ class DashboardContainer extends Component {
   /**********************************************
                   EVENT FUNCTIONS
   **********************************************/
-  editDashboard = () => {
-    console.log("gonna edit this dashboard");
-  }
-
   showForm = () => {
     this.setState({ showNewForm: true })
   }
@@ -84,7 +80,7 @@ class DashboardContainer extends Component {
               <NavLink
               key={dashboard.id}
               className="navlink-dash"
-              activeStyle={{ fontWeight: "bold"}}
+              activeStyle={{ fontWeight: "bold", color: "rgb(192, 247, 244)"}}
               to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>
             )
           })
@@ -102,7 +98,7 @@ class DashboardContainer extends Component {
 
     if (!!this.props.match.params.name) {
       let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
-      console.log("%c dashboard?", "color:pink", dashboard);
+      // console.log("%c dashboard?", "color:pink", dashboard);
       return (
         <Fragment>
           {
@@ -127,7 +123,7 @@ class DashboardContainer extends Component {
 
 
   render() {
-    console.log("%c dashboards", "color: blue", this.props.dashboards, "dashboard equities", this.props.dashboardEquities);
+    // console.log("%c dashboards", "color: blue", this.props.dashboards, "dashboard equities", this.props.dashboardEquities);
     return (
       <div className="dash-container">
         {this.renderDashboardNav()}

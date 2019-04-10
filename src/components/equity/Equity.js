@@ -1,6 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import EquityChart from './EquityChart'
+
+import { NavLink } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 class Equity extends Component {
   state ={
@@ -11,7 +15,6 @@ class Equity extends Component {
             borderColor: 'rgba(0, 0, 0, 0.1)',
             // backgroundColor:'rgb(255,255,255,1)',
             pointBorderColor: 'rgb(255,255,255,0)',
-            // pointBackgroundColor:'rgb(255,255,255,1)',
             lineTension: 1,
             data: []
         }]
@@ -45,10 +48,10 @@ class Equity extends Component {
     stats: {}
   }
 
-  /**********************************************
-                EVENT FUNCTIONS
-  **********************************************/
 
+  showProfile = () => {
+    this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.props.companyName.toLowerCase() })
+  }
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
@@ -57,10 +60,18 @@ class Equity extends Component {
     // if current time is between market hours, fetch intraday
     // else fetch from /1d
     // let url = `https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`
+    let t = new Date().getMonth()+1 + '/' + new Date().getDate() + '/' + new Date().getFullYear()
+    let open = t + ' 09:30:00 GMT-0400'
+    let close = t + ' 16:00:00 GMT-0400'
+    let now = new Date()
 
-    // this.fetchIntradayData()
+    // debugger
 
-    this.fetchPostCloseTradeData()
+    if (Date.parse(now) >= Date.parse(open) && Date.parse(now) <= Date.parse(close)) {
+      this.fetchIntradayData()
+    } else {
+      this.fetchPostCloseTradeData()
+    }
 
     this.fetchStatsData()
   }
@@ -86,7 +97,7 @@ class Equity extends Component {
         datasets: [{
               label: '',
               backgroundColor: 'rgb(0,0,0,0)',
-              borderColor: 'rgb(255, 99, 132)',
+              borderColor: '#2bcbba',
               data: datapoints
           }]
       }
@@ -100,7 +111,7 @@ class Equity extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`)
     .then(res => res.json())
     .then( json => {
-      // console.log(json);
+      console.log("%c i fetched post close data", "color: pink");
       this.setDatapoints(json)
     })
   }
@@ -109,7 +120,7 @@ class Equity extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/dynamic`)
     .then(res => res.json())
     .then( json => {
-      // console.log(json);
+      console.log("%c i fetched intraday data", "color: pink");
       if(!!json.data) {
         this.setDatapoints(json.data)
       }
@@ -144,31 +155,65 @@ class Equity extends Component {
       <div className="eq-card">
         {
           !!this.props.delete ?
-          <button onClick={() => this.props.delete(this.props.ticker, this.props.id)}>X</button>
+          <button
+            className="delete-btn"
+            onClick={() => this.props.delete(this.props.ticker, this.props.id)}>X</button>
           :
           null
         }
 
-        <button onClick={() => this.props.showProfile(this.props.ticker)}>show profile</button>
-
-        <h5>{this.props.ticker} - {this.props.companyName}</h5>
+        {
+          this.props.showProfile ?
+          <NavLink
+          className="navlink"
+          activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+          onClick={this.showProfile}
+          to={`/equities/search?=${this.props.companyName.toLowerCase()}`}>show profile</NavLink>
+          :
+          null
+        }
+        {
+          this.props.showProfile || this.props.delete ?
+          <Fragment>
+            <h5>{this.props.ticker} - {this.props.companyName}</h5>
+            <h6>sector: {this.state.stats.sector}</h6>
+          </Fragment>
+          :
+          null
+        }
         <EquityChart
           ticker={this.props.ticker}
           data={this.state.data}
           legend={this.state.legend}
           options={this.state.options}
         />
-        <h6>sector: {this.state.stats.sector}</h6>
-        <h6>
-          open: {this.state.stats.open} |
-          close: {this.state.stats.close} |
-          high: {this.state.stats.high} |
-          low: {this.state.stats.low}
-        </h6>
+        {
+          this.props.noStats ?
+          null
+          :
+          <h6>
+            open: {this.state.stats.open} |
+            close: {this.state.stats.close} |
+            high: {this.state.stats.high} |
+            low: {this.state.stats.low}
+          </h6>
+        }
+
       </div>
     )
   }
 
 } // end of Equity component
 
-export default Equity
+function mapStateToProps(state) {
+  return {
+    search: state.search,
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(Equity);
+
+
+  // <button onClick={this.showProfile}> show profile </button>

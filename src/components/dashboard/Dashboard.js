@@ -15,10 +15,10 @@ class Dashboard extends Component {
       // console.log(otherDashes);
       return (
         <Fragment>
-          <h3>{this.props.dashboard.name} dashboard</h3>
           <Newsfeed
             equities={this.props.equities}
           />
+          <div className="summary-card-container grey-border">
           {
             otherDashes.map( dashboard => {
               return (
@@ -29,6 +29,7 @@ class Dashboard extends Component {
               )
             })
           }
+          </div>
         </Fragment>
       )
   }
@@ -46,32 +47,32 @@ class Dashboard extends Component {
   renderCustom = () => {
     return (
       <Fragment>
-
-      <NavLink
-      className="navlink-dash"
-      activeStyle={{ fontWeight: "bold"}}
-      to={`/dashboards/${this.props.dashboard.name}/edit`}> edit </NavLink>
-
-      <h3>{this.props.dashboard.name} dashboard</h3>
-      { this.renderNewsfeed() }
-      <div className="dashboard-equities">
-      {
-        this.props.dashboard.equities.map( equity => {
-        return (
-          <Equity
-            key={equity.id}
-            ticker={equity.symbol}
-            companyName={equity.company_name}
-          />
-        )
-      })}
-      </div>
+        { this.renderNewsfeed() }
+        <div className="dashboard-equities grey-border">
+        {
+          this.props.dashboard.equities.map( equity => {
+          return (
+            <Equity
+              key={equity.id}
+              ticker={equity.symbol}
+              companyName={equity.company_name}
+              showProfile={true}
+            />
+          )
+        })}
+        </div>
+        <div className="edit-btn">
+          <NavLink
+          className="navlink-dash"
+          activeStyle={{ fontWeight: "bold"}}
+          to={`/dashboards/${this.props.dashboard.name}/edit`}> edit </NavLink>
+        </div>
       </Fragment>
     )
   }
 
   render() {
-    console.log("%c props in dashboard", "color: orange", this.props);
+    // console.log("%c props in dashboard", "color: orange", this.props);
     return (
       <div className="dashboard">
       {

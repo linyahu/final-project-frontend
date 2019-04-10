@@ -34,11 +34,11 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/dashboards">Dashboards</NavLink>
+              to="/dashboards">DASHBOARDS</NavLink>
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/equities">Equities</NavLink>
+              to="/equities">EQUITIES</NavLink>
 
           {/*
             <NavLink
@@ -50,7 +50,7 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/home">Logout</NavLink>
+              to="/home">LOGOUT</NavLink>
           </Fragment>
           :
           <Fragment>
@@ -90,7 +90,7 @@ class App extends Component {
           <Route path="/dashboards/:name" component={DashboardContainer} />
           <Route path="/dashboards" component={DashboardContainer} />
 
-          <Route path="/equities/:view" component={ props => <EquityContainer {...props} />} />
+          <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
         </Switch>

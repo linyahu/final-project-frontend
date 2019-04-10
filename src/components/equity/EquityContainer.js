@@ -4,8 +4,10 @@ import React, { Component } from 'react'
 // import Equity from './Equity'
 import EquityProfile from './EquityProfile'
 import Top from './Top'
+import Search from './Search'
 
-
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 class EquityContainer extends Component {
   // this container is going to contain the equity list
@@ -13,20 +15,20 @@ class EquityContainer extends Component {
   state = {
     search: "",
     equities: [],
-    losers: [],
+    // topEquities: [],
     gainers: [],
-    infocus: [],
-    // volume: [],
-    mostActive: [],
-    // percent: [],
+    losers: [],
+    mostactive: [],
+    infocus: []
   }
 
   /**********************************************
             EVENT FUNCTIONS
   **********************************************/
-  showProfile = () => {
-    console.log("gonnashow profile");
-  }
+  // showProfile = () => {
+  //   this.props.history.push(`/equities/search?=${this.props.companyName.toLowerCase()}`)
+  //   this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.props.companyName.toLowerCase() })
+  // }
 
   /**********************************************
             STATE-CHANGE FUNCTIONS
@@ -37,49 +39,60 @@ class EquityContainer extends Component {
 
   handleSearch = (e) => {
     e.preventDefault()
-    this.props.history.push(`/equities/search?=${this.state.search}`)
-    this.fetchEquitiesFromDatabase()
-  }
 
+    //old method
+    this.props.history.push(`/equities/search?=${this.state.search}`)
+    window.location.reload()
+
+
+    //with redux
+    // this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.state.search })
+
+
+  }
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
+    console.log("%c does this hit?", "color: orange");
     // this.props.history.push("/equities/top")
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()
     this.fetchInFocus()
+    // console.log("%c does this go every time?", "color: yellow");
+    // this.fetchTop()
 
-    if(this.props.match.params.view === "search") {
-      console.log("%c does this hit?", "color: green");
-      this.setState({ search: this.props.location.search.substring(2) })
-      this.fetchEquitiesFromDatabase()
-    }
+    // if(this.props.match.params.view === "search") {
+    //   console.log("%c does this hit?", "color: green");
+    //   this.setState({ search: this.props.location.search.substring(2) })
+    //   this.fetchEquitiesFromDatabase(this.state.search)
+    // }
   }
 
   /**********************************************
                 FETCH FUNCTIONS
   **********************************************/
-  fetchEquitiesFromDatabase() {
+  fetchEquitiesFromDatabase(search) {
     fetch("http://localhost:3000/api/v1/equities")
     .then(res => res.json())
     .then(json => {
       // console.log(json);
       // finding equities that match search
       // either ticker or company name includes search
-      let equities = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search))
-      this.setState({ equities })
+      let equities = json.filter( eq => eq.symbol.toLowerCase().includes(search) || eq.company_name.toLowerCase().includes(search))
+      console.log("%c after fetching", "color: blue", equities);
+      // this.setState({ equities })
     })
   }
+
 
   fetchMostActive() {
     fetch("https://api.iextrading.com/1.0/stock/market/list/mostactive")
     .then(res => res.json())
     .then(json => {
-      // console.log("most active", json);
-      this.setState({ mostActive: json })
+      this.setState({ mostactive: json })
     })
   }
 
@@ -87,7 +100,6 @@ class EquityContainer extends Component {
     fetch("https://api.iextrading.com/1.0/stock/market/list/gainers")
     .then(res => res.json())
     .then(json => {
-      // console.log("gainers", json);
       this.setState({ gainers: json })
     })
   }
@@ -96,26 +108,7 @@ class EquityContainer extends Component {
     fetch("https://api.iextrading.com/1.0/stock/market/list/losers")
     .then(res => res.json())
     .then(json => {
-      // console.log("losers", json);
       this.setState({ losers: json })
-    })
-  }
-
-  fetchVolume() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/iexvolume")
-    .then(res => res.json())
-    .then(json => {
-      // console.log("iex volume", json);
-      this.setState({ losers: json })
-    })
-  }
-
-  fetchPercent() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/iexpercent")
-    .then(res => res.json())
-    .then(json => {
-      // console.log("iex percent", json);
-      this.setState({ percent: json })
     })
   }
 
@@ -123,7 +116,6 @@ class EquityContainer extends Component {
     fetch("https://api.iextrading.com/1.0/stock/market/list/infocus")
     .then(res => res.json())
     .then(json => {
-      // console.log("infocus", json);
       this.setState({ infocus: json })
     })
   }
@@ -132,25 +124,60 @@ class EquityContainer extends Component {
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
-  renderEquityProfile = () => {
-    // console.log("what is the state right now", this.state.equities);
-    // console.log("can i get access to params");
+  renderSearch = () => {
+    // console.log("state", this.state, "props", this.props);
+    let searchTerm = this.props.location.search.substring(2)
+    console.log(searchTerm);
+    this.fetchEquitiesFromDatabase(searchTerm)
+  }
 
-    return this.state.equities.map( equity => {
-      // console.log(equity);
-      return (
-        <EquityProfile
-          key={equity.id}
-          equity={equity}
-        />
-      )
-    })
+  renderEquityProfile = () => {
+    console.log("what is the state right now", this.state);
+    console.log("can i get access to params", this.params);
+    // this.fetchEquitiesFromDatabase()
+
+    // return this.state.equities.map( equity => {
+    //   // console.log(equity);
+    //   return (
+        // <EquityProfile
+        //   key={equity.id}
+        //   equity={equity}
+        // />
+    //   )
+    // })
   }
 
   renderTop = () => {
     if (this.props.view === "top") {
-      this.props.history.push("/equities/top")
+      this.props.history.push("/equities/gainers")
     }
+  }
+
+  renderEquityNavBar = () => {
+    return (
+      <div>
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold"}}
+        to="/equities/gainers"> top gainers </NavLink>
+
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold"}}
+        to="/equities/losers"> top losers </NavLink>
+
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold"}}
+        to="/equities/mostactive"> most active </NavLink>
+
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold"}}
+        to="/equities/infocus"> in focus </NavLink>
+
+      </div>
+    )
   }
 
   renderSearchBar = () => {
@@ -170,39 +197,36 @@ class EquityContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log("%c top equities", "color: pink", this.state.topEquities);
     return (
       <div className="eq-container">
-        { this.renderSearchBar() }
         { this.renderTop() }
+        { this.renderSearchBar() }
+        { this.renderEquityNavBar() }
+        <div>
         {
-          this.props.match.params.view === "top" ?
-          <Top
-            gainers={this.state.gainers}
-            losers={this.state.losers}
-            infocus={this.state.infocus}
-            mostActive={this.state.mostActive}
-          />
+          this.props.match.params.view === "search" ?
+          <Search term={this.props.location.search.substring(2)}/>
           :
-          this.renderEquityProfile()
+          <Top
+          equities={this.state[this.props.match.params.view]}
+          title={this.props.match.params.view}
+          />
         }
+        </div>
       </div>
     )
   }
 
 } // end of EquityContainer
 
-export default EquityContainer
 
-// previous render
-// {
-//   this.state.showEquityProfile ?
-//   this.renderEquityProfile()
-//   :
-//   <Top
-//     gainers={this.state.gainers}
-//     losers={this.state.losers}
-//     infocus={this.state.infocus}
-//     mostActive={this.state.mostActive}
-//   />
-// }
+function mapStateToProps(state) {
+  return {
+    search: state.search,
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(EquityContainer);

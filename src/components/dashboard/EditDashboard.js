@@ -277,15 +277,26 @@ class EditDashboard extends Component {
     // console.log("this is my dashboard", this.state.dashboard);
     return (
       <div className="dashboard">
-        <input
-          type="text"
-          onChange={this.handleNameChange}
-          value={this.state.dashboard.name}
-          className="edit-dashname"
-          placeholder="dashboard name"
-        />
+        <div>
+
+          <div>
+            <button onClick={this.saveDashboard}>Save Dashboard</button>
+            <button onClick={this.deleteDashboard}>Delete Dashboard</button>
+          </div>
+
+          <input
+            type="text"
+            onChange={this.handleNameChange}
+            value={this.state.dashboard.name}
+            className="edit-dashname"
+            placeholder="dashboard name"
+          />
+
+        </div>
+
         { this.renderNewsfeed() }
-        <div className="dashboard-equities">
+
+        <div className="dashboard-equities grey-border">
         {
           !!this.state.dashboard.equities ?
           this.state.dashboard.equities.map( equity => {
@@ -303,8 +314,45 @@ class EditDashboard extends Component {
           null
         }
         </div>
-        <button onClick={this.saveDashboard}>Save Dashboard</button>
-        <button onClick={this.deleteDashboard}>Delete Dashboard</button>
+
+        <div className="search-form-container grey-border">
+          <form onSubmit={this.searchEquities}>
+            <label>filter sector </label>
+
+            <select name="sector" onChange={this.handleChange}>
+              <option value="">All</option>
+              <option value="Technology">Technology</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Industrials">Industrials</option>
+              <option value="Financial Services">Financial Services</option>
+              <option value="Basic Materials">Basic Materials</option>
+              <option value="Consumer Cyclical">Consumer Cyclical</option>
+            </select>
+
+            <br />
+
+            <label>search for equities</label>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="search"
+              value={this.state.search}
+              placeholder="type a ticker or company name" />
+            <input type="submit" value="search" />
+          </form>
+
+          {
+            this.state.searchResults != "" ?
+            this.renderSearchResults()
+            :
+            null
+          }
+
+          { this.state.noResults ? <h5> no results found </h5> : null }
+
+        </div>
+
+
       </div>
     )
   }
@@ -357,41 +405,13 @@ class EditDashboard extends Component {
     console.log("props in edit dashboard", this.props)
     return (
       <div className="dash-container">
+
         { this.renderDashboardNav() }
         { this.renderDashboardForm() }
 
-        <form onSubmit={this.searchEquities}>
-          <label>filter sector </label>
 
-          <select name="sector" onChange={this.handleChange}>
-            <option value="">All</option>
-            <option value="Technology">Technology</option>
-            <option value="Healthcare">Healthcare</option>
-            <option value="Industrials">Industrials</option>
-            <option value="Financial Services">Financial Services</option>
-            <option value="Basic Materials">Basic Materials</option>
-            <option value="Consumer Cyclical">Consumer Cyclical</option>
-          </select>
 
-          <br />
-
-          <label>search for equities</label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="search"
-            value={this.state.search}
-            placeholder="type a ticker or company name" />
-          <input type="submit" value="search" />
-        </form>
-
-        {
-          this.state.searchResults != "" ?
-          this.renderSearchResults()
-          :
-          null
-        }
-        { this.state.noResults ? <h5> no results </h5> : null }
+        <div className="clearfix" />
       </div>
     )
   }

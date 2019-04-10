@@ -10,8 +10,7 @@ class EquityProfile extends Component {
     return (
       <div className="eq-profile">
         <h3>{this.props.equity.company_name}</h3>
-        <h5>{this.props.equity.symbol}</h5>
-
+        
         <div className="eq-profile-details">
           <p>Sector: {this.props.equity.sector} </p>
           <p>Industry: {this.props.equity.industry} </p>
