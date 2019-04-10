@@ -46,6 +46,11 @@ class Equity extends Component {
   }
 
   /**********************************************
+                EVENT FUNCTIONS
+  **********************************************/
+
+
+  /**********************************************
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
@@ -143,6 +148,9 @@ class Equity extends Component {
           :
           null
         }
+
+        <button onClick={() => this.props.showProfile(this.props.ticker)}>show profile</button>
+
         <h5>{this.props.ticker} - {this.props.companyName}</h5>
         <EquityChart
           ticker={this.props.ticker}

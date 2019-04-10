@@ -22,6 +22,13 @@ class EquityContainer extends Component {
   }
 
   /**********************************************
+            EVENT FUNCTIONS
+  **********************************************/
+  showProfile = () => {
+    console.log("gonnashow profile");
+  }
+
+  /**********************************************
             STATE-CHANGE FUNCTIONS
   **********************************************/
   handleChange = (e) => {
@@ -34,6 +41,7 @@ class EquityContainer extends Component {
     this.fetchEquitiesFromDatabase()
   }
 
+
   /**********************************************
                 LIFECYCLE FUNCTIONS
   **********************************************/
@@ -43,6 +51,12 @@ class EquityContainer extends Component {
     this.fetchGainers()
     this.fetchLosers()
     this.fetchInFocus()
+
+    if(this.props.match.params.view === "search") {
+      console.log("%c does this hit?", "color: green");
+      this.setState({ search: this.props.location.search.substring(2) })
+      this.fetchEquitiesFromDatabase()
+    }
   }
 
   /**********************************************
@@ -156,7 +170,7 @@ class EquityContainer extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <div className="eq-container">
         { this.renderSearchBar() }
