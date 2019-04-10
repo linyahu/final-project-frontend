@@ -80,7 +80,7 @@ class DashboardContainer extends Component {
               <NavLink
               key={dashboard.id}
               className="navlink-dash"
-              activeStyle={{ fontWeight: "bold", color: "rgb(192, 247, 244)"}}
+              activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
               to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>
             )
           })

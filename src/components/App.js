@@ -19,6 +19,53 @@ class App extends Component {
     this.props.dispatch({ type: "TOGGLE_NAVBAR" })
   }
 
+  componentDidMount() {
+    const jwt = localStorage.getItem('jwt')
+
+    if (jwt){
+      fetch("http://localhost:3000/api/v1/auto_login", {
+        headers: {
+          "Authorization": jwt
+        }
+      })
+        .then(res => res.json())
+        .then((response) => {
+          if (response.errors) {
+            alert(response.errors)
+          } else {
+            // debugger
+            this.props.dispatch({ type: "SET_USER", payload: response.id })
+          }
+        })
+    }
+  }
+
+  // we need to set the current user and the token
+  setCurrentUser = (response) => {
+    // debugger
+    localStorage.setItem("jwt", response.jwt)
+    this.props.dispatch({ type: "SET_USER", payload: response })
+    // this.setState({
+    //   currentUser: response
+    // })
+  }
+
+  // this is just so all of our data is as up to date as possible now that we are
+  // just keep state at the top level of our application in order to correctly update
+  // we must have the state be updated properly
+  // updateUser = (user) => {
+  //   this.props.dispatch({ type: "SET_USER", payload: user })
+  // }
+
+  // we need to reset state and remove the current user and remove the token
+  logout = () => {
+    localStorage.removeItem("jwt")
+    // this.setState({
+    //   currentUser: null
+    // }, () => { this.props.history.push("/login") })
+    this.props.dispatch({ type: "SET_USER", payload: null })
+  }
+
 
   /**********************************************
                 RENDER FUNCTIONS
@@ -39,17 +86,10 @@ class App extends Component {
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
               to="/equities">EQUITIES</NavLink>
-
-          {/*
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/portfolio">Portfolio</NavLink>
-          */}
-
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              onClick={this.logout}
               to="/home">LOGOUT</NavLink>
           </Fragment>
           :
@@ -75,7 +115,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/home" render={() => <Home />} />
 
-          <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} />} />
 
         </Switch>
       </Fragment>
@@ -99,6 +139,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("%c props in App", "color: orange", this.props);
     return (
       <div className="App">
         {

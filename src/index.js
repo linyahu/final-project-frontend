@@ -15,7 +15,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // dashboards: [],
 // user_id: null
 const initialState = {
-  user_id: 2,
+  user_id: null,
   navbar: true,
   dashboards: [],
   dashboardEquities: [],
