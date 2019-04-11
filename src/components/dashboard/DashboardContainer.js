@@ -32,31 +32,6 @@ class DashboardContainer extends Component {
   }
 
   /**********************************************
-                LIFECYCLE FUNCTIONS
-  **********************************************/
-  componentDidMount() {
-    this.fetchDashboards()
-  }
-
-  /**********************************************
-                FETCH FUNCTIONS
-  **********************************************/
-  // fetch dashboards that belong to the user
-  // // pass it up through dispatch
-  fetchDashboards() {
-    fetch("http://localhost:3000/api/v1/dashboards")
-    .then(res => res.json())
-    .then( json => {
-      let dashboards = json.filter( d => d.user_id === this.props.user_id)
-      let equities = dashboards.map( d => d.equities ).flat()
-
-      // console.log('%c in fetchDashboards', 'color: blue', dashboards, 'equities', equities);
-      this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards })
-      this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: equities })
-    })
-  }
-
-  /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
   renderNewForm = () => {

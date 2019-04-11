@@ -19,7 +19,6 @@ const initialState = {
   navbar: true,
   dashboards: [],
   dashboardEquities: [],
-  hasPortfolio: false,
   portfolioEquities: [],
   search: "",
 }

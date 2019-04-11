@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 // import { NavLink, Switch } from 'react-router-dom';
 
 // import Equity from './Equity'
 import EquityProfile from './EquityProfile'
 import Top from './Top'
 import Search from './Search'
+import Sector from './Sector'
 
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -19,19 +20,12 @@ class EquityContainer extends Component {
     gainers: [],
     losers: [],
     mostactive: [],
-    infocus: []
+    infocus: [],
+    showDropdown: false,
   }
 
   /**********************************************
-            EVENT FUNCTIONS
-  **********************************************/
-  // showProfile = () => {
-  //   this.props.history.push(`/equities/search?=${this.props.companyName.toLowerCase()}`)
-  //   this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.props.companyName.toLowerCase() })
-  // }
-
-  /**********************************************
-            STATE-CHANGE FUNCTIONS
+          STATE-CHANGE / EVENT FUNCTIONS
   **********************************************/
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value.toLowerCase() })
@@ -39,16 +33,18 @@ class EquityContainer extends Component {
 
   handleSearch = (e) => {
     e.preventDefault()
-
-    //old method
     this.props.history.push(`/equities/search?=${this.state.search}`)
     window.location.reload()
+  }
 
+  showSectorDropdown = () => {
+    this.setState( prevState => {
+      return { showDropdown: !prevState.showDropdown}
+    })
+  }
 
-    //with redux
-    // this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.state.search })
-
-
+  addEquityToDashboard = () => {
+    this.props.history.push("dashboards/main")
   }
 
   /**********************************************
@@ -63,12 +59,6 @@ class EquityContainer extends Component {
     this.fetchInFocus()
     // console.log("%c does this go every time?", "color: yellow");
     // this.fetchTop()
-
-    // if(this.props.match.params.view === "search") {
-    //   console.log("%c does this hit?", "color: green");
-    //   this.setState({ search: this.props.location.search.substring(2) })
-    //   this.fetchEquitiesFromDatabase(this.state.search)
-    // }
   }
 
   /**********************************************
@@ -127,24 +117,7 @@ class EquityContainer extends Component {
   renderSearch = () => {
     // console.log("state", this.state, "props", this.props);
     let searchTerm = this.props.location.search.substring(2)
-    console.log(searchTerm);
     this.fetchEquitiesFromDatabase(searchTerm)
-  }
-
-  renderEquityProfile = () => {
-    console.log("what is the state right now", this.state);
-    console.log("can i get access to params", this.params);
-    // this.fetchEquitiesFromDatabase()
-
-    // return this.state.equities.map( equity => {
-    //   // console.log(equity);
-    //   return (
-        // <EquityProfile
-        //   key={equity.id}
-        //   equity={equity}
-        // />
-    //   )
-    // })
   }
 
   renderTop = () => {
@@ -176,6 +149,11 @@ class EquityContainer extends Component {
         activeStyle={{ fontWeight: "bold"}}
         to="/equities/infocus"> in focus </NavLink>
 
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold"}}
+        to="/equities/sector"> sector </NavLink>
+
       </div>
     )
   }
@@ -197,7 +175,7 @@ class EquityContainer extends Component {
   }
 
   render() {
-    // console.log("%c top equities", "color: pink", this.state.topEquities);
+    // console.log("%c props", "color: pink", this.props);
     return (
       <div className="eq-container">
         { this.renderTop() }
@@ -206,12 +184,22 @@ class EquityContainer extends Component {
         <div>
         {
           this.props.match.params.view === "search" ?
-          <Search term={this.props.location.search.substring(2)}/>
-          :
-          <Top
-          equities={this.state[this.props.match.params.view]}
-          title={this.props.match.params.view}
+          <Search
+            term={this.props.location.search.substring(2)}
+            addEquityToDashboard={this.addEquityToDashboard}
           />
+          :
+          <Fragment>
+          {
+            this.props.match.params.view === "sector" ?
+            <Sector />
+            :
+            <Top
+            equities={this.state[this.props.match.params.view]}
+            title={this.props.match.params.view}
+            />
+          }
+          </Fragment>
         }
         </div>
       </div>

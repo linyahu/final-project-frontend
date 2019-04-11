@@ -20,8 +20,6 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("did this hit??");
-
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
@@ -177,7 +175,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Fragment>
         {

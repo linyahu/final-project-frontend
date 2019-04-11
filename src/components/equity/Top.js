@@ -9,7 +9,7 @@ class Top extends Component {
       return (
         <Fragment>
           { this.props.equities.map(equity => {
-            if (equity.avgTotalVolume > 100000) {
+            if (!!equity.iexVolume && equity.avgTotalVolume > 100000) {
               return (
                 <TopSummary
                   key={equity.symbol}
@@ -26,7 +26,6 @@ class Top extends Component {
 
   render() {
     // debugger
-    console.log("%c top", "color: orange", this.props);
     return (
       <div className="small-padding">
         {this.renderEquities() }

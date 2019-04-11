@@ -29,6 +29,7 @@ class Search extends Component {
               <EquityProfile
                 key={equity.id}
                 equity={equity}
+                addEquityToDashboard={this.props.addEquityToDashboard}
               />
             )
           })
@@ -36,7 +37,6 @@ class Search extends Component {
       </div>
     )
   }
-
 } // end of Search Component
 
 function mapStateToProps(state) {

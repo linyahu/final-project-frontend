@@ -6,6 +6,7 @@ class Newsfeed extends Component {
   // receives Equities as props
 
   render() {
+    
     return (
       <div className="newsfeed grey-border">
         {

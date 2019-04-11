@@ -6,6 +6,8 @@ import DashboardContainer from './dashboard/DashboardContainer'
 // import Dashboard from './dashboard/Dashboard'
 import EditDashboard from './dashboard/EditDashboard'
 import EquityContainer from './equity/EquityContainer'
+import PortfolioContainer from './portfolio/PortfolioContainer'
+import CryptoContainer from './crypto/CryptoContainer'
 
 import { connect } from 'react-redux';
 import { Route, NavLink, Switch } from 'react-router-dom';
@@ -15,13 +17,17 @@ import '../assets/App.css';
 
 class App extends Component {
 
+  saveDashboard = (name) => {
+
+    window.location.reload()
+  }
+
   showNavbar = () => {
     this.props.dispatch({ type: "TOGGLE_NAVBAR" })
   }
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt')
-
     if (jwt){
       fetch("http://localhost:3000/api/v1/auto_login", {
         headers: {
@@ -38,6 +44,20 @@ class App extends Component {
           }
         })
     }
+    this.fetchDashboards()
+  }
+
+  fetchDashboards() {
+    fetch("http://localhost:3000/api/v1/dashboards")
+    .then(res => res.json())
+    .then( json => {
+      let dashboards = json.filter( d => d.user_id === this.props.user_id)
+      let equities = dashboards.map( d => d.equities ).flat()
+
+      // console.log('%c in fetchDashboards', 'color: blue', dashboards, 'equities', equities);
+      this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards })
+      this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: equities })
+    })
   }
 
   // we need to set the current user and the token
@@ -89,6 +109,14 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/crypto">CRYPTO</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/portfolio">PORTFOLIO</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
               onClick={this.logout}
               to="/home">LOGOUT</NavLink>
           </Fragment>
@@ -127,12 +155,16 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route exact path="/dashboards/:name/edit" component={EditDashboard} />
+          <Route exact path="/dashboards/:name/edit" component={ props => <EditDashboard {...props} saveDashboard={this.saveDashboard}/> } />
           <Route path="/dashboards/:name" component={DashboardContainer} />
           <Route path="/dashboards" component={DashboardContainer} />
 
           <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
+
+          <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
+
+          <Route path="/crypto" component={ props => <CryptoContainer {...props}/>} />
 
         </Switch>
       </Fragment>
@@ -140,7 +172,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("%c props in App", "color: orange", this.props);
     return (
       <div className="App">
         {
@@ -169,7 +200,9 @@ function mapStateToProps(state) {
   return {
     navbar: state.navbar,
     user_id: state.user_id,
-    dashboards: state.dashboards
+    dashboards: state.dashboards,
+    dashboardEquities: state.dashboardEquities,
+    portfolioEquities: state.portfolioEquities
   }
 }
 
