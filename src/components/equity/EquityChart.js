@@ -14,7 +14,6 @@ class EquityChart extends Component {
       <div className="eq-chart">
         <Line
           data={this.props.data}
-          width={400}
           legend={this.props.legend}
           options={this.props.options}
         />

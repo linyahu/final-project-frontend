@@ -12,8 +12,6 @@ class Equity extends Component {
       labels: [],
       datasets: [{
             label: '',
-            borderColor: 'rgba(0, 0, 0, 0.1)',
-            // backgroundColor:'rgb(255,255,255,1)',
             pointBorderColor: 'rgb(255,255,255,0)',
             lineTension: 1,
             data: []

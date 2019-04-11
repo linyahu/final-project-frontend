@@ -347,6 +347,33 @@
 }
 
 
+/************************************
+            Financials Table
+*************************************/
+.financials {
+  align-self: center;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.financials td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.financials tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.financials th {
+  font-size: 14px;
+}
+
+.financials td {
+  font-size: 12px;
+}
+
 
 /************************************
             MODAL STYLING
@@ -370,7 +397,7 @@
   background-color: rgba(255,255,255,0.9);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  /* color: white; */
+  color: black;
   /* border: 1px solid #888; */
   width: 60%; /* Could be more or less, depending on screen size */
 }

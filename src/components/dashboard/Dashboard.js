@@ -7,9 +7,7 @@ import Equity from '../equity/Equity'
 import { NavLink } from 'react-router-dom';
 
 class Dashboard extends Component {
-  /**********************************************
-                RENDER FUNCTIONS
-  **********************************************/
+
   renderMain = () => {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
       // console.log(otherDashes);
