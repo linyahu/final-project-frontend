@@ -9,6 +9,8 @@ import EditDashboard from './dashboard/EditDashboard'
 import EquityContainer from './equity/EquityContainer'
 
 import PortfolioContainer from './portfolio/PortfolioContainer'
+import PortfolioDetailsContainer from './portfolio/PortfolioDetailsContainer'
+
 
 import { connect } from 'react-redux';
 import { Route, NavLink, Switch } from 'react-router-dom';
@@ -170,6 +172,8 @@ class App extends Component {
           <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
+
+          <Route path="/portfolio/details" component={ props => <PortfolioDetailsContainer {...props}/>} />
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
 
         </Switch>

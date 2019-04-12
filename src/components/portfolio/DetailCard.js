@@ -1,8 +1,45 @@
 // detail for EACH stock
 import React, { Component, Fragment } from 'react';
 
+import EquityChart from '../equity/EquityChart'
+
 class DetailCard extends Component {
   state = {
+    data: {
+      labels: [],
+      datasets: [{
+            label: '',
+            pointBorderColor: 'rgb(255,255,255,0)',
+            lineTension: 1,
+            data: []
+        }]
+    },
+    legend: {
+      display: false,
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          ticks: {
+            display: false, // show label
+            fontColor: 'rgba(255,255,255,1)'
+          },
+          gridLines: {
+            display: false,
+            color: 'rgba(255,255,255,0.5)'
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            fontColor: 'rgba(255,255,255,1)'
+          },
+          gridLines: {
+            display: false,
+            color: 'rgba(255,255,255,0.5)'
+          }
+        }]
+      }
+    },
     currentPrice: 0,
     currentValue: 0,
   }
@@ -22,7 +59,21 @@ class DetailCard extends Component {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/chart/5y`)
     .then(res => res.json())
     .then(json => {
-      console.log(json);
+      let data = json.filter(data => data.date >= this.props.subportfolio.date_bought)
+      let datapoints = data.map(d => d.close)
+      let labels = data.map(d => d.date)
+
+      this.setState({
+        data: {
+          labels: labels,
+          datasets: [{
+                label: '',
+                backgroundColor: 'rgb(0,0,0,0)',
+                borderColor: '#2bcbba',
+                data: datapoints
+            }]
+        }
+      })
     })
   }
 
@@ -31,7 +82,21 @@ class DetailCard extends Component {
     .then(res => res.json())
     .then(json => {
       let data = json.filter(data => data.date >= this.props.subportfolio.date_bought)
-      console.log(json, data);
+      let datapoints = data.map(d => d.close)
+      let labels = data.map(d => d.date)
+
+      this.setState({
+        data: {
+          labels: labels,
+          datasets: [{
+                label: '',
+                backgroundColor: 'rgb(0,0,0,0)',
+                borderColor: '#2bcbba',
+                data: datapoints
+            }]
+        }
+      })
+
     })
   }
 
@@ -52,9 +117,15 @@ class DetailCard extends Component {
     console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
-        <h6 >{this.props.subportfolio.equity.company_name}
-        <br />
-        <br />
+        <h5>{this.props.subportfolio.equity.company_name}</h5>
+
+          <EquityChart
+          data={this.state.data}
+          legend={this.state.legend}
+          options={this.state.options}
+          />
+
+        <h6>
         last px: ${this.state.currentPrice} |
         value: ${this.state.currentValue} |
         $change: { Math.round((this.state.currentValue - this.props.subportfolio.initial_value)*100)/100 } |

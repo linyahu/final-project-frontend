@@ -414,6 +414,7 @@
   margin: 2% 2% 1% 1%;
   height: 400px;
   overflow-y: auto;
+  /* padding-top: 10px; */
 }
 
 .portfolio-container {
