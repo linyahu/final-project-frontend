@@ -89,7 +89,6 @@ class Financials extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div className="modal">
         <div className="modal-content">

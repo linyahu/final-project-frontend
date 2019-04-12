@@ -1,5 +1,3 @@
-/* ORGANIZED BY ALPHABETICAL ORDER */
-
 #plus-btn {
   width: 20px;
   padding: 2px;
@@ -13,6 +11,7 @@
   height: 150px;
   width: 300px;
 }
+
 
 /********************************************
                   all my forms
@@ -81,6 +80,12 @@
 
 .edit-btn {
   float: right;
+}
+
+.btn-div button {
+  /* float: right; */
+  margin: 10px;
+  /* padding: 10px; */
 }
 
 /********************************************
@@ -351,9 +356,11 @@
             Financials Table
 *************************************/
 .financials {
-  align-self: center;
   border-collapse: collapse;
   width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .financials td, th {
@@ -374,6 +381,23 @@
   font-size: 12px;
 }
 
+/************************************
+            Historic Chart
+*************************************/
+.historic {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.historic label {
+  padding: 3px;
+  margin-left: 2%;
+  font-size: 13px;
+}
+
+.historic select {
+
+}
 
 /************************************
             MODAL STYLING
@@ -395,17 +419,19 @@
 /* Modal Content/Box */
 .modal-content {
   background-color: rgba(255,255,255,0.9);
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 12% auto; /* 15% from the top and centered */
   padding: 20px;
   color: black;
   /* border: 1px solid #888; */
   width: 60%; /* Could be more or less, depending on screen size */
 }
 
-.modal-content input {
-  /* width: 250px; */
-  /* height: 20px; */
-  /* font-size: 14px; */
+.modal-content-sm {
+  background-color: rgba(255,255,255,0.9);
+  margin: 20% auto; /* 15% from the top and centered */
+  padding: 20px;
+  color: black;
+  width: 25%;
 }
 
 /* The Close Button */
