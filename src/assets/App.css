@@ -400,6 +400,29 @@
 }
 
 /************************************
+            Portfolio
+*************************************/
+.details {
+  background-color: rgba(255,255,255,0.1);
+  margin: 10px;
+  padding: 1px;
+}
+
+.portfolio-card {
+  width: 30%;
+  float: left;
+  margin: 2% 2% 1% 1%;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.portfolio-container {
+  display: inline;
+  overflow: auto;
+  margin: auto;
+}
+
+/************************************
             MODAL STYLING
 *************************************/
 /* The Modal (background) */

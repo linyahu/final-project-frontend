@@ -5,7 +5,7 @@ class Summary extends Component {
   render() {
     // console.log("%c props in my summary company", "color: blue", this.props);
     return (
-      <div className="grey-border">
+      <div className="grey-border portfolio-card">
         <h4>Summary Component </h4>
       </div>
     )

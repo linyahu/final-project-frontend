@@ -27,17 +27,19 @@ class PortfolioContainer extends Component {
 
   renderPortfolio() {
     return (
-      <div>
-        <h3> here's your portfolio </h3>
+      <div className="portfolio-container">
         <Summary
           subportfolios={this.props.portfolio.subportfolios}
         />
-        <Details
-          subportfolios={this.props.portfolio.subportfolios}
-        />
+
         <Breakdown
           subportfolios={this.props.portfolio.subportfolios}
         />
+
+        <Details
+          subportfolios={this.props.portfolio.subportfolios}
+        />
+
 
         <h3> subportfolios here </h3>
         <SubportfolioContainer

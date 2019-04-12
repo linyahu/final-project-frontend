@@ -6,15 +6,11 @@ import DetailCard from './DetailCard'
 class Details extends Component {
 
 
-  componentDidMount() {
-
-  }
-
-
   render() {
     console.log("props in details", this.props);
     return (
-      <div className="grey-border">
+      <div className="grey-border portfolio-card">
+        <h4>Portfolio Details</h4>
         {
           this.props.subportfolios.map(sub => {
             return (
