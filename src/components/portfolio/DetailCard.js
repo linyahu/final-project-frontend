@@ -113,8 +113,8 @@ class DetailCard extends Component {
 
 
   render() {
-    console.log("props in detailcard", this.props);
-    console.log("%c state", "color: pink", this.state);
+    // console.log("props in detailcard", this.props);
+    // console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
         <h5>{this.props.subportfolio.equity.company_name}</h5>
