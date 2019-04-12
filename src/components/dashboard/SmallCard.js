@@ -41,7 +41,7 @@ class SmallCard extends Component {
   }
 
   render() {
-    console.log("state in small card", this.state.summary);
+    // console.log("state in small card", this.state.summary);
     return (
       <div className="sm-card">
         <h5>{this.props.name}</h5>

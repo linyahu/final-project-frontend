@@ -47,6 +47,7 @@ class DashboardContainer extends Component {
     fetch("http://localhost:3000/api/v1/dashboards")
     .then(res => res.json())
     .then( json => {
+      // console.log("do i have user id?", this.props.user_id);
       let dashboards = json.filter( d => d.user_id === this.props.user_id)
       let equities = dashboards.map( d => d.equities ).flat()
 

@@ -19,7 +19,7 @@ const initialState = {
   navbar: true,
   dashboards: [],
   dashboardEquities: [],
-  hasPortfolio: false,
+  portfolio: {},
   portfolioEquities: [],
   search: "",
 }
@@ -42,6 +42,8 @@ function reducer(state = initialState, action) {
       // return {...state, dashboards: action.payload }
     case "SET_USER":
       return { ...state, user_id: action.payload }
+    case "SET_PORTFOLIO":
+      return { ...state, portfolio: action.payload }
     case "SET_PORTFOLIO_EQUITIES":
       return { ...state, portfolioEquities: action.payload }
     case "SET_DASHBOARD_EQUITIES":

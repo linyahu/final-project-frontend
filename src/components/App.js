@@ -5,7 +5,10 @@ import Login from './Login'
 import DashboardContainer from './dashboard/DashboardContainer'
 // import Dashboard from './dashboard/Dashboard'
 import EditDashboard from './dashboard/EditDashboard'
+
 import EquityContainer from './equity/EquityContainer'
+
+import PortfolioContainer from './portfolio/PortfolioContainer'
 
 import { connect } from 'react-redux';
 import { Route, NavLink, Switch } from 'react-router-dom';
@@ -33,16 +36,18 @@ class App extends Component {
           if (response.errors) {
             alert(response.errors)
           } else {
-            // debugger
             this.props.dispatch({ type: "SET_USER", payload: response.id })
+            this.fetchPortfolioEquities()
           }
         })
     }
+
+
   }
 
   // we need to set the current user and the token
   setCurrentUser = (response) => {
-    // debugger
+    debugger
     localStorage.setItem("jwt", response.jwt)
     this.props.dispatch({ type: "SET_USER", payload: response })
     // this.setState({
@@ -67,6 +72,20 @@ class App extends Component {
   }
 
 
+  fetchPortfolioEquities() {
+    fetch("http://localhost:3000/api/v1/portfolios")
+    .then(res => res.json())
+    .then( json => {
+      let portfolio = json.find(p => p.user_id === this.props.user_id)
+      let equities = portfolio.subportfolios.map( s => s.equity )
+      // console.log("app component did mount", portfolio, equities);
+
+      this.props.dispatch({ type: "SET_PORTFOLIO", payload: portfolio })
+      this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: equities })
+
+    })
+  }
+
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
@@ -86,6 +105,10 @@ class App extends Component {
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
               to="/equities">EQUITIES</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/portfolio">PORTFOLIO</NavLink>
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
@@ -134,13 +157,15 @@ class App extends Component {
           <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
+          <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
+
         </Switch>
       </Fragment>
     )
   }
 
   render() {
-    console.log("%c props in App", "color: orange", this.props);
+    // console.log("%c props in App", "color: orange", this.props);
     return (
       <div className="App">
         {
@@ -169,7 +194,9 @@ function mapStateToProps(state) {
   return {
     navbar: state.navbar,
     user_id: state.user_id,
-    dashboards: state.dashboards
+    dashboards: state.dashboards,
+    portfolio: state.portfolio,
+    portfolioEquities: state.portfolioEquities,
   }
 }
 

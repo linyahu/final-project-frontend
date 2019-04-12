@@ -25,8 +25,6 @@ class Top extends Component {
   }
 
   render() {
-    // debugger
-    console.log("%c top", "color: orange", this.props);
     return (
       <div className="small-padding">
         {this.renderEquities() }
