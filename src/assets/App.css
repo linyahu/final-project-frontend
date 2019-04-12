@@ -314,7 +314,7 @@
 
 .sm-card {
   background-color: rgba(0,0,0,0.2);
-  min-height: 190px;
+  height: 200px;
   width: 30%;
   float: left;
   margin: 1.5%;
