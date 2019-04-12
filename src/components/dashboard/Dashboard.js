@@ -10,6 +10,7 @@ class Dashboard extends Component {
 
   renderMain = () => {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
+      let newPortfolio = {name: "portfolio", equities: this.props.portfolioEquities }
       // console.log(otherDashes);
       return (
         <Fragment>
@@ -26,6 +27,15 @@ class Dashboard extends Component {
                 />
               )
             })
+          }
+          {
+            this.props.portfolioEquities.length === 0 ?
+            null
+            :
+            <SummaryCard
+              key={this.props.portfolio.name}
+              dashboard={newPortfolio}
+            />
           }
           </div>
         </Fragment>
@@ -70,7 +80,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    // console.log("%c props in dashboard", "color: orange", this.props);
+    console.log("%c props in dashboard", "color: orange", this.props);
     return (
       <div className="dashboard">
       {

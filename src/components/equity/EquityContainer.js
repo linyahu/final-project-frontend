@@ -44,11 +44,8 @@ class EquityContainer extends Component {
     this.props.history.push(`/equities/search?=${this.state.search}`)
     window.location.reload()
 
-
     //with redux
     // this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.state.search })
-
-
   }
 
   /**********************************************
@@ -129,22 +126,6 @@ class EquityContainer extends Component {
     let searchTerm = this.props.location.search.substring(2)
     console.log(searchTerm);
     this.fetchEquitiesFromDatabase(searchTerm)
-  }
-
-  renderEquityProfile = () => {
-    console.log("what is the state right now", this.state);
-    console.log("can i get access to params", this.params);
-    // this.fetchEquitiesFromDatabase()
-
-    // return this.state.equities.map( equity => {
-    //   // console.log(equity);
-    //   return (
-        // <EquityProfile
-        //   key={equity.id}
-        //   equity={equity}
-        // />
-    //   )
-    // })
   }
 
   renderTop = () => {

@@ -15,12 +15,14 @@ class Search extends Component {
     .then(res => res.json())
     .then(json => {
       let equities = json.filter( eq => eq.symbol.toLowerCase().includes(search) || eq.company_name.toLowerCase().includes(search))
-      // console.log("here they are", equities);
+
       this.setState({ equities })
     })
   }
 
+
   render() {
+    console.log("what are my props", this.props);
     return (
       <div>
         {
@@ -41,7 +43,8 @@ class Search extends Component {
 
 function mapStateToProps(state) {
   return {
-    search: state.search,
+    user_id: state.user_id,
+    // search: state.search,
   }
 }
 

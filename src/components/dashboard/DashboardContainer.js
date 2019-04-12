@@ -114,6 +114,8 @@ class DashboardContainer extends Component {
             dashboard={dashboard}
             allDashboards={this.props.dashboards}
             edit={this.editDashboard}
+            portfolio={this.props.portfolio}
+            portfolioEquities={this.props.portfolioEquities}
           />
         </Fragment>
       )
@@ -140,6 +142,8 @@ function mapStateToProps(state) {
     user_id: state.user_id,
     dashboards: state.dashboards,
     dashboardEquities: state.dashboardEquities,
+    portfolioEquities: state.portfolioEquities,
+    portfolio: state.portfolio,
   }
 }
 

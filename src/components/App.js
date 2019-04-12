@@ -38,6 +38,7 @@ class App extends Component {
           } else {
             this.props.dispatch({ type: "SET_USER", payload: response.id })
             this.fetchPortfolioEquities()
+            this.fetchDashboards()
           }
         })
     }
@@ -47,12 +48,8 @@ class App extends Component {
 
   // we need to set the current user and the token
   setCurrentUser = (response) => {
-    debugger
     localStorage.setItem("jwt", response.jwt)
     this.props.dispatch({ type: "SET_USER", payload: response })
-    // this.setState({
-    //   currentUser: response
-    // })
   }
 
   // this is just so all of our data is as up to date as possible now that we are
@@ -77,12 +74,28 @@ class App extends Component {
     .then(res => res.json())
     .then( json => {
       let portfolio = json.find(p => p.user_id === this.props.user_id)
-      let equities = portfolio.subportfolios.map( s => s.equity )
-      // console.log("app component did mount", portfolio, equities);
 
-      this.props.dispatch({ type: "SET_PORTFOLIO", payload: portfolio })
-      this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: equities })
+      if (!!portfolio) {
+        let equities = portfolio.subportfolios.map( s => s.equity )
+        // console.log("app component did mount", portfolio, equities);
 
+        this.props.dispatch({ type: "SET_PORTFOLIO", payload: portfolio })
+        this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: equities })
+      }
+    })
+  }
+
+  fetchDashboards() {
+    fetch("http://localhost:3000/api/v1/dashboards")
+    .then(res => res.json())
+    .then( json => {
+      // console.log("do i have user id?", this.props.user_id);
+      let dashboards = json.filter( d => d.user_id === this.props.user_id)
+      let equities = dashboards.map( d => d.equities ).flat()
+
+      // console.log('%c in fetchDashboards', 'color: blue', dashboards, 'equities', equities);
+      this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards })
+      this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: equities })
     })
   }
 

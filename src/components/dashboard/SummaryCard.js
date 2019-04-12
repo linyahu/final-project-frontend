@@ -14,10 +14,8 @@ class SummaryCard extends Component {
   }
 
 
-
-
   render() {
-    // console.log("props in summary card", this.props.dashboard);
+    console.log("props in summary card", this.props.dashboard);
     return (
       <div className="summary-card">
         <h3> {this.props.dashboard.name} dashboard </h3>
