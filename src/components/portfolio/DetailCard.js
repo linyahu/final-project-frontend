@@ -42,6 +42,13 @@ class DetailCard extends Component {
     },
     currentPrice: 0,
     currentValue: 0,
+    showChart: false,
+  }
+
+  toggleChart = () => {
+    this.setState( prevState => {
+      return { showChart: !prevState.showChart }
+    })
   }
 
   componentDidMount() {
@@ -118,12 +125,21 @@ class DetailCard extends Component {
     return (
       <div className="details">
         <h5>{this.props.subportfolio.equity.company_name}</h5>
+        {
+          this.state.showChart ?
+          <Fragment>
+            <EquityChart
+              data={this.state.data}
+              legend={this.state.legend}
+              options={this.state.options}
+            />
+            <button onClick={this.toggleChart}>hide chart</button>
+          </Fragment>
+          :
+          <button onClick={this.toggleChart}>show price chart</button>
+        }
 
-          <EquityChart
-          data={this.state.data}
-          legend={this.state.legend}
-          options={this.state.options}
-          />
+
 
         <h6>
         last px: ${this.state.currentPrice} |

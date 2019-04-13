@@ -17,6 +17,7 @@ class Details extends Component {
           this.props.subportfolios.map(sub => {
             return (
               <DetailCard
+                key={sub.id}
                 subportfolio={sub}
               />
             )

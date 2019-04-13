@@ -19,16 +19,6 @@ class Dashboard extends Component {
           />
           <div className="summary-card-container grey-border">
           {
-            otherDashes.map( dashboard => {
-              return (
-                <SummaryCard
-                  key={dashboard.id}
-                  dashboard={dashboard}
-                />
-              )
-            })
-          }
-          {
             this.props.portfolioEquities.length === 0 ?
             null
             :
@@ -37,6 +27,16 @@ class Dashboard extends Component {
               dashboard={newPortfolio}
             />
           }
+          {
+            otherDashes.map( dashboard => {
+              return (
+                <SummaryCard
+                  key={dashboard.id}
+                  dashboard={dashboard}
+                />
+              )
+            })
+          }  
           </div>
         </Fragment>
       )
