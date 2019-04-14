@@ -18,7 +18,7 @@ class SummaryCard extends Component {
     console.log("props in summary card", this.props.dashboard);
     return (
       <div className="summary-card">
-        <h3> {this.props.dashboard.name} dashboard </h3>
+        <h3> {this.props.dashboard.name} </h3>
         <h6> | {this.state.tickers} </h6>
         {
           this.props.dashboard.equities.map(equity => {

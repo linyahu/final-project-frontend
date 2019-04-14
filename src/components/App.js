@@ -39,7 +39,7 @@ class App extends Component {
             alert(response.errors)
           } else {
             this.props.dispatch({ type: "SET_USER", payload: response.id })
-            this.fetchPortfolioEquities()
+            this.fetchPortfolioEquities(response.id)
             this.fetchDashboards()
           }
         })
@@ -52,6 +52,8 @@ class App extends Component {
   setCurrentUser = (response) => {
     localStorage.setItem("jwt", response.jwt)
     this.props.dispatch({ type: "SET_USER", payload: response })
+
+    this.fetchPortfolioEquities(response)
   }
 
   // this is just so all of our data is as up to date as possible now that we are
@@ -68,18 +70,19 @@ class App extends Component {
     //   currentUser: null
     // }, () => { this.props.history.push("/login") })
     this.props.dispatch({ type: "SET_USER", payload: null })
+    this.props.dispatch({ type: "SET_PORTFOLIO", payload: {} })
+    this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: [] })
   }
 
 
-  fetchPortfolioEquities() {
+  fetchPortfolioEquities(id) {
     fetch("http://localhost:3000/api/v1/portfolios")
     .then(res => res.json())
     .then( json => {
-      let portfolio = json.find(p => p.user_id === this.props.user_id)
+      let portfolio = json.find(p => p.user_id === id)
 
       if (!!portfolio) {
         let equities = portfolio.subportfolios.map( s => s.equity )
-        // console.log("app component did mount", portfolio, equities);
 
         this.props.dispatch({ type: "SET_PORTFOLIO", payload: portfolio })
         this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: equities })

@@ -8,13 +8,27 @@ import SubportfolioContainer from './SubportfolioContainer'
 import { connect } from 'react-redux';
 
 class PortfolioContainer extends Component {
+  state = {
+    accountBalance: 0,
+  }
 
   componentDidMount() {
-    this.fetchPortfolioData()
+    this.fetchUserData()
   }
 
   fetchPortfolioData() {
 
+  }
+
+  fetchUserData() {
+    fetch("http://localhost:3000/api/v1/users")
+    .then(res => res.json())
+    .then(json => {
+      let user = json.find( a => a.id === this.props.user_id)
+      let accountBalance = user.account_balance
+
+      this.setState({ accountBalance })
+    })
   }
 
   renderDefault() {
@@ -30,6 +44,7 @@ class PortfolioContainer extends Component {
       <div className="portfolio-container">
         <Summary
           subportfolios={this.props.portfolio.subportfolios}
+          accountBalance={this.state.accountBalance}
         />
 
         <Breakdown
@@ -68,6 +83,7 @@ function mapStateToProps(state) {
   // console.log('%c mapStateToProps', 'color: yellow', state);
   // maps the state from the store to the props
   return {
+    user_id: state.user_id,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
   }

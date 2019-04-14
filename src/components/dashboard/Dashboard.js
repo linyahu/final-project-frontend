@@ -11,7 +11,7 @@ class Dashboard extends Component {
   renderMain = () => {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
       let newPortfolio = {name: "portfolio", equities: this.props.portfolioEquities }
-      // console.log(otherDashes);
+
       return (
         <Fragment>
           <Newsfeed
@@ -36,7 +36,7 @@ class Dashboard extends Component {
                 />
               )
             })
-          }  
+          }
           </div>
         </Fragment>
       )

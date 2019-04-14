@@ -58,7 +58,7 @@ class Summary extends Component {
     let d = (t.getFullYear() -1) + "-" + (t.getMonth() +1) + "-" + t.getDate()
 
     this.props.subportfolios.map( eq => {
-      console.log("my equity", eq);
+      // console.log("my equity", eq);
       if (eq.date_bought > d) {
         this.fetchOneYearTradingData(eq, d)
       } else {
@@ -121,7 +121,7 @@ class Summary extends Component {
               RENDER FUNCTIONS
 **********************************************/
   render() {
-    console.log("%c state in my summary company", "color: blue", this.state);
+    // console.log("%c state in my summary company", "color: blue", this.state);
     return (
       <div className="grey-border portfolio-card">
         <h4>Portfolio Snapshot</h4>
