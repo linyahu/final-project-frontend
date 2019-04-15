@@ -10,7 +10,9 @@ class Dashboard extends Component {
 
   renderMain = () => {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
-      let newPortfolio = {name: "portfolio", equities: this.props.portfolioEquities }
+      let subportfolios = this.props.portfolio.subportfolios.filter( s => !s.date_sold)
+      let equities = subportfolios.map( s => s.equity )
+      let newPortfolio = {name: "portfolio", equities: equities }
 
       return (
         <Fragment>

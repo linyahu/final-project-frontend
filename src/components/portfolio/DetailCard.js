@@ -182,7 +182,7 @@ class DetailCard extends Component {
                 RENDER FUNCTIONS
   **********************************************/
   render() {
-    console.log("props in detailcard", this.props);
+    // console.log("props in detailcard", this.props);
     // console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
