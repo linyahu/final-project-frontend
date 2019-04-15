@@ -22,7 +22,7 @@ class Search extends Component {
 
 
   render() {
-    console.log("what are my props", this.props);
+    // console.log("what are my props", this.props);
     return (
       <div>
         {

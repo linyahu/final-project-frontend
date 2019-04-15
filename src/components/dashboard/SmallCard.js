@@ -22,7 +22,6 @@ class SmallCard extends Component {
   renderDetails() {
     return (
       <div className="back">
-
         <h6>
           Avg Volume: {Math.round(this.state.summary.avgTotalVolume/100000)/10}m
           <br />
@@ -45,6 +44,7 @@ class SmallCard extends Component {
     return (
       <div className="sm-card">
         <h5>{this.props.name}</h5>
+        <h6>{this.props.equity.sector} - {this.props.equity.industry}</h6>
         {
           this.renderDetails()
         }
@@ -54,6 +54,7 @@ class SmallCard extends Component {
             ticker={this.props.ticker}
             noStats={true}
           />
+
         </div>
 
       </div>

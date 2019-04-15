@@ -125,13 +125,14 @@ class Summary extends Component {
     return (
       <div className="grey-border portfolio-card">
         <h4>Portfolio Snapshot</h4>
+        <h6>shows performance of portfolio since first trade</h6>
         <EquityChart
           data={this.state.data}
           legend={this.state.legend}
           options={this.state.options}
         />
-        <h6>performance of portfolio since first trade</h6>
         <h6>current value: {this.state.currentValue} </h6>
+        <h6>account balance: {this.props.accountBalance} </h6>
       </div>
 
     )

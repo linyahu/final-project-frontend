@@ -9,26 +9,41 @@ import { connect } from 'react-redux';
 
 class PortfolioContainer extends Component {
   state = {
-    accountBalance: 0,
+    "Technology": 0,
+    "Healthcare": 0,
+    "Industrials": 0,
+    "Financial Services": 0,
+    "Basic Materials": 0,
+    "Consumer Cyclical": 0
   }
 
   componentDidMount() {
-    this.fetchUserData()
+    if (!!this.props.portfolio.subportfolios) {
+      this.props.portfolio.subportfolios.map(sub => {
+        this.fetchEquityData(sub)
+      })
+    }
   }
 
-  fetchPortfolioData() {
-
-  }
-
-  fetchUserData() {
-    fetch("http://localhost:3000/api/v1/users")
+  fetchEquityData(sub) {
+    // console.log(sub);
+    fetch(`https://api.iextrading.com/1.0/stock/${sub.equity.symbol}/price`)
     .then(res => res.json())
     .then(json => {
-      let user = json.find( a => a.id === this.props.user_id)
-      let accountBalance = user.account_balance
 
-      this.setState({ accountBalance })
+      this.setState(prevState => {
+        return { [sub.equity.sector]: prevState[sub.equity.sector] + Math.round(json*sub.quantity*100)/100 }
+      })
     })
+  }
+
+  getSectorData = () => {
+    return {  "Technology": this.state["Technology"],
+              "Healthcare": this.state["Healthcare"],
+              "Industrials": this.state["Industrials"],
+              "Financial Services": this.state["Financial Services"],
+              "Basic Materials": this.state["Basic Materials"],
+              "Consumer Cyclical": this.state["Consumer Cyclical"]}
   }
 
   renderDefault() {
@@ -44,11 +59,12 @@ class PortfolioContainer extends Component {
       <div className="portfolio-container">
         <Summary
           subportfolios={this.props.portfolio.subportfolios}
-          accountBalance={this.state.accountBalance}
+          accountBalance={this.props.accountBalance}
         />
 
         <Breakdown
-          subportfolios={this.props.portfolio.subportfolios}
+          sectorData={this.getSectorData()}
+
         />
 
         <Details
@@ -65,7 +81,7 @@ class PortfolioContainer extends Component {
   }
 
   render() {
-    // console.log("what are my props", this.props);
+    // console.log("%c state?", "color: green", this.state);
     return (
       <div>
       {
@@ -80,12 +96,11 @@ class PortfolioContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('%c mapStateToProps', 'color: yellow', state);
-  // maps the state from the store to the props
   return {
     user_id: state.user_id,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
+    accountBalance: state.accountBalance
   }
 }
 

@@ -80,7 +80,7 @@ class EquityProfile extends Component {
         <Equity
           id={this.props.equity.id}
           ticker={this.props.equity.symbol}
-          addButton={this.showAddToDashboard}
+          trade={true}
         />
         <button name="showFinancials" onClick={this.showDetails}> view financials </button>
         <button name="showHistoricChart" onClick={this.showDetails}> historic charts </button>

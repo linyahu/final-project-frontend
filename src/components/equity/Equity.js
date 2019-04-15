@@ -13,7 +13,7 @@ class Equity extends Component {
       datasets: [{
             label: '',
             pointBorderColor: 'rgb(255,255,255,0)',
-            lineTension: 1,
+            lineTension: 0.1,
             data: []
         }]
     },
@@ -44,13 +44,15 @@ class Equity extends Component {
       }
     },
     stats: {},
-    showDropdown: false,
+    showTradeForm: false,
+    currentPrice: "",
+    quantity: 0,
+    addEquityId: 0,
+    addDashboardId: 0,
   }
 
 
-  showProfile = () => {
-    this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.props.companyName.toLowerCase() })
-  }
+
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
@@ -69,10 +71,11 @@ class Equity extends Component {
       this.fetchPostCloseTradeData()
     }
     this.fetchStatsData()
+    window.setInterval(this.fetchCurrentPrice, 5000)
   }
 
   /**********************************************
-              CHANGE STATE FUNCTIONS
+            EVENT / CHANGE STATE FUNCTIONS
   **********************************************/
   setDatapoints = (json) => {
     // debugger
@@ -96,6 +99,54 @@ class Equity extends Component {
               data: datapoints
           }]
       }
+    })
+  }
+
+  showProfile = () => {
+    this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.props.companyName.toLowerCase() })
+  }
+
+  trade = () => {
+    this.setState({ showTradeForm: true })
+  }
+
+  closeTradeForm = () => {
+    this.setState({ showTradeForm: false })
+  }
+
+  handleTrade = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleDirection = (e) => {
+    if (e.target.value === "sell") {
+      this.setState( prevState => {
+        return { quantity: -prevState.quantity }
+      })
+    } else {
+      this.setState( prevState => {
+        return { quantity: Math.abs(prevState.quantity) }
+      })
+    }
+  }
+
+  addEquityId = (e) => {
+    this.setState({ addEquityId: this.props.id, addDashboardId: e.target.value })
+  }
+
+  addToDashboard = () => {
+    let data = {
+      dashboard_id: this.state.addDashboardId,
+      equity_id: this.state.addEquityId
+    }
+
+    fetch("http://localhost:3000/api/v1/equity_dashboards", {
+      method: "POST",
+
+    })
+    .then(res => res.json())
+    .then( json => {
+
     })
   }
 
@@ -139,23 +190,79 @@ class Equity extends Component {
     })
   }
 
+  fetchCurrentPrice = () => {
+    // console.log("will fetch price?");
+    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/price`)
+    .then(res => res.json())
+    .then(json => {
+      this.setState({ currentPrice: json })
+    })
+  }
+
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
-  renderAddButton() {
-    let equityIds = this.props.dashboardEquities.map( e => e.id )
-    if (!equityIds.includes(this.props.id)) {
-      return (
-        <div className="btn-div">
-          <button onClick={() => this.props.addButton(this.props.id)}>+</button>
+  renderTradeForm(id) {
+    let dashboardIds = this.props.dashboardEquities.map( e => e.id )
+    let portfolioIds = this.props.portfolioEquities.map( e => e.id )
+    // console.log("my id", id);
+    return (
+      <div className="modal">
+        <div className="modal-content-sm">
+          <button onClick={this.closeTradeForm} className="close">X</button>
+          <h4>{this.props.ticker} - ${this.state.currentPrice}</h4>
+          {
+            dashboardIds.includes(id) ?
+            null
+            :
+            <div>
+              <h5> add to a dashboard </h5>
+              <select onChange={this.addEquityId}>
+              {
+                this.props.dashboards.map( dashboard => {
+                  if (dashboard.name === "main") {
+                    return <option value="">Select</option>
+                  } else {
+                    return <option value={dashboard.id}>{dashboard.name}</option>
+                  }
+                })
+              }
+              </select>
+              <button onClick={this.addToDashboard}> add to dashboard </button>
+            </div>
+          }
+          <h6> trading fee: $5 </h6>
+          <h6> account balance: {this.props.accountBalance} </h6>
+          <label> quantity </label>
+          <input name="quantity" onChange={this.handleTrade} value={this.state.quantity} type="text" /><br />
+          <label> buy/sell </label>
+            <select onChange={this.handleDirection} value={this.state.direction}>
+              <option value="buy">buy</option>
+              <option value="sell">sell</option>
+            </select><br />
+          {
+            (this.state.quantity * this.state.currentPrice + 5)> this.props.accountBalance ?
+            <h5> you don't have anough in your account to cover this trade </h5>
+            :
+            null
+          }
+          {
+            this.state.quantity < 0 && !portfolioIds.includes(id) ?
+            <h5> warning: you don't currently have this stock
+            <br />
+            in your portfolio, please proceed only if you
+            <br />
+            understand the risks of short-selling
+           </h5>
+            :
+            null
+          }
+          <button> trade </button>
         </div>
-      )
-    }
+      </div>
+    )
   }
 
-  renderDropdown() {
-
-  }
 
   renderStats() {
     return (
@@ -181,8 +288,22 @@ class Equity extends Component {
   }
 
   render() {
+    // console.log("what are my props in equity", this.props);
+    console.log("state stuff", this.state);
     return (
       <div className="eq-card">
+        {
+          !!this.props.trade ?
+          <button onClick={this.trade}>+</button>
+          :
+          null
+        }
+        {
+          this.state.showTradeForm ?
+          this.renderTradeForm(this.props.id)
+          :
+          null
+        }
         {
           !!this.props.delete ?
           <button
@@ -213,7 +334,7 @@ class Equity extends Component {
         {
           this.props.showProfile || this.props.delete ?
           <Fragment>
-            <h5>{this.state.stats.sector}</h5>
+            <h5>{this.state.stats.sector} </h5>
           </Fragment>
           :
           null
@@ -238,12 +359,6 @@ class Equity extends Component {
           :
           null
         }
-        {/*
-          this.props.addButton ?
-          this.renderAddButton()
-          :
-          null
-        */}
 
       </div>
     )
@@ -254,7 +369,10 @@ class Equity extends Component {
 function mapStateToProps(state) {
   return {
     search: state.search,
+    dashboards: state.dashboards,
     dashboardEquities: state.dashboardEquities,
+    portfolioEquities: state.portfolioEquities,
+    accountBalance: state.accountBalance
   }
 }
 

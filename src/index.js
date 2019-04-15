@@ -22,6 +22,7 @@ const initialState = {
   portfolio: {},
   portfolioEquities: [],
   search: "",
+  accountBalance: 0,
 }
 
 function reducer(state = initialState, action) {
@@ -48,6 +49,8 @@ function reducer(state = initialState, action) {
       return { ...state, portfolioEquities: action.payload }
     case "SET_DASHBOARD_EQUITIES":
       return { ...state, dashboardEquities: action.payload }
+    case "SET_ACCOUNT_BALANCE":
+      return { ...state, accountBalance: action.payload }
     case "SEARCH_EQUITY":
       return { ...state, search: action.payload }
     default:

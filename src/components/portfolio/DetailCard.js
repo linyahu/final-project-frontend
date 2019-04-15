@@ -139,13 +139,15 @@ class DetailCard extends Component {
           <button onClick={this.toggleChart}>show price chart</button>
         }
 
-
-
         <h6>
         last px: ${this.state.currentPrice} |
+        quantity: {this.props.subportfolio.quantity} |
         value: ${this.state.currentValue} |
         $change: { Math.round((this.state.currentValue - this.props.subportfolio.initial_value)*100)/100 } |
         %change: {Math.round((this.state.currentPrice/this.props.subportfolio.initial_px - 1)*10000)/100} </h6 >
+        <h6>
+        date bought: {this.props.subportfolio.date_bought}
+        </h6>
       </div>
     )
   }
