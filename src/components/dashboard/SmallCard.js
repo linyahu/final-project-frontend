@@ -44,7 +44,7 @@ class SmallCard extends Component {
     return (
       <div className="sm-card">
         <h5>{this.props.name}</h5>
-        <h6>{this.props.equity.sector} - {this.props.equity.industry}</h6>
+        <h6>{this.props.equity.sector}</h6>
         {
           this.renderDetails()
         }

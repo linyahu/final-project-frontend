@@ -13,7 +13,7 @@ class Equity extends Component {
       datasets: [{
             label: '',
             pointBorderColor: 'rgb(255,255,255,0)',
-            lineTension: 0.1,
+            lineTension: 0,
             data: []
         }]
     },
@@ -179,8 +179,8 @@ class Equity extends Component {
     })
     .then(res => res.json())
     .then( json => {
-      console.log("after creating subportfolio", json);
-      this.updateAccountBalance(json.initial_value)
+      // console.log("after creating subportfolio", json);
+      this.updateAccountBalance(json.initial_value, json)
     })
   }
 
@@ -233,8 +233,30 @@ class Equity extends Component {
     })
   }
 
-  updateAccountBalance = (value) => {
+  updateAccountBalance = (value, newSubportfolio) => {
+    let data ={
+      account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) - value - 5)*100)/100
+    }
 
+    fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log("did it patch through?", json);
+
+      // let newPortfolioEquities = [...this.props.portfolioEquities, newSubportfolio]
+      this.props.dispatch({ type: "SET_PORTFOLIO", payload: json })
+      this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: data.account_balance })
+
+      // window.location.reload()
+
+    })
   }
 
   /**********************************************
@@ -243,7 +265,7 @@ class Equity extends Component {
   renderTradeForm(id) {
     let dashboardIds = this.props.dashboardEquities.map( e => e.id )
     let portfolioIds = this.props.portfolioEquities.map( e => e.id )
-    // console.log("my id", id);
+
     return (
       <div className="modal">
         <div className="modal-content-sm">
@@ -330,7 +352,7 @@ class Equity extends Component {
 
   render() {
     // console.log("what are my props in equity", this.props);
-    console.log("state stuff", this.state);
+    // console.log("state stuff", this.state);
     return (
       <div className="eq-card">
         {

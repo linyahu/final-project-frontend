@@ -65,7 +65,7 @@ class DetailCard extends Component {
       quantity: 0,
       end_px: this.state.currentPrice,
       initial_value: parseFloat(this.props.subportfolio.initial_value),
-      end_value: this.state.currentValue - 5
+      end_value: this.state.currentValue
     }
     fetch(`http://localhost:3000/api/v1/subportfolios/${this.props.subportfolio.id}`, {
       method: "PATCH",
@@ -77,8 +77,8 @@ class DetailCard extends Component {
     })
     .then(res => res.json())
     .then( json => {
-      this.updateAccountBalance()
-      // window.location.reload()
+      // console.log("json??", json);
+      this.updateAccountBalance(json.end_value)
     })
   }
 
@@ -156,11 +156,13 @@ class DetailCard extends Component {
     })
   }
 
-  updateAccountBalance = () => {
+  updateAccountBalance = (value) => {
     let data ={
-      account_balance: this.props.
+      account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) + parseFloat(value) - 5)*100)/100
     }
-    fetch(`http://localhost:3000/api/v1/users/${this.props.user}`, {
+    console.log("what is my data", data);
+
+    fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +172,9 @@ class DetailCard extends Component {
     })
     .then(res => res.json())
     .then(json => {
+      console.log("did it patch through?", json);
 
+      window.location.reload()
     })
   }
 
@@ -178,8 +182,8 @@ class DetailCard extends Component {
                 RENDER FUNCTIONS
   **********************************************/
   render() {
-    // console.log("props in detailcard", this.props);
-    console.log("%c state", "color: pink", this.state);
+    console.log("props in detailcard", this.props);
+    // console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
         <h5>{this.props.subportfolio.equity.company_name}</h5>
@@ -199,8 +203,8 @@ class DetailCard extends Component {
         {
           this.props.subportfolio.quantity > 0 ?
           <Fragment>
-          <h6>date bought: {this.props.subportfolio.date_bought}</h6>
-          <button onClick={this.closePosition}> close this position </button>
+            <h6>date bought: {this.props.subportfolio.date_bought}</h6>
+            <button onClick={this.closePosition}> close this position </button>
           </Fragment>
           :
           <Fragment>

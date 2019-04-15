@@ -314,7 +314,7 @@
 
 .sm-card {
   background-color: rgba(0,0,0,0.2);
-  height: 200px;
+  height: 250px;
   width: 30%;
   float: left;
   margin: 1.5%;
@@ -406,14 +406,15 @@
   background-color: rgba(255,255,255,0.1);
   margin: 10px;
   padding: 1px;
-  width: 300px;
+  width: 30%;
+  height: 400px;
   float: left;
 }
 
 .portfolio-card {
   float: left;
   margin: 2% 2% 1% 1%;
-  /* overflow-y: auto; */
+  /* overflow: auto; */
 }
 
 .col-1 {
@@ -429,12 +430,11 @@
 .bottom {
   width: 93.5%;
   overflow-x: auto;
-  /* height: 300px; */
 }
 
 .portfolio-container {
   display: inline;
-  overflow: auto;
+  /* overflow: auto; */
   margin: auto;
 }
 

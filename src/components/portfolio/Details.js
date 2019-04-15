@@ -13,7 +13,6 @@ class Details extends Component {
     return (
       <div className="grey-border portfolio-card bottom">
         <h4>Current Trades</h4>
-        <button> view closed positions </button>
         {
           this.props.subportfolios.map(sub => {
             return (
@@ -21,7 +20,6 @@ class Details extends Component {
                 key={sub.id}
                 subportfolio={sub}
                 portfolio={this.props.portfolio}
-                user={this.props.user}
               />
             )
           })

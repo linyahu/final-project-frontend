@@ -65,8 +65,7 @@ class PortfolioContainer extends Component {
 
         <Details
           subportfolios={this.props.portfolio.subportfolios}
-          portfolio={this.props.portfolio.id}
-          user={this.props.user_id}
+          portfolio={this.props.portfolio}
         />
       </div>
     )

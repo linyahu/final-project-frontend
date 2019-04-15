@@ -42,7 +42,7 @@ class App extends Component {
           } else {
             this.props.dispatch({ type: "SET_USER", payload: response.id })
             this.fetchPortfolioEquities(response.id)
-            this.fetchAccountData(response.id)
+            // this.fetchAccountData(response.id)
             this.fetchDashboards()
           }
         })
@@ -57,7 +57,7 @@ class App extends Component {
     this.props.dispatch({ type: "SET_USER", payload: response })
 
     this.fetchPortfolioEquities(response)
-    this.fetchAccountData(response)
+    // this.fetchAccountData(response)
   }
 
   // this is just so all of our data is as up to date as possible now that we are
@@ -90,19 +90,20 @@ class App extends Component {
 
         this.props.dispatch({ type: "SET_PORTFOLIO", payload: portfolio })
         this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: equities })
+        this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: portfolio.account_balance })
       }
     })
   }
 
-  fetchAccountData(id) {
-    fetch("http://localhost:3000/api/v1/users")
-    .then(res => res.json())
-    .then(json => {
-      let user = json.find( a => a.id === id)
-      let accountBalance = user.account_balance
-      this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: accountBalance })
-    })
-  }
+  // fetchAccountData(id) {
+  //   fetch("http://localhost:3000/api/v1/users")
+  //   .then(res => res.json())
+  //   .then(json => {
+  //     let user = json.find( a => a.id === id)
+  //     let accountBalance = user.account_balance
+  //     this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: accountBalance })
+  //   })
+  // }
 
   fetchDashboards() {
     fetch("http://localhost:3000/api/v1/dashboards")
@@ -196,7 +197,7 @@ class App extends Component {
 
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
 
-          <Route path="/account" component={ props => <Account {...props}/>} />
+          <Route path="/account" component={ props => <Account {...props} user_id={this.props.user_id} balance={this.props.accountBalance}/>} />
 
         </Switch>
       </Fragment>
@@ -236,6 +237,7 @@ function mapStateToProps(state) {
     dashboards: state.dashboards,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
+    accountBalance: state.accountBalance
   }
 }
 
