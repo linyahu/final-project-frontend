@@ -18,7 +18,7 @@ class Summary extends Component {
       scales: {
         xAxes: [{
           ticks: {
-            display: false, // show label
+            display: true, // show label
             fontColor: 'rgba(255,255,255,1)'
           },
           gridLines: {
@@ -123,16 +123,16 @@ class Summary extends Component {
   render() {
     // console.log("%c state in my summary company", "color: blue", this.state);
     return (
-      <div className="grey-border portfolio-card">
+      <div className="grey-border portfolio-card col-2">
         <h4>Portfolio Snapshot</h4>
-        <h6>shows performance of portfolio since first trade</h6>
+        <h6>current value: {this.state.currentValue} |
+        account balance: {this.props.accountBalance} </h6>
         <EquityChart
           data={this.state.data}
           legend={this.state.legend}
           options={this.state.options}
+          height={120}
         />
-        <h6>current value: {this.state.currentValue} </h6>
-        <h6>account balance: {this.props.accountBalance} </h6>
       </div>
 
     )

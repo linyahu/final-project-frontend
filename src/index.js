@@ -9,11 +9,6 @@ import { Provider } from 'react-redux';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
-// default initial state:
-// navbar: true,
-// dashboards: [],
-// user_id: null
 const initialState = {
   user_id: null,
   navbar: true,

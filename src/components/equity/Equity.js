@@ -49,6 +49,7 @@ class Equity extends Component {
     quantity: 0,
     addEquityId: 0,
     addDashboardId: 0,
+    addedToDashboard: false,
   }
 
 
@@ -136,17 +137,50 @@ class Equity extends Component {
 
   addToDashboard = () => {
     let data = {
-      dashboard_id: this.state.addDashboardId,
+      dashboard_id: parseInt(this.state.addDashboardId),
       equity_id: this.state.addEquityId
     }
-
     fetch("http://localhost:3000/api/v1/equity_dashboards", {
       method: "POST",
-
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then( json => {
+      this.setState({
+        addEquityId: 0,
+        addDashboardId: 0,
+        showTradeForm: false,
+        addedToDashboard: true,
+      })
+    })
+  }
 
+  addToPortfolio = () => {
+    let data = {
+      portfolio_id: this.props.portfolio.id,
+      equity_id: this.props.id,
+      initial_px: parseFloat(this.state.currentPrice),
+      date_bought: (new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + new Date().getDate()),
+      quantity: parseFloat(this.state.quantity),
+      initial_value: parseFloat(Math.round(this.state.quantity * this.state.currentPrice * 100)/100)
+    }
+
+    fetch("http://localhost:3000/api/v1/subportfolios", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then( json => {
+      console.log("after creating subportfolio", json);
+      this.updateAccountBalance(json.initial_value)
     })
   }
 
@@ -199,6 +233,10 @@ class Equity extends Component {
     })
   }
 
+  updateAccountBalance = (value) => {
+
+  }
+
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
@@ -212,7 +250,7 @@ class Equity extends Component {
           <button onClick={this.closeTradeForm} className="close">X</button>
           <h4>{this.props.ticker} - ${this.state.currentPrice}</h4>
           {
-            dashboardIds.includes(id) ?
+            dashboardIds.includes(id) || this.state.addedToDashboard ?
             null
             :
             <div>
@@ -257,7 +295,7 @@ class Equity extends Component {
             :
             null
           }
-          <button> trade </button>
+          <button onClick={this.addToPortfolio}> trade </button>
         </div>
       </div>
     )
@@ -266,12 +304,15 @@ class Equity extends Component {
 
   renderStats() {
     return (
+      <div>
       <h6>
         open: {this.state.stats.open} |
         close: {this.state.stats.close} |
         high: {this.state.stats.high} |
         low: {this.state.stats.low}
       </h6>
+      <h6>current price: {this.state.currentPrice}</h6>
+      </div>
     )
   }
 
@@ -371,6 +412,7 @@ function mapStateToProps(state) {
     search: state.search,
     dashboards: state.dashboards,
     dashboardEquities: state.dashboardEquities,
+    portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
     accountBalance: state.accountBalance
   }

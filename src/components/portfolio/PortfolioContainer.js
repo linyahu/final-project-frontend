@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import Breakdown from './Breakdown'
 import Details from './Details'
 import Summary from './Summary'
-import SubportfolioContainer from './SubportfolioContainer'
 
 import { connect } from 'react-redux';
 
@@ -26,11 +25,9 @@ class PortfolioContainer extends Component {
   }
 
   fetchEquityData(sub) {
-    // console.log(sub);
     fetch(`https://api.iextrading.com/1.0/stock/${sub.equity.symbol}/price`)
     .then(res => res.json())
     .then(json => {
-
       this.setState(prevState => {
         return { [sub.equity.sector]: prevState[sub.equity.sector] + Math.round(json*sub.quantity*100)/100 }
       })
@@ -64,17 +61,12 @@ class PortfolioContainer extends Component {
 
         <Breakdown
           sectorData={this.getSectorData()}
-
         />
 
         <Details
           subportfolios={this.props.portfolio.subportfolios}
-        />
-
-
-        <h3> subportfolios here </h3>
-        <SubportfolioContainer
-          subportfolios={this.props.portfolio.subportfolios}
+          portfolio={this.props.portfolio.id}
+          user={this.props.user_id}
         />
       </div>
     )

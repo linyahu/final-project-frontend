@@ -55,7 +55,7 @@ class Breakdown extends Component {
     // console.log("props in breakdown", this.props);
     // console.log("what is my state", this.state);
     return (
-      <div className="grey-border portfolio-card">
+      <div className="grey-border portfolio-card col-1">
         <h4>Breakdown Component </h4>
         <h6> breakdown of portfolio by sector </h6>
         <Pie

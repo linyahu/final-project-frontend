@@ -42,15 +42,49 @@ class DetailCard extends Component {
     },
     currentPrice: 0,
     currentValue: 0,
-    showChart: false,
+    closePosition: false,
   }
 
-  toggleChart = () => {
+  /**********************************************
+            EVENT / CHANGE STATE FUNCTIONS
+  **********************************************/
+
+  closePosition = () => {
     this.setState( prevState => {
-      return { showChart: !prevState.showChart }
+      return { closePosition: !prevState.closePosition }
     })
   }
 
+  confirmTrade = () => {
+    let data = {
+      portfolio_id: this.props.portfolio,
+      equity_id: this.props.subportfolio.equity.id,
+      initial_px: parseFloat(this.props.subportfolio.initial_px),
+      date_bought: this.props.subportfolio.date_bought,
+      date_sold: (new Date().getFullYear()) + "-" + (new Date().getMonth() +1) + "-" + new Date().getDate(),
+      quantity: 0,
+      end_px: this.state.currentPrice,
+      initial_value: parseFloat(this.props.subportfolio.initial_value),
+      end_value: this.state.currentValue - 5
+    }
+    fetch(`http://localhost:3000/api/v1/subportfolios/${this.props.subportfolio.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then( json => {
+      this.updateAccountBalance()
+      // window.location.reload()
+    })
+  }
+
+  /**********************************************
+                LIFECYCLE FUNCTIONS
+  **********************************************/
   componentDidMount() {
     let t = new Date()
     let d = (t.getFullYear() -1) + "-" + (t.getMonth() +1) + "-" + t.getDate()
@@ -59,9 +93,12 @@ class DetailCard extends Component {
     } else {
       this.fetchFiveYearTradingData()
     }
-    this.fetchPrice()
+    window.setInterval(this.fetchPrice, 5000)
   }
 
+  /**********************************************
+                FETCH FUNCTIONS
+  **********************************************/
   fetchFiveYearTradingData() {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/chart/5y`)
     .then(res => res.json())
@@ -92,6 +129,7 @@ class DetailCard extends Component {
       let datapoints = data.map(d => d.close)
       let labels = data.map(d => d.date)
 
+      // console.log(this.props.subportfolio.equity.symbol, datapoints);
       this.setState({
         data: {
           labels: labels,
@@ -107,7 +145,7 @@ class DetailCard extends Component {
     })
   }
 
-  fetchPrice() {
+  fetchPrice = () => {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/price`)
     .then(res => res.json())
     .then(json => {
@@ -118,26 +156,39 @@ class DetailCard extends Component {
     })
   }
 
+  updateAccountBalance = () => {
+    let data ={
+      account_balance: this.props.
+    }
+    fetch(`http://localhost:3000/api/v1/users/${this.props.user}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(json => {
 
+    })
+  }
+
+  /**********************************************
+                RENDER FUNCTIONS
+  **********************************************/
   render() {
     // console.log("props in detailcard", this.props);
-    // console.log("%c state", "color: pink", this.state);
+    console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
         <h5>{this.props.subportfolio.equity.company_name}</h5>
-        {
-          this.state.showChart ?
-          <Fragment>
-            <EquityChart
-              data={this.state.data}
-              legend={this.state.legend}
-              options={this.state.options}
-            />
-            <button onClick={this.toggleChart}>hide chart</button>
-          </Fragment>
-          :
-          <button onClick={this.toggleChart}>show price chart</button>
-        }
+
+        <EquityChart
+          data={this.state.data}
+          legend={this.state.legend}
+          options={this.state.options}
+        />
 
         <h6>
         last px: ${this.state.currentPrice} |
@@ -145,17 +196,37 @@ class DetailCard extends Component {
         value: ${this.state.currentValue} |
         $change: { Math.round((this.state.currentValue - this.props.subportfolio.initial_value)*100)/100 } |
         %change: {Math.round((this.state.currentPrice/this.props.subportfolio.initial_px - 1)*10000)/100} </h6 >
-        <h6>
-        date bought: {this.props.subportfolio.date_bought}
-        </h6>
+        {
+          this.props.subportfolio.quantity > 0 ?
+          <Fragment>
+          <h6>date bought: {this.props.subportfolio.date_bought}</h6>
+          <button onClick={this.closePosition}> close this position </button>
+          </Fragment>
+          :
+          <Fragment>
+            <h6> date bought: {this.props.subportfolio.date_bought} | date sold: {this.props.subportfolio.date_sold}</h6>
+            <h6> realized gain/loss: {Math.round((this.props.subportfolio.end_value - this.props.subportfolio.initial_value)*100)/100}</h6>
+          </Fragment>
+        }
+        {
+          this.state.closePosition ?
+          <div className="modal">
+            <div className="modal-content-sm">
+              <button onClick={this.closePosition} className="close">X</button>
+              <h4>{this.props.subportfolio.equity.symbol} - ${this.state.currentPrice}</h4>
+              <h5> trading fee: $5 </h5>
+              <h5> initial value: ${this.props.subportfolio.initial_value}</h5>
+              <h5> current value: ${this.state.currentValue}</h5>
+              <h5> realized gain/loss: ${Math.round((this.state.currentValue - this.props.subportfolio.initial_value - 5)*100)/100}</h5>
+              <button onClick={this.confirmTrade}> confirm trade </button>
+            </div>
+          </div>
+          :
+          null
+        }
       </div>
     )
   }
 }
 
 export default DetailCard
-
-
-// <h5>qty: {this.props.subportfolio.quantity} </h5>
-// <h5>initial price: {this.props.subportfolio.initial_px} </h5>
-// <h5>initial value: {this.props.subportfolio.initial_value} </h5>

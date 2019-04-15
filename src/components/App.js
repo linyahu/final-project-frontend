@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 
 import Home from './Home'
 import Login from './Login'
+import Account from './Account'
+
 import DashboardContainer from './dashboard/DashboardContainer'
 // import Dashboard from './dashboard/Dashboard'
 import EditDashboard from './dashboard/EditDashboard'
@@ -9,7 +11,7 @@ import EditDashboard from './dashboard/EditDashboard'
 import EquityContainer from './equity/EquityContainer'
 
 import PortfolioContainer from './portfolio/PortfolioContainer'
-import PortfolioDetailsContainer from './portfolio/PortfolioDetailsContainer'
+// import PortfolioDetailsContainer from './portfolio/PortfolioDetailsContainer'
 
 
 import { connect } from 'react-redux';
@@ -142,8 +144,13 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/account">ACCOUNT</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
               onClick={this.logout}
               to="/home">LOGOUT</NavLink>
+
           </Fragment>
           :
           <Fragment>
@@ -187,9 +194,9 @@ class App extends Component {
           <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
-
-          <Route path="/portfolio/details" component={ props => <PortfolioDetailsContainer {...props}/>} />
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
+
+          <Route path="/account" component={ props => <Account {...props}/>} />
 
         </Switch>
       </Fragment>
