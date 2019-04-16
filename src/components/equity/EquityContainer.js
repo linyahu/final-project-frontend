@@ -105,22 +105,22 @@ class EquityContainer extends Component {
       <div>
         <NavLink
         className="navlink-dash"
-        activeStyle={{ fontWeight: "bold"}}
+        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/gainers"> top gainers </NavLink>
 
         <NavLink
         className="navlink-dash"
-        activeStyle={{ fontWeight: "bold"}}
+        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/losers"> top losers </NavLink>
 
         <NavLink
         className="navlink-dash"
-        activeStyle={{ fontWeight: "bold"}}
+        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/mostactive"> most active </NavLink>
 
         <NavLink
         className="navlink-dash"
-        activeStyle={{ fontWeight: "bold"}}
+        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/infocus"> in focus </NavLink>
 
       </div>

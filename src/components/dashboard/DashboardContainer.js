@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 
 class DashboardContainer extends Component {
   state = {
-    // currentDash: "main",
     editDash: false,
     showNewForm: false,
   }
@@ -26,7 +25,6 @@ class DashboardContainer extends Component {
 
   goToNewlyCreatedDashboard = (name, equities) => {
     this.setState({ showNewForm: false })
-    // this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: [...this.props.dashboardEquities, equities] })
     this.props.history.push(`/dashboards/${name}`)
     window.location.reload()
   }
@@ -47,11 +45,9 @@ class DashboardContainer extends Component {
     fetch("http://localhost:3000/api/v1/dashboards")
     .then(res => res.json())
     .then( json => {
-      // console.log("do i have user id?", this.props.user_id);
       let dashboards = json.filter( d => d.user_id === this.props.user_id)
       let equities = dashboards.map( d => d.equities ).flat()
 
-      // console.log('%c in fetchDashboards', 'color: blue', dashboards, 'equities', equities);
       this.props.dispatch({ type: "SET_DASHBOARDS", payload: dashboards })
       this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: equities })
     })
@@ -74,22 +70,30 @@ class DashboardContainer extends Component {
   renderDashboardNav = () => {
     if (!!this.props.dashboards) {
       return (
-        <div className="navbar">
+        <div className="top-nav">
         {
           this.props.dashboards.map( dashboard => {
             return (
               <NavLink
               key={dashboard.id}
-              className="navlink-dash"
+              className="top-nav-link"
               activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
               to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>
             )
           })
         }
-        <button
-          onClick={this.showForm}
-          id="plus-btn"
-          >+</button>
+        {
+          this.props.match.params.name !== "main" ?
+          <div className="edit-btn">
+            <NavLink
+            className="edit-btn"
+            activeStyle={{ fontWeight: "bold"}}
+            to={`/dashboards/${this.props.match.params.name}/edit`}> edit </NavLink>
+          </div>
+          :
+          null
+        }
+          <button onClick={this.showForm} id="plus-btn">+</button>
         </div>
       )
     }
@@ -126,9 +130,9 @@ class DashboardContainer extends Component {
 
 
   render() {
-    // console.log("%c dashboards", "color: blue", this.props.dashboards, "dashboard equities", this.props.dashboardEquities);
+    console.log("%c dashboards", "color: blue", this.props);
     return (
-      <div className="dash-container">
+      <div className="main-container">
         {this.renderDashboardNav()}
         {this.renderDashboards()}
       </div>

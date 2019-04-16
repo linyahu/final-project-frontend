@@ -17,13 +17,21 @@ import PortfolioContainer from './portfolio/PortfolioContainer'
 import { connect } from 'react-redux';
 import { Route, NavLink, Switch } from 'react-router-dom';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import '../assets/App.css';
 
 
 class App extends Component {
 
   showNavbar = () => {
-    this.props.dispatch({ type: "TOGGLE_NAVBAR" })
+    let test = document.querySelector('#mySideNav')
+    test.style.width = "200px"
+  }
+
+  hideNavBar = () => {
+    let test = document.querySelector('#mySideNav')
+    test.style.width = "0"
   }
 
   componentDidMount() {
@@ -123,49 +131,43 @@ class App extends Component {
                 RENDER FUNCTIONS
   **********************************************/
   renderNavbar() {
-    // the portfolio & logout nav is not currently working
-    // neither is the home & login
     return (
-      <nav className="navbar">
+      <nav>
         {
           !!this.props.user_id ?
-          <Fragment>
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/dashboards">DASHBOARDS</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/equities">EQUITIES</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/portfolio">PORTFOLIO</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              to="/account">ACCOUNT</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
-              onClick={this.logout}
-              to="/home">LOGOUT</NavLink>
+          <div id="mySideNav" className="sidenav">
+            <button className="closebtn" onClick={this.hideNavBar}>&#9664;</button>
+            <div className="nav">
+                <NavLink className="navlink" activeStyle={{ color: "white"}}
+                  to="/dashboards">DASHBOARDS</NavLink>
 
-          </Fragment>
+                <NavLink className="navlink" activeStyle={{ color: "white"}}
+                  to="/equities">EQUITIES</NavLink>
+
+                <NavLink className="navlink" activeStyle={{ color: "white"}}
+                  to="/portfolio">PORTFOLIO</NavLink>
+
+                <NavLink className="navlink" activeStyle={{ color: "white"}}
+                  to="/account">ACCOUNT</NavLink>
+
+                <NavLink className="navlink" activeStyle={{ color: "white"}}
+                  onClick={this.logout}
+                  to="/home">LOGOUT</NavLink>
+            </div>
+          </div>
           :
           <Fragment>
             <NavLink
               className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              activeStyle={{ color: "white"}}
               to="/home">Home</NavLink>
             <NavLink
               className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              activeStyle={{ color: "white"}}
               to="/equities">EQUITIES</NavLink>
             <NavLink
               className="navlink"
-              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              activeStyle={{ color: "white"}}
               to="/login">Login</NavLink>
           </Fragment>
         }
@@ -213,9 +215,9 @@ class App extends Component {
   }
 
   render() {
-    console.log("%c props in App", "color: orange", this.props);
     return (
       <div className="App">
+          <button className="closed-nav" onClick={this.showNavbar}>{"▶"}</button>
         {
           this.props.navbar
           ?

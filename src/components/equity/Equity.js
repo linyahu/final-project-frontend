@@ -355,7 +355,7 @@ class Equity extends Component {
     // console.log("what are my props in equity", this.props);
     // console.log("state stuff", this.state);
     return (
-      <div className="eq-card">
+      <div className={this.props.class}>
         {
           !!this.props.trade && !!this.props.user_id ?
           <button onClick={this.trade}>+</button>
@@ -380,7 +380,7 @@ class Equity extends Component {
         {
           this.props.showProfile ?
           <NavLink
-            className="navlink"
+            className="eq-navlink"
             activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
             onClick={this.showProfile}
             to={`/equities/search?=${this.props.companyName.toLowerCase()}`}>{this.props.ticker} - {this.props.companyName}</NavLink>

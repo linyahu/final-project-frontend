@@ -93,24 +93,20 @@ class Dashboard extends Component {
               ticker={equity.symbol}
               companyName={equity.company_name}
               showProfile={true}
+              class="dash-eq-card"
             />
           )
         })}
         </div>
-        <div className="edit-btn">
-          <NavLink
-          className="navlink-dash"
-          activeStyle={{ fontWeight: "bold"}}
-          to={`/dashboards/${this.props.dashboard.name}/edit`}> edit </NavLink>
-        </div>
+
       </Fragment>
     )
   }
 
   render() {
-    console.log("%c props in dashboard", "color: orange", this.props);
+    // console.log("%c props in dashboard", "color: orange", this.props);
     return (
-      <div className="dashboard">
+      <div className="inner-container">
       {
         !!this.props.dashboard ?
         <Fragment>

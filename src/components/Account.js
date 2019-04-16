@@ -7,11 +7,17 @@ class Account extends Component {
     user: {},
     addMoney: false,
     amount: 0,
+    edit: false,
   }
 
-  addMoney = () => {
+
+  /**********************************************
+          CHANGE STATE / EVENT FUNCTIONS
+  **********************************************/
+  toggleModal = (e) => {
+    let name = e.target.name
     this.setState( prevState => {
-      return { addMoney: !prevState.addMoney }
+      return { [name]: !prevState[name] }
     })
   }
 
@@ -42,9 +48,13 @@ class Account extends Component {
 
       this.props.dispatch({ type: "SET_PORTFOLIO", payload: json })
       this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: json.account_balance })
-
     })
   }
+
+
+  /**********************************************
+                LIFECYCLE FUNCTIONS
+  **********************************************/
 
   componentDidMount() {
     fetch("http://localhost:3000/api/v1/users")
@@ -55,6 +65,30 @@ class Account extends Component {
     })
   }
 
+  /**********************************************
+                RENDER FUNCTIONS
+  **********************************************/
+  renderAddMoney = () => {
+    return (
+      <div className="modal">
+        <div className="modal-content-sm">
+        <button className="close" name="addMoney" onClick={this.toggleModal}>X</button>
+        <form onSubmit={this.updateAccountBalance}>
+          <label>enter amount you wish to add to your account</label>
+          <input onChange={this.enterAmount} type="text" value={this.state.amount} />
+          {
+            isNaN(this.state.amount) ?
+            <h6> please enter a valid amount </h6>
+            :
+            <input type="submit" value="update account" />
+          }
+        </form>
+        </div>
+      </div>
+    )
+  }
+
+
   render() {
     console.log("props?", this.props);
     return (
@@ -64,24 +98,10 @@ class Account extends Component {
         <h4>username: {this.state.user.username} </h4>
         <h4>email: {this.state.user.email} </h4>
         <h4> account balance: ${this.props.accountBalance }</h4>
-        <button onClick={this.addMoney}> add money to your account </button>
+        <button name="addMoney" onClick={this.toggleModal}> add money to your account </button>
         {
           this.state.addMoney ?
-          <div className="modal">
-            <div className="modal-content-sm">
-            <button className="close" onClick={this.addMoney}>X</button>
-            <form onSubmit={this.updateAccountBalance}>
-              <label>enter amount you wish to add to your account</label>
-              <input onChange={this.enterAmount} type="text" value={this.state.amount} />
-              {
-                isNaN(this.state.amount) ?
-                <h6> please enter a valid amount </h6>
-                :
-                <input type="submit" value="update account" />
-              }
-            </form>
-            </div>
-          </div>
+          this.renderAddMoney()
           :
           null
         }

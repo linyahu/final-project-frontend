@@ -1,10 +1,21 @@
 #plus-btn {
-  width: 20px;
-  padding: 2px;
-  float: right;
+  position: fixed;
+  top: 2%;
+  right: 6%;
   text-decoration: none;
-  color: rgba(0, 181, 204, 1);
-  /* background-color: rgba(0,153,153,0.2); */
+  font-size: 20px;
+  color: rgb(180, 183, 198);
+  background-color: rgba(255, 255, 255,0);
+  border-radius: 20px;
+  border: none;
+}
+
+#plus-btn:hover {
+  color: rgb(234, 182, 182);
+}
+
+#plus-btn:focus {
+  outline: none;
 }
 
 #eq-chart {
@@ -12,7 +23,95 @@
   width: 300px;
 }
 
+/********************************************
+                navigation
+********************************************/
+.closed-nav {
+  position: fixed;
+  font-size: 16px;
+  height: 100%;
+  width: 22px;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  border: none;
+  color: rgb(132, 165, 163);
+}
 
+.closed-nav:focus {
+  outline: none;
+}
+
+.closebtn:focus {
+  outline: none;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  overflow-x: hidden;
+  transition: 0.7s;
+  /* padding-top: 60px; */
+}
+
+.closebtn {
+  position: absolute;
+  color: rgb(132, 165, 163);
+  background-color: rgba(255,255,255,0);
+  border: none;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  font-size: 16px;
+  vertical-align: middle;
+  /* margin-left: 50px; */
+}
+
+.navlink {
+  float: left;
+  font-size: 20px;
+  width: 100%;
+  padding: 20px 5px 2px 5px;
+  text-decoration: none;
+  color: rgb(132, 165, 163);
+}
+
+.navlink:hover {
+  color: rgb(234, 182, 182);
+}
+
+.nav {
+  margin-top: 80px;
+}
+
+.top-nav {
+  position: fixed;
+  top: 2.5%;
+  margin-left: 4%;
+  width: 100%;
+  font-size: 18px;
+}
+
+.top-nav-link {
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: rgb(111, 188, 184);
+  padding: 0px;
+  float: left;
+  width: 8%;
+  /* font-size:  */
+}
+
+.top-nav-link:hover {
+  color: rgba(241, 169, 160, 1);
+}
 /********************************************
                   all my forms
 ********************************************/
@@ -78,9 +177,7 @@
   float: right;
 }
 
-.edit-btn {
-  float: right;
-}
+
 
 .btn-div button {
   /* float: right; */
@@ -89,64 +186,134 @@
 }
 
 /********************************************
-                  CLASSES
+                APP / GENERAL
 ********************************************/
+.App {
+  text-align: center;
+}
+
+.main-container {
+  align-content: center;
+  margin: auto;
+}
+
+.inner-container {
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  color: white;
+  height: auto;
+  padding: 2% 0px 2% 0px;
+}
+
+/********************************************
+                  DASHBOARD
+********************************************/
+.summary-card-container {
+  width: 62.5%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+
+.summary-card {
+  background-color: rgba(197, 239, 247, 0.1);
+  padding: 1%;
+  margin: 2%;
+  min-height: 20%;
+  display: block;
+  overflow-x: auto;
+}
+
+.newsfeed {
+  width: 20%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 4%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+
+.dashboard-equities {
+  width: 62.5%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+
+.dash-eq-card {
+  margin: 3% 1.5% 0% 1.5%;
+  /* margin-top: 2%; */
+  /* margin-bottom: 2%; */
+  float: left;
+  padding: 1%;
+  width: 45%;
+  height: auto;
+  background-color: rgba(0,0,0,0.1)
+  /* vertical-align: baseline; */
+}
+
+.eq-chart {
+  border-radius: 1px;
+  padding: 10px;
+  margin: auto;
+  height: 30%;
+  width: 70%;
+  color: white;
+}
+
+.article a {
+  color: rgb(120, 190, 190);
+}
+
+.article a:hover {
+  color: rgba(241, 169, 160, 1);
+}
+
+.eq-navlink {
+  /* float: left; */
+  font-size: 16px;
+  width: 100%;
+  padding: 20px 5px 5px 5px;
+  text-decoration: none;
+  color: rgb(120, 190, 190);
+}
+
+.eq-navlink:hover {
+  color: rgba(241, 169, 160, 1);
+}
+
+.edit-btn {
+  position: fixed;
+  right: 10%;
+  color: rgb(180, 183, 198);
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
 
 .account-details {
   margin: auto;
   padding: 2%;
   width: 50%;
   margin-top: 3%;
-}
-
-.App {
-  text-align: center;
-}
-
-.article a {
-  color: rgba(255,255,255,1);
-}
-
-
-.clearfix{
-  clear: both;
-}
-
-.dash-container {
-  /* border-color: "white" */
-  /* border-style: solid; */
-  /* border-radius: 1px; */
-  /* background-color: rgba(255, 255, 255, 0.4); */
-  align-content: center;
-  padding: 2% 0px 2% 0px;
-  margin: auto;
-}
-
-.dashboard {
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: white;
-  height: auto;
-  padding: 2% 0px 2% 0px;
-  /* align-content: center; */
-  /* display: table; */
-  /* height: 800px;
-  display: grid;
-  grid-template-columns: 200px 200px 200px 200px;
-  grid-template-rows: 100px 100px 100px 100px 100px; */
-}
-
-
-
-.dashboard-equities {
-  width: 40%;
-  height: 750px;
-  padding: 0% 2% 0% 2%;
-  margin: auto;
-  margin-left: 1%;
-  overflow-y: auto;
-  float: left;
 }
 
 .edit-dashname {
@@ -161,30 +328,6 @@
 
 }
 
-.eq-card {
-  /* align-self: center; */
-  margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  padding: 1%;
-  /* width: 600px; */
-  /* background-color: rgba(255,255,255,0.1); */
-  height: auto;
-}
-
-
-
-.eq-chart {
-  /* background-color: rgba(100,100,100,1); */
-  /* border-color: red; */
-  /* border-style: solid; */
-  border-radius: 1px;
-  padding: 10px;
-  margin: auto;
-  height: 30%;
-  width: 70%;
-  color: white;
-}
 
 .eq-container {
   /* border-color: rgba(31, 58, 147, 1); */
@@ -196,7 +339,7 @@
 }
 
 .eq-profile {
-  width: 800px;
+  width: 860px;
   padding: 30px;
   margin: auto;
   margin-top: 20px;
@@ -232,12 +375,7 @@
   padding: 10px;
 }
 
-.navlink {
-  padding: 5px;
-  margin: 10px 40px 10px 40px;
-  text-decoration: none;
-  color: rgb(132, 165, 163);
-}
+
 
 .navlink-dash  {
   margin: auto;
@@ -277,21 +415,7 @@
   margin-bottom: 20px;
 }
 
-.newsfeed {
-  width: 20%;
-  height: 750px;
-  padding: 0% 2% 0% 2%;
-  margin: auto;
-  margin-left: 2.5%;
-  overflow-y: auto;
-  float: left;
-  /* grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 6; */
-  /* float: left; */
-  /* display: table-cell; */
-}
+
 
 
 
@@ -336,24 +460,7 @@
   display: none;
 }
 
-.summary-card-container {
-  width: 62.5%;
-  height: 750px;
-  padding: 0% 2% 0% 2%;
-  margin: auto;
-  margin-left: 2.5%;
-  overflow-y: auto;
-  float: left;
-}
 
-.summary-card {
-  background-color: rgba(197, 239, 247, 0.1);
-  padding: 1%;
-  margin: 2%;
-  min-height: 20%;
-  display: block;
-  overflow-x: auto;
-}
 
 
 /************************************
