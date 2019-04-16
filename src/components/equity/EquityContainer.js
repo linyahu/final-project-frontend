@@ -15,7 +15,6 @@ class EquityContainer extends Component {
   state = {
     search: "",
     equities: [],
-    // topEquities: [],
     gainers: [],
     losers: [],
     mostactive: [],
@@ -39,52 +38,26 @@ class EquityContainer extends Component {
 
   handleSearch = (e) => {
     e.preventDefault()
-
     //old method
+    // with redux doesn't really work...
+    // this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.state.search })
     this.props.history.push(`/equities/search?=${this.state.search}`)
     window.location.reload()
-
-    //with redux
-    // this.props.dispatch({ type: "SEARCH_EQUITY", payload: this.state.search })
   }
 
   /**********************************************
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
-    console.log("%c does this hit?", "color: orange");
-    // this.props.history.push("/equities/top")
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()
     this.fetchInFocus()
-    // console.log("%c does this go every time?", "color: yellow");
-    // this.fetchTop()
-
-    // if(this.props.match.params.view === "search") {
-    //   console.log("%c does this hit?", "color: green");
-    //   this.setState({ search: this.props.location.search.substring(2) })
-    //   this.fetchEquitiesFromDatabase(this.state.search)
-    // }
   }
 
   /**********************************************
                 FETCH FUNCTIONS
   **********************************************/
-  fetchEquitiesFromDatabase(search) {
-    fetch("http://localhost:3000/api/v1/equities")
-    .then(res => res.json())
-    .then(json => {
-      // console.log(json);
-      // finding equities that match search
-      // either ticker or company name includes search
-      let equities = json.filter( eq => eq.symbol.toLowerCase().includes(search) || eq.company_name.toLowerCase().includes(search))
-      console.log("%c after fetching", "color: blue", equities);
-      // this.setState({ equities })
-    })
-  }
-
-
   fetchMostActive() {
     fetch("https://api.iextrading.com/1.0/stock/market/list/mostactive")
     .then(res => res.json())
@@ -121,13 +94,6 @@ class EquityContainer extends Component {
   /**********************************************
                 RENDER FUNCTIONS
   **********************************************/
-  renderSearch = () => {
-    // console.log("state", this.state, "props", this.props);
-    let searchTerm = this.props.location.search.substring(2)
-    console.log(searchTerm);
-    this.fetchEquitiesFromDatabase(searchTerm)
-  }
-
   renderTop = () => {
     if (this.props.view === "top") {
       this.props.history.push("/equities/gainers")
@@ -178,7 +144,7 @@ class EquityContainer extends Component {
   }
 
   render() {
-    // console.log("%c top equities", "color: pink", this.state.topEquities);
+    console.log("%c props in equity container", "color: pink", this.props);
     return (
       <div className="eq-container">
         { this.renderTop() }
@@ -187,7 +153,9 @@ class EquityContainer extends Component {
         <div>
         {
           this.props.match.params.view === "search" ?
-          <Search term={this.props.location.search.substring(2)}/>
+          <Search
+            term={this.props.location.search.substring(2)}
+          />
           :
           <Top
           equities={this.state[this.props.match.params.view]}
@@ -205,6 +173,7 @@ class EquityContainer extends Component {
 function mapStateToProps(state) {
   return {
     search: state.search,
+    user_id: state.user_id
   }
 }
 
