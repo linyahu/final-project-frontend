@@ -105,7 +105,8 @@
   color: rgb(111, 188, 184);
   padding: 0px;
   float: left;
-  width: 8%;
+  /* width: 8%; */
+  min-width: 180px;
   /* font-size:  */
 }
 
@@ -240,6 +241,8 @@
   float: left;
 }
 
+
+
 .dashboard-equities {
   width: 62.5%;
   height: 860px;
@@ -251,16 +254,24 @@
   float: left;
 }
 
+.dashboard-equities-full {
+  width: 89.1%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 4%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+
 .dash-eq-card {
   margin: 3% 1.5% 0% 1.5%;
-  /* margin-top: 2%; */
-  /* margin-bottom: 2%; */
   float: left;
   padding: 1%;
   width: 45%;
   height: auto;
   background-color: rgba(0,0,0,0.1)
-  /* vertical-align: baseline; */
 }
 
 .eq-chart {
@@ -293,6 +304,18 @@
   color: rgba(241, 169, 160, 1);
 }
 
+/********************* EDIT **********************/
+.dashboard-equities-edit {
+  width: 35%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+
 .edit-btn {
   position: fixed;
   right: 10%;
@@ -300,6 +323,35 @@
   text-decoration: none;
 }
 
+.sm-eq-edit {
+  margin: 3% 1.5% 0% 1.5%;
+  float: left;
+  padding: 1%;
+  width: 95%;
+  height: auto;
+  background-color: rgba(0,0,0,0.1)
+}
+
+.lg-eq-edit {
+  margin: 3% 1.5% 0% 1.5%;
+  float: left;
+  padding: 1%;
+  width: 45%;
+  height: auto;
+  background-color: rgba(0,0,0,0.1)
+}
+
+.search-form-container {
+  width: 20%;
+  height: 860px;
+  padding: 0% 2% 0% 2%;
+  margin: auto;
+  margin-left: 2.5%;
+  margin-top: 1%;
+  overflow-y: auto;
+  float: left;
+}
+/********************* EDIT **********************/
 
 
 
@@ -419,16 +471,7 @@
 
 
 
-.search-form-container {
-  width: 20%;
-  height: 750px;
-  padding: 0% 2% 0% 2%;
-  margin: auto;
-  margin-left: 1%;
-  /* margin-right: 2.5%; */
-  overflow-y: auto;
-  float: left;
-}
+
 
 .searchbar {
   width: 150px;

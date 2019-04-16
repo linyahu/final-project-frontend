@@ -51,8 +51,6 @@ class EditDashboard extends Component {
   }
 
   deleteEquity = (ticker, id) => {
-    // let newEquities = this.state.dashboard.equities.filter( e => e.symbol !== ticker)
-    // console.log("new equities", newEquities);
     if( window.confirm("are you sure you want to delete?")) {
       let currentIds = this.props.dashboardEquities.map(eq => eq.id)
       if (currentIds.includes(id)){
@@ -226,7 +224,6 @@ class EditDashboard extends Component {
 
   fetchDeleteEquities = (id) => {
     let eqdId = this.state.currentEquityDashoards.find(a => a.equity_id === id)
-    // console.log(eqdId);
 
     fetch(`http://localhost:3000/api/v1/equity_dashboards/${eqdId.id}`, {
       method: "DELETE",
@@ -276,7 +273,7 @@ class EditDashboard extends Component {
     // let dashboard = this.props.dashboards.find(d => d.name === this.props.match.params.name )
     // console.log("this is my dashboard", this.state.dashboard);
     return (
-      <div className="dashboard">
+      <div className="inner-container">
         <div>
 
           <div>
@@ -296,24 +293,50 @@ class EditDashboard extends Component {
 
         { this.renderNewsfeed() }
 
-        <div className="dashboard-equities grey-border">
         {
-          !!this.state.dashboard.equities ?
-          this.state.dashboard.equities.map( equity => {
-            return (
-              <Equity
-                key={equity.id}
-                ticker={equity.symbol}
-                companyName={equity.company_name}
-                delete={this.deleteEquity}
-                id={equity.id}
-              />
-            )
-          })
-        :
-          null
+          this.state.dashboard.newsfeed ?
+          <div className="dashboard-equities-edit grey-border">
+          {
+            !!this.state.dashboard.equities ?
+            this.state.dashboard.equities.map( equity => {
+              return (
+                <Equity
+                  key={equity.id}
+                  ticker={equity.symbol}
+                  companyName={equity.company_name}
+                  delete={this.deleteEquity}
+                  id={equity.id}
+                  class="sm-eq-edit"
+                />
+              )
+            })
+          :
+            null
+          }
+          </div>
+          :
+          <div className="dashboard-equities grey-border">
+          {
+            !!this.state.dashboard.equities ?
+            this.state.dashboard.equities.map( equity => {
+              return (
+                <Equity
+                  key={equity.id}
+                  ticker={equity.symbol}
+                  companyName={equity.company_name}
+                  delete={this.deleteEquity}
+                  id={equity.id}
+                  class="lg-eq-edit"
+                />
+              )
+            })
+          :
+            null
+          }
+          </div>
         }
-        </div>
+
+
 
         <div className="search-form-container grey-border">
           <form onSubmit={this.searchEquities}>
@@ -382,24 +405,18 @@ class EditDashboard extends Component {
   renderDashboardNav = () => {
     if (!!this.props.dashboards) {
       return (
-        <div className="navbar">
+        <div className="top-nav">
         {
           this.props.dashboards.map( dashboard => {
             return (
               <NavLink
               key={dashboard.id}
-              className="navlink-dash"
-              activeStyle={{ fontWeight: "bold"}}
+              className="top-nav-link"
+              activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
               to={`/dashboards/${dashboard.name}`}>{dashboard.name}</NavLink>
             )
           })
         }
-        {/*
-        <button
-          onClick={this.showForm}
-          id="plus-btn"
-          >+</button>
-          */}
         </div>
       )
     }
@@ -408,14 +425,10 @@ class EditDashboard extends Component {
   render() {
     console.log("props in edit dashboard", this.props)
     return (
-      <div className="dash-container">
+      <div className="main-container">
 
         { this.renderDashboardNav() }
         { this.renderDashboardForm() }
-
-
-
-        <div className="clearfix" />
       </div>
     )
   }

@@ -48,6 +48,7 @@ class Breakdown extends Component {
       }],
       labels: Object.keys(this.props.sectorData)
     }
+    console.log("is this data?", data);
     return data
   }
 

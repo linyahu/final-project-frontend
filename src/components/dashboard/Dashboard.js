@@ -84,21 +84,39 @@ class Dashboard extends Component {
     return (
       <Fragment>
         { this.renderNewsfeed() }
-        <div className="dashboard-equities grey-border">
-        {
-          this.props.dashboard.equities.map( equity => {
-          return (
-            <Equity
-              key={equity.id}
-              ticker={equity.symbol}
-              companyName={equity.company_name}
-              showProfile={true}
-              class="dash-eq-card"
-            />
-          )
-        })}
-        </div>
 
+        {
+          this.props.dashboard.newsfeed ?
+          <div className="dashboard-equities grey-border">
+          {
+            this.props.dashboard.equities.map( equity => {
+            return (
+              <Equity
+                key={equity.id}
+                ticker={equity.symbol}
+                companyName={equity.company_name}
+                showProfile={true}
+                class="dash-eq-card"
+              />
+            )
+          })}
+          </div>
+          :
+          <div className="dashboard-equities-full grey-border">
+          {
+            this.props.dashboard.equities.map( equity => {
+            return (
+              <Equity
+                key={equity.id}
+                ticker={equity.symbol}
+                companyName={equity.company_name}
+                showProfile={true}
+                class="dash-eq-card"
+              />
+            )
+          })}
+          </div>
+        }
       </Fragment>
     )
   }

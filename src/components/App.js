@@ -200,7 +200,7 @@ class App extends Component {
           <Route path="/dashboards/:name" component={DashboardContainer} />
           <Route path="/dashboards" component={DashboardContainer} />
 
-          <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
+          <Route path="/equities/:view" component={ props => <EquityContainer {...props} hideNavBar={this.hideNavBar}/>} />
           <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
