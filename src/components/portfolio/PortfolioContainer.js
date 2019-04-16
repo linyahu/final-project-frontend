@@ -10,10 +10,13 @@ class PortfolioContainer extends Component {
   state = {
     "Technology": 0,
     "Healthcare": 0,
+    "Energy": 0,
     "Industrials": 0,
     "Financial Services": 0,
     "Basic Materials": 0,
-    "Consumer Cyclical": 0
+    "Consumer Cyclical": 0,
+    "Consumer Defensive": 0,
+    "Real Estate": 0,
   }
 
   componentDidMount() {
@@ -37,10 +40,14 @@ class PortfolioContainer extends Component {
   getSectorData = () => {
     return {  "Technology": this.state["Technology"],
               "Healthcare": this.state["Healthcare"],
+              "Energy": this.state["Energy"],
               "Industrials": this.state["Industrials"],
               "Financial Services": this.state["Financial Services"],
               "Basic Materials": this.state["Basic Materials"],
-              "Consumer Cyclical": this.state["Consumer Cyclical"]}
+              "Consumer Cyclical": this.state["Consumer Cyclical"],
+              "Consumer Defensive": this.state["Consumer Defensive"],
+              "Real Estate": this.state["Real Estate"]
+            }
   }
 
   renderDefault() {

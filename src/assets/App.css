@@ -91,6 +91,14 @@
 /********************************************
                   CLASSES
 ********************************************/
+
+.account-details {
+  margin: auto;
+  padding: 2%;
+  width: 50%;
+  margin-top: 3%;
+}
+
 .App {
   text-align: center;
   /* align-content: center; */

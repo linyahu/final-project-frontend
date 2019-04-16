@@ -197,7 +197,9 @@ class App extends Component {
 
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
 
-          <Route path="/account" component={ props => <Account {...props} user_id={this.props.user_id} balance={this.props.accountBalance}/>} />
+          <Route
+            path="/account"
+            component={ props => <Account {...props} />} />
 
         </Switch>
       </Fragment>

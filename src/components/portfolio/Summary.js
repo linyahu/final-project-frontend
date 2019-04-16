@@ -58,11 +58,13 @@ class Summary extends Component {
     let d = (t.getFullYear() -1) + "-" + (t.getMonth() +1) + "-" + t.getDate()
 
     this.props.subportfolios.map( eq => {
-      // console.log("my equity", eq);
-      if (eq.date_bought > d) {
-        this.fetchOneYearTradingData(eq, d)
-      } else {
-        this.fetchFiveYearTradingData(eq, d)
+      if (!eq.date_sold) {
+        // console.log("my equity", eq);
+        if (eq.date_bought > d) {
+          this.fetchOneYearTradingData(eq, d)
+        } else {
+          this.fetchFiveYearTradingData(eq, d)
+        }
       }
     })
   }
@@ -85,16 +87,21 @@ class Summary extends Component {
       })
     })
     .then( () => {
+      //collapsedData takes in all the data from current open positions
+      // adds them up by key (which are the dates in common)
       let collapsedData = this.sumObjectsByKey(this.state.dataArray)
-      let datapoints = Object.values(collapsedData)
-      let labels = Object.keys(collapsedData)
-      // let date = (new Date().getFullYear()) + "-" + (new Date().getMonth() +1) + "-" + new Date().getDate()
-      let currentValue = Object.values(collapsedData)[Object.values(collapsedData).length - 1]
+      // sorted Data sorts the collapsedData in chronological order
+      let sortedData = {}
+      Object.keys(collapsedData).sort().forEach( function (key) {
+        return sortedData[key] = collapsedData[key]
+      })
+      // datapoints are the values of the sorteData
+      let datapoints = Object.values(sortedData)
+      // lables are the dates of the sorteData
+      let labels = Object.keys(sortedData)
+      // currentValue is the last value of the sortedData
+      let currentValue = Math.round(100*(Object.values(sortedData)[Object.values(sortedData).length - 1]))/100
 
-      // console.log("what is collapsedData", collapsedData);
-      // NOTE:
-      // fix the bug where collapsedData is only sometimes in chronological order
-      // will probably need to do a sort by function
 
       this.setState({
         data: {

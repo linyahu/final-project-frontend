@@ -292,6 +292,7 @@ class Equity extends Component {
             </div>
           }
           <h6> trading fee: $5 </h6>
+          <h6> cost of trade: ${Math.round(this.state.currentPrice * this.state.quantity * 100)/100 + 5}</h6>
           <h6> account balance: {this.props.accountBalance} </h6>
           <label> quantity </label>
           <input name="quantity" onChange={this.handleTrade} value={this.state.quantity} type="text" /><br />
@@ -308,7 +309,7 @@ class Equity extends Component {
           }
           {
             this.state.quantity < 0 && !portfolioIds.includes(id) ?
-            <h5> warning: you don't currently have this stock
+            <h5> warning: you currently don't have this stock
             <br />
             in your portfolio, please proceed only if you
             <br />

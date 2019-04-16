@@ -323,10 +323,13 @@ class EditDashboard extends Component {
               <option value="">All</option>
               <option value="Technology">Technology</option>
               <option value="Healthcare">Healthcare</option>
+              <option value="Energy">Energy</option>
               <option value="Industrials">Industrials</option>
               <option value="Financial Services">Financial Services</option>
               <option value="Basic Materials">Basic Materials</option>
               <option value="Consumer Cyclical">Consumer Cyclical</option>
+              <option value="Consumer Defensive">Consumer Defensive</option>
+              <option value="Real Estate">Real Estate</option>
             </select>
 
             <br />

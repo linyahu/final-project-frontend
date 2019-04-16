@@ -201,7 +201,7 @@ class DetailCard extends Component {
         $change: { Math.round((this.state.currentValue - this.props.subportfolio.initial_value)*100)/100 } |
         %change: {Math.round((this.state.currentPrice/this.props.subportfolio.initial_px - 1)*10000)/100} </h6 >
         {
-          this.props.subportfolio.quantity > 0 ?
+          Math.abs(this.props.subportfolio.quantity) > 0 ?
           <Fragment>
             <h6>date bought: {this.props.subportfolio.date_bought}</h6>
             <button onClick={this.closePosition}> close this position </button>
