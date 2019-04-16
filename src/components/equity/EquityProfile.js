@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import Equity from './Equity'
 import Financials from './Financials'
 import HistoricChart from './HistoricChart'
+import Newsfeed from '../dashboard/Newsfeed'
 
 import { connect } from 'react-redux';
 
@@ -11,6 +12,7 @@ class EquityProfile extends Component {
   state = {
     showFinancials: false,
     showHistoricChart: false,
+    showNews: false,
     showAdd: false,
     equity_id: null,
     dashboard_id: null,
@@ -84,6 +86,7 @@ class EquityProfile extends Component {
         />
         <button name="showFinancials" onClick={this.showDetails}> view financials </button>
         <button name="showHistoricChart" onClick={this.showDetails}> historic charts </button>
+        <button name="showNews" onClick={this.showDetails}> show news </button>
       </div>
     )
   }
@@ -137,6 +140,20 @@ class EquityProfile extends Component {
             companyName={this.props.equity.company_name}
             closeDetails={this.closeDetails}
           />
+          :
+          null
+        }
+        {
+          this.state.showNews ?
+          <div className="modal">
+            <div className="modal-content">
+            <button name="showNews" className="close" onClick={this.closeDetails}>X</button>
+              <Newsfeed
+                equities={[this.props.equity]}
+                class="modal-news"
+              />
+            </div>
+          </div>
           :
           null
         }

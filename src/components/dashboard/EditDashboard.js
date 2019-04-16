@@ -366,6 +366,7 @@ class EditDashboard extends Component {
         <Newsfeed
           equities={this.state.dashboard.equities}
           delete={this.deleteNewsfeed}
+          class="newsfeed grey-border"
         />
       )
     } else {

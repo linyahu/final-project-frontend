@@ -10,38 +10,63 @@ class Dashboard extends Component {
 
   renderMain = () => {
       let otherDashes = this.props.allDashboards.filter(d => d.name !== "main")
-      let subportfolios = this.props.portfolio.subportfolios.filter( s => !s.date_sold)
-      let equities = subportfolios.map( s => s.equity )
-      let newPortfolio = {name: "portfolio", equities: equities }
+      if (this.props.portfolioEquities.length !== 0) {
+        let subportfolios = this.props.portfolio.subportfolios.filter( s => !s.date_sold)
+        let equities = subportfolios.map( s => s.equity )
+        let newPortfolio = {name: "portfolio", equities: equities }
 
-      return (
-        <Fragment>
-          <Newsfeed
-            equities={this.props.equities}
-          />
-          <div className="summary-card-container grey-border">
-          {
-            this.props.portfolioEquities.length === 0 ?
-            null
-            :
-            <SummaryCard
-              key={this.props.portfolio.name}
-              dashboard={newPortfolio}
+        return (
+          <Fragment>
+            <Newsfeed
+              equities={this.props.equities}
+              class="newsfeed grey-border"
             />
-          }
-          {
-            otherDashes.map( dashboard => {
-              return (
-                <SummaryCard
-                  key={dashboard.id}
-                  dashboard={dashboard}
-                />
-              )
-            })
-          }
-          </div>
-        </Fragment>
-      )
+            <div className="summary-card-container grey-border">
+            {
+              this.props.portfolioEquities.length === 0 ?
+              null
+              :
+              <SummaryCard
+                key={this.props.portfolio.name}
+                dashboard={newPortfolio}
+              />
+            }
+            {
+              otherDashes.map( dashboard => {
+                return (
+                  <SummaryCard
+                    key={dashboard.id}
+                    dashboard={dashboard}
+                  />
+                )
+              })
+            }
+            </div>
+          </Fragment>
+        )
+      } else {
+        return (
+          <Fragment>
+            <Newsfeed
+              equities={this.props.equities}
+              class="newsfeed grey-border"
+            />
+            <div className="summary-card-container grey-border">
+            {
+              otherDashes.map( dashboard => {
+                return (
+                  <SummaryCard
+                    key={dashboard.id}
+                    dashboard={dashboard}
+                  />
+                )
+              })
+            }
+            </div>
+          </Fragment>
+        )
+      }
+
   }
 
   renderNewsfeed = () => {
@@ -49,6 +74,7 @@ class Dashboard extends Component {
       return (
         <Newsfeed
           equities={this.props.dashboard.equities}
+          class="newsfeed grey-border"
         />
       )
     }

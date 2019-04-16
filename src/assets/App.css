@@ -101,10 +101,6 @@
 
 .App {
   text-align: center;
-  /* align-content: center; */
-  /* padding: 20px 50px 50px 50px; */
-  /* padding: 2% 0% 2% 0%;
-  margin: 2% 0% 2% 0%; */
 }
 
 .article a {
@@ -479,6 +475,11 @@
   padding: 20px;
   color: black;
   width: 25%;
+}
+
+.modal-news a {
+  color: black;
+  overflow-y: auto;
 }
 
 /* The Close Button */

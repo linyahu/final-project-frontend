@@ -36,7 +36,7 @@ class Account extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      // console.log("did it patch through?", json);
+      console.log("did it patch through?", json);
 
       this.setState({ addMoney: false, amount: 0 })
 
