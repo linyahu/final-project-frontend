@@ -357,7 +357,7 @@ class Equity extends Component {
     return (
       <div className="eq-card">
         {
-          !!this.props.trade ?
+          !!this.props.trade && !!this.props.user_id ?
           <button onClick={this.trade}>+</button>
           :
           null
@@ -432,6 +432,7 @@ class Equity extends Component {
 
 function mapStateToProps(state) {
   return {
+    user_id: state.user_id,
     search: state.search,
     dashboards: state.dashboards,
     dashboardEquities: state.dashboardEquities,

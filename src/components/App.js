@@ -162,6 +162,10 @@ class App extends Component {
             <NavLink
               className="navlink"
               activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
+              to="/equities">EQUITIES</NavLink>
+            <NavLink
+              className="navlink"
+              activeStyle={{ background: "rgba(92, 151, 191, 1)", color: "white"}}
               to="/login">Login</NavLink>
           </Fragment>
         }
@@ -172,12 +176,14 @@ class App extends Component {
   renderNotLoggedIn() {
     return (
       <Fragment>
-        <h1> This will be a landing page </h1>
         <Switch>
           <Route exact path="/home" render={() => <Home />} />
 
           <Route path="/login/signup" component={props => <Login {...props} view="signup" setCurrentUser={this.setCurrentUser} />} />
           <Route path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} />} />
+
+          <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
+          <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
 
         </Switch>
       </Fragment>
