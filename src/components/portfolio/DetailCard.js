@@ -186,7 +186,7 @@ class DetailCard extends Component {
     // console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
-        <h5>{this.props.subportfolio.equity.company_name}</h5>
+        <h5>{this.props.subportfolio.equity.company_name} - {this.props.subportfolio.equity.sector}</h5>
 
         <EquityChart
           data={this.state.data}
@@ -204,7 +204,9 @@ class DetailCard extends Component {
           Math.abs(this.props.subportfolio.quantity) > 0 ?
           <Fragment>
             <h6>date bought: {this.props.subportfolio.date_bought}</h6>
-            <button onClick={this.closePosition}> close this position </button>
+
+            <button className="pf-btn" onClick={this.closePosition}> close this position </button>
+            
           </Fragment>
           :
           <Fragment>
@@ -216,7 +218,9 @@ class DetailCard extends Component {
           this.state.closePosition ?
           <div className="modal">
             <div className="modal-content-sm">
+
               <button onClick={this.closePosition} className="close">X</button>
+
               <h4>{this.props.subportfolio.equity.symbol} - ${this.state.currentPrice}</h4>
               <h5> trading fee: $5 </h5>
               <h5> initial value: ${this.props.subportfolio.initial_value}</h5>

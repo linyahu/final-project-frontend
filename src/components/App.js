@@ -25,16 +25,18 @@ import '../assets/App.css';
 class App extends Component {
 
   showNavbar = () => {
-    let test = document.querySelector('#mySideNav')
-    test.style.width = "200px"
+    document.querySelector('#mySideNav').style.width = "200px"
+    document.querySelector(".closed-nav").style.color = "rgba(0,0,0,0)"
   }
 
   hideNavBar = () => {
-    let test = document.querySelector('#mySideNav')
-    test.style.width = "0"
+    document.querySelector('#mySideNav').style.width = "0"
+    document.querySelector(".closed-nav").style.color = "rgb(132, 165, 163)"
   }
 
   componentDidMount() {
+    this.hideNavBar()
+
     const jwt = localStorage.getItem('jwt')
 
     if (jwt){
@@ -103,16 +105,6 @@ class App extends Component {
     })
   }
 
-  // fetchAccountData(id) {
-  //   fetch("http://localhost:3000/api/v1/users")
-  //   .then(res => res.json())
-  //   .then(json => {
-  //     let user = json.find( a => a.id === id)
-  //     let accountBalance = user.account_balance
-  //     this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: accountBalance })
-  //   })
-  // }
-
   fetchDashboards() {
     fetch("http://localhost:3000/api/v1/dashboards")
     .then(res => res.json())
@@ -156,20 +148,23 @@ class App extends Component {
             </div>
           </div>
           :
-          <Fragment>
-            <NavLink
-              className="navlink"
-              activeStyle={{ color: "white"}}
-              to="/home">Home</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ color: "white"}}
-              to="/equities">EQUITIES</NavLink>
-            <NavLink
-              className="navlink"
-              activeStyle={{ color: "white"}}
-              to="/login">Login</NavLink>
-          </Fragment>
+          <div id="mySideNav" className="sidenav">
+            <button className="closebtn" onClick={this.hideNavBar}>&#9664;</button>
+            <div className="nav">
+              <NavLink
+                className="navlink"
+                activeStyle={{ color: "white"}}
+                to="/home">Home</NavLink>
+              <NavLink
+                className="navlink"
+                activeStyle={{ color: "white"}}
+                to="/equities">EQUITIES</NavLink>
+              <NavLink
+                className="navlink"
+                activeStyle={{ color: "white"}}
+                to="/login">Login</NavLink>
+            </div>
+          </div>
         }
       </nav>
     )
@@ -217,7 +212,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <button className="closed-nav" onClick={this.showNavbar}>{"▶"}</button>
+        <button className="closed-nav" onClick={this.showNavbar}>{"▶"}</button>
+
         {
           this.props.navbar
           ?

@@ -253,34 +253,31 @@ class EditDashboard extends Component {
   **********************************************/
   renderSearchResults = () => {
     let currentIds = [this.state.addedEquities.map(eq => eq.id), this.props.dashboardEquities.map(eq => eq.id)].flat()
-
     return this.state.searchResults.map(equity => {
       return (
-        <Fragment key={equity.id}>
-          <h5>{equity.symbol} - {equity.company_name}</h5>
+        <div className="search-result" key={equity.id}>
           {
             !currentIds.includes(equity.id) ?
-            <button onClick={() => this.addEquity(equity)}>add</button>
+            <span className="available" onClick={() => this.addEquity(equity)}>{equity.symbol} - {equity.company_name}</span>
             :
-            <h6>[cannot add: already existing on another dashboard]</h6>
+            <span className="unavailable">{equity.symbol} - {equity.company_name}</span>
           }
-        </Fragment>
+        </div>
       )
     })
   }
 
-  renderDashboardForm = () => {
-    // let dashboard = this.props.dashboards.find(d => d.name === this.props.match.params.name )
-    // console.log("this is my dashboard", this.state.dashboard);
+  renderSearchForm = () => {
     return (
-      <div className="inner-container">
+      <div className="search-form-container grey-border">
         <div>
+          <button className="simple-btn" onClick={this.saveDashboard}>Save Dashboard</button>
+          <button className="simple-btn" onClick={this.deleteDashboard}>Delete Dashboard</button>
+        </div>
 
-          <div>
-            <button onClick={this.saveDashboard}>Save Dashboard</button>
-            <button onClick={this.deleteDashboard}>Delete Dashboard</button>
-          </div>
-
+        <div className="edit-dashboard">
+          <br />
+          <label> edit dashboard name </label>
           <input
             type="text"
             onChange={this.handleNameChange}
@@ -288,11 +285,72 @@ class EditDashboard extends Component {
             className="edit-dashname"
             placeholder="dashboard name"
           />
+          {
+            this.state.dashboard.newsfeed ?
+            null
+            :
+            <div>
+              <input type="checkbox" value={this.state.dashboard.newsfeed} onChange={this.toggleNewsfeed} />
+              <label>add newsfeed</label>
+            </div>
+          }
 
         </div>
 
-        { this.renderNewsfeed() }
+        <div className="search-form">
 
+        <div>search for equities to add</div>
+
+        <form onSubmit={this.searchEquities}>
+          <label>filter sector </label>
+
+          <select name="sector" onChange={this.handleChange}>
+            <option value="">All</option>
+            <option value="Technology">Technology</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Energy">Energy</option>
+            <option value="Industrials">Industrials</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Basic Materials">Basic Materials</option>
+            <option value="Consumer Cyclical">Consumer Cyclical</option>
+            <option value="Consumer Defensive">Consumer Defensive</option>
+            <option value="Real Estate">Real Estate</option>
+          </select>
+
+          <br />
+
+          <input
+            className="input-field"
+            onChange={this.handleChange}
+            type="text"
+            name="search"
+            value={this.state.search}
+            placeholder="type a ticker or company name" />
+            <div>
+              <input className="search-btn" type="submit" value="search" />
+            </div>
+        </form>
+
+        {
+          this.state.searchResults != "" ?
+          this.renderSearchResults()
+          :
+          null
+        }
+
+        { this.state.noResults ? <h5> no results found </h5> : null }
+        </div>
+
+      </div>
+    )
+  }
+
+  renderDashboardForm = () => {
+    // let dashboard = this.props.dashboards.find(d => d.name === this.props.match.params.name )
+    // console.log("this is my dashboard", this.state.dashboard);
+    return (
+      <div className="inner-container">
+        { this.renderNewsfeed() }
         {
           this.state.dashboard.newsfeed ?
           <div className="dashboard-equities-edit grey-border">
@@ -336,47 +394,7 @@ class EditDashboard extends Component {
           </div>
         }
 
-
-
-        <div className="search-form-container grey-border">
-          <form onSubmit={this.searchEquities}>
-            <label>filter sector </label>
-
-            <select name="sector" onChange={this.handleChange}>
-              <option value="">All</option>
-              <option value="Technology">Technology</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Energy">Energy</option>
-              <option value="Industrials">Industrials</option>
-              <option value="Financial Services">Financial Services</option>
-              <option value="Basic Materials">Basic Materials</option>
-              <option value="Consumer Cyclical">Consumer Cyclical</option>
-              <option value="Consumer Defensive">Consumer Defensive</option>
-              <option value="Real Estate">Real Estate</option>
-            </select>
-
-            <br />
-
-            <label>search for equities</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              name="search"
-              value={this.state.search}
-              placeholder="type a ticker or company name" />
-            <input type="submit" value="search" />
-          </form>
-
-          {
-            this.state.searchResults != "" ?
-            this.renderSearchResults()
-            :
-            null
-          }
-
-          { this.state.noResults ? <h5> no results found </h5> : null }
-
-        </div>
+        { this.renderSearchForm() }
 
 
       </div>
@@ -391,13 +409,6 @@ class EditDashboard extends Component {
           delete={this.deleteNewsfeed}
           class="newsfeed grey-border"
         />
-      )
-    } else {
-      return (
-        <div>
-          <input type="checkbox" value={this.state.dashboard.newsfeed} onChange={this.toggleNewsfeed} />
-          <label>add newsfeed</label>
-        </div>
       )
     }
   }
@@ -423,10 +434,9 @@ class EditDashboard extends Component {
   }
 
   render() {
-    console.log("props in edit dashboard", this.props)
+    console.log("state in edit dashboard", this.state)
     return (
       <div className="main-container">
-
         { this.renderDashboardNav() }
         { this.renderDashboardForm() }
       </div>

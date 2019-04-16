@@ -36,6 +36,7 @@
   background-color: rgba(0,0,0,0.8);
   border: none;
   color: rgb(132, 165, 163);
+  transition: 0.7s;
 }
 
 .closed-nav:focus {
@@ -175,15 +176,44 @@
                   all my buttons
 ********************************************/
 .delete-btn {
+  background-color: rgba(0,0,0,0);
+  border: none;
   float: right;
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 5px;
+  padding: 2px 7px 2px 7px;
+  border-radius: 10px;
 }
 
-
+.delete-btn:hover {
+  color: rgb(219, 144, 144);
+  background-color: rgba(224, 197, 197,0.2);
+}
 
 .btn-div button {
   /* float: right; */
   margin: 10px;
   /* padding: 10px; */
+}
+
+.search-btn {
+  background-color: rgba(111, 188, 184, 0.6);
+  border: none;
+  color: white;
+  font-size: 13px;
+  padding: 2px 7px 2px 7px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.search-btn:hover {
+  background-color: rgba(111, 188, 184, 0.9);
+}
+
+.search-btn:focus {
+  outline-color: rgba(197, 247, 240, 0.2);
 }
 
 /********************************************
@@ -196,6 +226,7 @@
 .main-container {
   align-content: center;
   margin: auto;
+  margin-left: 4%;
 }
 
 .inner-container {
@@ -204,7 +235,7 @@
   margin-bottom: 2%;
   color: white;
   height: auto;
-  padding: 2% 0px 2% 0px;
+  /* padding: 2% 0px 2% 0px; */
 }
 
 /********************************************
@@ -216,7 +247,7 @@
   padding: 0% 2% 0% 2%;
   margin: auto;
   margin-left: 2.5%;
-  margin-top: 1%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
@@ -235,13 +266,11 @@
   height: 860px;
   padding: 0% 2% 0% 2%;
   margin: auto;
-  margin-left: 4%;
-  margin-top: 1%;
+  margin-left: 2%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
-
-
 
 .dashboard-equities {
   width: 62.5%;
@@ -249,7 +278,7 @@
   padding: 0% 2% 0% 2%;
   margin: auto;
   margin-left: 2.5%;
-  margin-top: 1%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
@@ -259,8 +288,8 @@
   height: 860px;
   padding: 0% 2% 0% 2%;
   margin: auto;
-  margin-left: 4%;
-  margin-top: 1%;
+  margin-left: 2%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
@@ -311,7 +340,7 @@
   padding: 0% 2% 0% 2%;
   margin: auto;
   margin-left: 2.5%;
-  margin-top: 1%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
@@ -342,23 +371,120 @@
 }
 
 .search-form-container {
-  width: 20%;
+  width: 21%;
   height: 860px;
-  padding: 0% 2% 0% 2%;
+  padding: 0% 1% 0% 1%;
   margin: auto;
   margin-left: 2.5%;
-  margin-top: 1%;
+  margin-top: 2.5%;
   overflow-y: auto;
   float: left;
 }
+
+.search-form {
+  background-color: rgba(0,0,0,0.1);
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 8%;
+  padding: 5% 1% 5% 1%;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.search-form select {
+  background-color: rgba(0,0,0,0);
+  border-radius: 1px;
+  color: white;
+  height: 18px;
+  border-color: rgba(111, 188, 184, 0.9);
+}
+
+.search-form select:focus {
+  outline-color: rgba(197, 247, 240, 0.2);
+}
+
+.search-form option {
+  background-color: pink;
+}
+
+.search-form label {
+  font-size: 14px;
+  margin-top: 8%;
+  color: rgba(187, 237, 230, 0.4);
+}
+
+.search-form div {
+  /* padding: 5px; */
+  margin: 5px 3px 20px 3px;
+}
+
+.search-result {
+  background-color: rgba(187, 237, 230, 0.2);
+  font-size: 13px;
+  padding: 10px;
+  /* width: 80%; */
+}
+
+.unavailable {
+  text-decoration: line-through;
+  color: rgb(108, 132, 129);
+}
+
+.edit-dashboard {
+  background-color: rgba(0,0,0,0.1);
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 8%;
+  padding: 1%;
+  height: 120px;
+}
+
+.edit-dashboard label {
+  font-size: 14px;
+  margin-top: 8%;
+  color: rgba(187, 237, 230, 0.4);
+}
+
+.edit-dashname {
+  width: 70%;
+  height: 22px;
+  font-size: 16px;
+  text-align: center;
+  margin: auto;
+  margin-top: 3%;
+  margin-bottom: 5%;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-color: rgba(111, 188, 184, 0.9);
+  border-style: groove;
+}
+
+.edit-dashname:focus {
+  outline-color: rgba(197, 247, 240, 0.2);
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+.input-field {
+  width: 60%;
+  height: 18px;
+  font-size: 12px;
+  text-align: center;
+  margin: 2%;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-color: rgba(111, 188, 184, 0.9);
+  border-style: groove;
+}
+
+.input-field:focus {
+  outline-color: rgba(197, 247, 240, 0.2);
+}
+
 /********************* EDIT **********************/
-
-
-
-
-
-
-
 
 
 .account-details {
@@ -368,17 +494,7 @@
   margin-top: 3%;
 }
 
-.edit-dashname {
-  min-width: 220px;
-  width: auto;
-  height: 22px;
-  font-size: 18px;
-  text-align: center;
-  margin: 20px;
-  /* float: left; */
-  /* align-self: center; */
 
-}
 
 
 .eq-container {
@@ -467,12 +583,6 @@
   margin-bottom: 20px;
 }
 
-
-
-
-
-
-
 .searchbar {
   width: 150px;
   float: right;
@@ -556,40 +666,71 @@
 /************************************
             Portfolio
 *************************************/
-.details {
-  background-color: rgba(255,255,255,0.1);
-  margin: 10px;
-  padding: 1px;
-  width: 30%;
-  height: 400px;
-  float: left;
-}
-
 .portfolio-card {
   float: left;
-  margin: 2% 2% 1% 1%;
-  /* overflow: auto; */
+  margin: 1% 2% 1% 1%;
 }
 
 .col-1 {
   width: 30%;
-  height: 400px;
+  height: 420px;
 }
 
 .col-2 {
   width: 60%;
-  height: 400px;
+  height: 420px;
 }
 
 .bottom {
-  width: 93.5%;
+  width: 91.2%;
+  height: 600px;
   overflow-x: auto;
+  padding: 1%;
 }
 
-.portfolio-container {
-  display: inline;
-  /* overflow: auto; */
-  margin: auto;
+.details {
+  background-color: rgba(255,255,255,0.1);
+  margin: 1.5% 0% 0% 1.5%;
+  padding: 0.5%;
+  width: 22%;
+  height: 320px;
+  float: left;
+}
+
+.pf-btn {
+  bottom: 0px;
+  background-color: rgba(145, 186, 183, 0);
+  border: none;
+  border-radius: 5px;
+  color: rgb(141, 163, 161);
+  padding: 3px 8px 3px 8px;
+}
+
+.pf-btn:hover {
+  background-color: rgba(135, 193, 188, 0.2);
+  color: rgb(239, 237, 237);
+}
+
+.pf-btn:focus {
+  outline-color: rgba(186, 242, 237, 0.7);
+}
+
+.simple-btn {
+  background-color: rgba(0,0,0,0);
+  border: none;
+  font-size: 14px;
+  color: rgb(135, 193, 188);
+  padding: 5px 8px 5px 8px;
+  border-radius: 5px;
+  margin: 10px 5% 0px 5%;
+}
+
+.simple-btn:hover {
+  background-color: rgba(186, 242, 237, 0.1);
+}
+
+.simple-btn:focus {
+  outline: none;
 }
 
 /************************************

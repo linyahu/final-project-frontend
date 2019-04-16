@@ -7,33 +7,20 @@ import { Pie } from 'react-chartjs-2';
 class Breakdown extends Component {
   state = {
     legend: {
-      display: false
+      display: false,
+      color: "white",
     },
     options: {
 
     }
   }
 
-
   componentDidMount() {
     this.setState({
       data: {
         datasets: [{
+            fill: true,
             data: Object.values(this.props.sectorData),
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'],
           }],
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: Object.keys(this.props.sectorData)
@@ -44,7 +31,29 @@ class Breakdown extends Component {
   getData = () => {
     let data = {
       datasets: [{
-        data: Object.values(this.props.sectorData)
+        data: Object.values(this.props.sectorData),
+        backgroundColor: [
+          'rgba(175, 200, 206, 0.3)',
+          'rgba(117, 140, 145, 0.3)',
+          'rgba(82, 102, 107, 0.3)',
+          'rgba(123, 153, 160, 0.3)',
+          'rgba(168, 191, 196, 0.3)',
+          'rgba(72, 92, 96, 0.3)',
+          'rgba(91, 117, 122, 0.3)',
+          'rgba(138, 167, 173, 0.3)',
+          'rgba(157, 170, 173, 0.3)',
+        ],
+        borderColor: [
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+          'rgb(177, 221, 218, 0.4)',
+        ]
       }],
       labels: Object.keys(this.props.sectorData)
     }
@@ -53,7 +62,7 @@ class Breakdown extends Component {
   }
 
   render() {
-    // console.log("props in breakdown", this.props);
+    console.log("props in breakdown", this.props);
     // console.log("what is my state", this.state);
     return (
       <div className="grey-border portfolio-card col-1">

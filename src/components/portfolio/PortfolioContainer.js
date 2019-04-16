@@ -60,7 +60,7 @@ class PortfolioContainer extends Component {
 
   renderPortfolio() {
     return (
-      <div className="portfolio-container">
+      <div className="main-container">
         <Summary
           subportfolios={this.props.portfolio.subportfolios}
           accountBalance={this.props.accountBalance}

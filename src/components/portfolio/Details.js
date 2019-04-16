@@ -26,7 +26,7 @@ class Details extends Component {
           this.state.viewClosedPositions ?
           <Fragment>
           <div>
-            <button onClick={this.viewClosedPositions}> view open positions </button>
+            <button className="simple-btn" onClick={this.viewClosedPositions}> view open positions </button>
           </div>
           {
             this.props.subportfolios.map(sub => {
@@ -45,8 +45,9 @@ class Details extends Component {
           :
           <Fragment>
           <div>
-            <button onClick={this.viewClosedPositions}> view closed positions </button>
+            <button className="simple-btn" onClick={this.viewClosedPositions}> view closed positions </button>
           </div>
+
           {
             this.props.subportfolios.map(sub => {
               if (!sub.date_sold) {
