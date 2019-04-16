@@ -6,6 +6,11 @@ import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import storage from 'redux-persist/lib/storage'
+
+// import rootReducer from './reducers'
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -20,9 +25,15 @@ const initialState = {
   accountBalance: 0,
 }
 
-function reducer(state = initialState, action) {
-  // console.log('%c reducer:', 'color: orange', state, action);
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ["user_id"]
+}
 
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+function reducer(state = initialState, action) {
   switch (action.type) {
     case "TOGGLE_NAVBAR":
       return { ...state, navbar: !state.navbar }
@@ -54,13 +65,22 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer);
+const store = createStore(persistedReducer);
+const persistor = persistStore(store)
+
+// export default () => {
+//   let store = createStore(persistedReducer)
+//   let persistor = persistStore(store)
+//   return { store, persistor }
+// }
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <App />
+      </Router>
+    </PersistGate>
   </Provider>
   , document.getElementById('root'));
 

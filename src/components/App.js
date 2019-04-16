@@ -213,7 +213,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log("%c props in App", "color: orange", this.props);
+    console.log("%c props in App", "color: orange", this.props);
     return (
       <div className="App">
         {
