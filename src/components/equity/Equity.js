@@ -328,13 +328,13 @@ class Equity extends Component {
   renderStats() {
     return (
       <div>
-      <h6>
+      <h5>current price: {this.state.currentPrice}</h5>
+      <h5>
         open: {this.state.stats.open} |
         close: {this.state.stats.close} |
         high: {this.state.stats.high} |
         low: {this.state.stats.low}
-      </h6>
-      <h6>current price: {this.state.currentPrice}</h6>
+      </h5>
       </div>
     )
   }
@@ -358,7 +358,7 @@ class Equity extends Component {
       <div className={this.props.class}>
         {
           !!this.props.trade && !!this.props.user_id ?
-          <button onClick={this.trade}>+</button>
+          <button className="trade-btn" onClick={this.trade}>trade</button>
           :
           null
         }

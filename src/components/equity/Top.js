@@ -26,7 +26,7 @@ class Top extends Component {
 
   render() {
     return (
-      <div className="small-padding">
+      <div className="equity-container">
         {this.renderEquities() }
       </div>
     )

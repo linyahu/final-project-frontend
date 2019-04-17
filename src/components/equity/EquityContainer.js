@@ -102,7 +102,7 @@ class EquityContainer extends Component {
 
   renderEquityNavBar = () => {
     return (
-      <div>
+      <div className="top-nav">
         <NavLink
         className="navlink-dash"
         activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
@@ -123,33 +123,30 @@ class EquityContainer extends Component {
         activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/infocus"> in focus </NavLink>
 
-      </div>
-    )
-  }
+        <div className="searchform">
+          <form onSubmit={this.handleSearch}>
+            <input
+              type="text"
+              className="search"
+              name="search"
+              value={this.state.search}
+              onChange={this.handleChange}
+              placeholder="search ticker or company"
+              />
+          </form>
+        </div>
 
-  renderSearchBar = () => {
-    return (
-      <form onSubmit={this.handleSearch}>
-        <button className="searchbar-btn">Q</button>
-        <input
-          type="text"
-          className="searchbar"
-          name="search"
-          value={this.state.search}
-          onChange={this.handleChange}
-          placeholder="search ticker or company"
-          />
-      </form>
+      </div>
     )
   }
 
   render() {
     console.log("%c props in equity container", "color: pink", this.props);
     return (
-      <div className="eq-container">
-        { this.renderTop() }
-        { this.renderSearchBar() }
+      <div className="main-container">
         { this.renderEquityNavBar() }
+        { this.renderTop() }
+
         <div>
         {
           this.props.match.params.view === "search" ?
@@ -158,8 +155,8 @@ class EquityContainer extends Component {
           />
           :
           <Top
-          equities={this.state[this.props.match.params.view]}
-          title={this.props.match.params.view}
+            equities={this.state[this.props.match.params.view]}
+            title={this.props.match.params.view}
           />
         }
         </div>

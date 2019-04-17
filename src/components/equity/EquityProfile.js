@@ -84,9 +84,11 @@ class EquityProfile extends Component {
           ticker={this.props.equity.symbol}
           trade={true}
         />
-        <button name="showFinancials" onClick={this.showDetails}> view financials </button>
-        <button name="showHistoricChart" onClick={this.showDetails}> historic charts </button>
-        <button name="showNews" onClick={this.showDetails}> show news </button>
+
+        <button className="trade-btn" name="showFinancials" onClick={this.showDetails}> view financials </button>
+        <button className="trade-btn" name="showHistoricChart" onClick={this.showDetails}> historic charts </button>
+        <button className="trade-btn" name="showNews" onClick={this.showDetails}> show news </button>
+
       </div>
     )
   }

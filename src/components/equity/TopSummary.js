@@ -21,7 +21,6 @@ class TopSummary extends Component {
           <h5> previous close: ${this.props.equity.previousClose} |
               52 week high: ${this.props.equity.week52High} |
               52 week low: ${this.props.equity.week52Low}</h5>
-
       </div>
     )
   }
