@@ -18,7 +18,7 @@ class Details extends Component {
 
 
   render() {
-    // console.log("props in details", this.props);
+    console.log("props in details", this.props);
     return (
       <div className="grey-border portfolio-card bottom">
         <h4>Current Trades</h4>

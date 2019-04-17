@@ -746,7 +746,9 @@
   position: fixed;
 }
 
-
+.search:focus {
+  outline-color: rgba(111, 188, 184, 0.1);
+}
 
 .eq-profile {
   width: 80%;

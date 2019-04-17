@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import Home from './Home'
 import Login from './Login'
 import Account from './Account'
+import Page404 from './Page404'
 
 import DashboardContainer from './dashboard/DashboardContainer'
 // import Dashboard from './dashboard/Dashboard'
@@ -196,9 +197,9 @@ class App extends Component {
 
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
 
-          <Route
-            path="/account"
-            component={ props => <Account {...props} />} />
+          <Route path="/account" component={ props => <Account {...props} />} />
+
+          <Route component={<Page404 />} />
 
         </Switch>
       </Fragment>
