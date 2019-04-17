@@ -11,7 +11,7 @@
 }
 
 #plus-btn:hover {
-  color: rgb(234, 182, 182);
+  color: rgb(247, 222, 222);
 }
 
 #plus-btn:focus {
@@ -21,6 +21,15 @@
 #eq-chart {
   height: 150px;
   width: 300px;
+}
+
+.logo {
+  position: absolute;
+  /* margin-top: 2%; */
+  /* width: 50%; */
+  top: 17%;
+  left: 42.5%;
+  width: 15%;
 }
 
 /********************************************
@@ -50,6 +59,85 @@
   border-style: solid;
   /* border-radius: 5px; */
   border-width: 1.5px;
+}
+
+.landing {
+  margin: auto;
+  position: fixed;
+  z-index: -1;
+  background-image: url("./landing.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.landing-plain {
+  margin: auto;
+  position: fixed;
+  z-index: -1;
+  background-image: url("./landing-plain.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.landing-login {
+  margin: auto;
+  position: fixed;
+  z-index: -1;
+  background-image: url("./landing-login.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.sm-link {
+  font-size: 14px;
+  color: rgb(162, 219, 214);
+}
+
+.sm-link:hover {
+  color: rgb(247, 222, 222);
+}
+
+.blurb {
+  position: fixed;
+  top: 55%;
+  left: 38%;
+  font-size: 22px;
+  color: rgba(162, 219, 214, 0.7);
+}
+
+.landing-buttons {
+  position: fixed;
+  top: 65%;
+  left: 30%;
+  width: 35%;
+}
+
+.landing-link {
+  text-decoration: none;
+  color: rgba(162, 219, 214, 0.7);
+  font-size: 20px;
+  padding: 2% 3% 2% 3%;
+  border-color: rgba(162, 219, 214, 0.7);
+  background-color: rgba(0,0,0,0.3);
+  border-style: solid;
+  margin: 5% 8% 5% 8%;
+  border-radius: 15px;
+}
+
+.landing-link:hover {
+  background-color: rgba(162, 219, 214, 0.7);
+  border-color: rgba(162, 219, 214, 0.2);
+  color: rgba(0,0,0,0.5);
+}
+
+.landing-link:focus {
+  outline-color: rgba(162, 219, 214, 0.7);
 }
 
 /********************************************
@@ -112,7 +200,7 @@
 }
 
 .navlink:hover {
-  color: rgb(234, 182, 182);
+  color: rgb(247, 222, 222);
 }
 
 .nav {
@@ -125,7 +213,7 @@
   padding: 2% 0% 1% 2%;
   width: 100%;
   font-size: 18px;
-  background-color: #2f3542;
+  background-color: #282e3a;
 }
 
 .top-nav-link {
@@ -142,7 +230,7 @@
 }
 
 .top-nav-link:hover {
-  color: rgba(241, 169, 160, 1);
+  color: rgb(232, 199, 199);
 }
 /********************************************
                   all my forms
@@ -152,7 +240,7 @@
   margin-top: 10%;
   width: 30%;
   padding: 2%;
-  background-color: rgba(18, 22, 25, 0.5);
+  background-color: rgba(18, 22, 25, 0.8);
   color: white;
   display: block;
   height: auto;
@@ -175,29 +263,88 @@
 .signup button {
   /* position: relative; */
   margin: auto;
+}
 
+.signup-table {
+  width: 90%;
 }
 
 .login {
   margin: auto;
-  margin-top: 10%;
-  width: 30%;
-  padding: 3%;
-  background-color: rgba(18, 22, 25, 0.5);
+  margin-top: 16%;
+  width: 25%;
+  padding: 2%;
+  background-color: rgba(0,0,0,0.7);
   color: white;
   display: block;
-  height: auto;
+  min-height: 160px;
   overflow: auto;
+}
+
+.login-table {
+  margin: auto;
+  width: 70%;
 }
 
 .login input {
   margin: 2%;
+  font-size: 18px;
+  background-color: rgba(255,255,255,0);
+  border-color: rgba(162, 219, 214, 0.7);
+  border-style: groove;
+  color: rgb(148, 183, 178);
+}
 
+.login input:focus {
+  outline-color: rgba(162, 219, 214, 0.7);
+}
+
+.login td {
+  text-align: right;
+  padding-right: 5px;
 }
 
 .login label {
-  margin: 2%;
+  margin: 5%;
+  font-size: 20px;
+  color: rgb(218, 229, 227, 1);
+}
 
+.login span {
+  font-size: 14px;
+  color: rgba(218, 229, 227, 0.8);
+}
+
+.login img {
+  position: fixed;
+  top: 17%;
+  left: 42.5%;
+  width: 15%;
+}
+
+.login-div {
+  margin: 7% 0% 0% 0%;
+}
+
+.login-btn {
+  text-decoration: none;
+  padding: 5px;
+  width: 40%;
+  margin: 5% 0% 0% 2%;
+  color: rgb(0, 40, 34);
+  font-size: 16px;
+  background-color: rgba(142, 206, 196, 0.8);
+  border: none;
+  border-radius: 5px;
+}
+
+.login-btn:hover {
+  background-color: rgba(12, 104, 96, 0.8);
+  color: rgba(162, 219, 214, 1)
+}
+
+.login-btn:focus {
+  outline-color: rgba(162, 219, 214, 0.1);
 }
 
 /********************************************
@@ -214,7 +361,9 @@
 }
 
 .simple-btn:hover {
-  background-color: rgba(186, 242, 237, 0.1);
+  /* background-color: rgba(186, 242, 237, 0.1); */
+  font-weight: bolder;
+  color: rgb(190, 229, 222);
 }
 
 .simple-btn:focus {
@@ -254,7 +403,7 @@
 }
 
 .pf-link:hover {
-  color: rgb(234, 182, 182);
+  color: rgb(247, 222, 222);
 }
 
 .search-btn {
@@ -288,8 +437,13 @@
 }
 
 .trade-btn:hover {
-  color: rgb(0,0,0,0.5);
-  background-color: rgba(186, 242, 237, 0.8);
+  color: rgb(0,0,0,1);
+  background-color: rgb(96, 150, 145);
+  border-color: rgb(96, 150, 145);
+}
+
+.trade-btn:focus {
+  outline-color: rgba(197, 247, 240, 0.2);
 }
 
 /********************************************
@@ -326,6 +480,7 @@
   margin-bottom: 2%;
   overflow-y: auto;
   float: left;
+  /* background-color: rgba(0,0,0,0.3); */
 }
 
 .dashboard-equities {
@@ -358,7 +513,7 @@
   padding: 1%;
   width: 45%;
   height: auto;
-  background-color: rgba(0,0,0,0.1)
+  background-color: rgba(0,0,0,0.3)
 }
 
 .eq-chart {
@@ -375,7 +530,7 @@
 }
 
 .article a:hover {
-  color: rgba(241, 169, 160, 1);
+  color: rgb(232, 199, 199);
 }
 
 .eq-navlink {
@@ -388,7 +543,7 @@
 }
 
 .eq-navlink:hover {
-  color: rgba(241, 169, 160, 1);
+  color: rgb(232, 199, 199);
 }
 
 /********************* EDIT **********************/
@@ -417,7 +572,7 @@
   padding: 1%;
   width: 95%;
   height: auto;
-  background-color: rgba(0,0,0,0.1)
+  background-color: rgba(0,0,0,0.3)
 }
 
 .lg-eq-edit {
@@ -426,7 +581,7 @@
   padding: 1%;
   width: 45%;
   height: auto;
-  background-color: rgba(0,0,0,0.1)
+  background-color: rgba(0,0,0,0.3);
 }
 
 .search-form-container {
@@ -442,7 +597,7 @@
 }
 
 .search-form {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.3);
   margin: auto;
   margin-top: 5%;
   margin-bottom: 8%;
@@ -491,7 +646,7 @@
 }
 
 .edit-dashboard {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.3);
   margin: auto;
   margin-top: 5%;
   margin-bottom: 8%;
@@ -544,6 +699,21 @@
   outline-color: rgba(197, 247, 240, 0.2);
 }
 
+.input-field-light {
+  width: 35%;
+  height: 18px;
+  font-size: 12px;
+  text-align: center;
+  margin: 2%;
+  background-color: rgba(0,0,0,0);
+  color: rgb(88, 124, 121);
+  border-color: rgba(131, 173, 169, 0.6);
+  border-style: groove;
+}
+
+.input-field-light:focus {
+  outline-color: rgba(131, 173, 169, 0.6);
+}
 /********************* EDIT **********************/
 
 
@@ -557,8 +727,8 @@
 .card {
   float: left;
   width: 43%;
-  background-color: rgba(0,0,0,0.1);
-  height: 480px;
+  background-color: rgba(0,0,0,0.3);
+  min-height: 480px;
   margin: 0% 2% 4% 2%;
   padding: 1%;
 }
@@ -573,14 +743,10 @@
   border-color: rgba(111, 188, 184, 0.9);
   border-style: groove;
   padding-left: 10px;
+  position: fixed;
 }
 
-.account-details {
-  margin: auto;
-  padding: 2%;
-  width: 50%;
-  margin-top: 3%;
-}
+
 
 .eq-profile {
   width: 80%;
@@ -628,7 +794,7 @@
 }
 
 .navlink-dash:hover {
-  color: rgba(241, 169, 160, 1);
+  color: rgb(232, 199, 199);
 }
 
 .new-dash {
@@ -655,7 +821,7 @@
 }
 
 .sm-card {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
   height: 250px;
   width: 30%;
   float: left;
@@ -674,6 +840,55 @@
   display: none;
 }
 
+/************************************
+            ACCOUNT
+*************************************/
+.account-details {
+  margin: auto;
+  padding: 2%;
+  width: 35%;
+  margin-top: 10%;
+  background-color: rgba(0,0,0,0.8);
+  min-height: 300px;
+}
+
+.account-details label {
+  color: rgb(103, 175, 169);
+  font-size: 24px;
+}
+
+.account-details button {
+  background-color:
+}
+
+.account-table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+
+}
+
+.account-table td {
+  font-size: 16px;
+  /* border: 2px solid rgba(0,0,0,0.2); */
+  width: 50%;
+  /* background-color: rgba(192, 214, 212, 0.1); */
+  font-size: 16px;
+  /* padding: 2px; */
+}
+.account-label {
+  text-align: right;
+  padding: 5px 10px 5px 10px;
+  color: rgba(255,255,255,0.8);
+}
+
+.account-data {
+  text-align: left;
+  padding: 5px 10px 5px 10px;
+  color: rgba(255,255,255,0.8);
+}
 
 /************************************
             Financials Table
@@ -766,8 +981,9 @@
 }
 
 .pf-btn:hover {
-  background-color: rgba(135, 193, 188, 0.2);
-  color: rgb(239, 237, 237);
+  /* background-color: rgba(135, 193, 188, 0.2); */
+  color: rgb(216, 179, 179);
+  font-weight: bolder;
 }
 
 .pf-btn:focus {
@@ -781,7 +997,7 @@
   margin-top: 10%;
   padding: 40px;
   width: 50%;
-  height: 400px;
+  min-height: 400px;
   background-color: rgba(0,0,0,0.2);
 }
 
@@ -821,6 +1037,7 @@
   padding: 20px;
   color: black;
   width: 25%;
+  min-height: 250px;
 }
 
 .modal-news a {

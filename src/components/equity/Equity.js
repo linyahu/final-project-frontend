@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 
 import EquityChart from './EquityChart'
 
+
 import { NavLink } from 'react-router-dom';
 
 import { connect } from 'react-redux';

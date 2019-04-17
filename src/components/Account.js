@@ -73,14 +73,23 @@ class Account extends Component {
       <div className="modal">
         <div className="modal-content-sm">
         <button className="close" name="addMoney" onClick={this.toggleModal}>X</button>
+        <br />
+        <br />
+        <br />
+        <br />
         <form onSubmit={this.updateAccountBalance}>
           <label>enter amount you wish to add to your account</label>
-          <input onChange={this.enterAmount} type="text" value={this.state.amount} />
+          <br />
+          <br />
+          <br />
+          <input className="input-field-light" onChange={this.enterAmount} type="text" value={this.state.amount} />
+          <br />
+          <br />
           {
             isNaN(this.state.amount) ?
             <h6> please enter a valid amount </h6>
             :
-            <input type="submit" value="update account" />
+            <input className="search-btn" type="submit" value="update account" />
           }
         </form>
         </div>
@@ -92,19 +101,59 @@ class Account extends Component {
   render() {
     console.log("props?", this.props);
     return (
-      <div className="account-details grey-border">
-        <h4>first name: {this.state.user.first_name} </h4>
-        <h4>last name: {this.state.user.last_name} </h4>
-        <h4>username: {this.state.user.username} </h4>
-        <h4>email: {this.state.user.email} </h4>
-        <h4> account balance: ${this.props.accountBalance }</h4>
-        <button name="addMoney" onClick={this.toggleModal}> add money to your account </button>
+      <div className="landing-plain">
+      <div className="account-details">
+      <label> profile </label>
+        <table className="account-table">
+          <tr>
+            <td className="account-label">first name: </td>
+            <td className="account-data"> {this.state.user.first_name} </td>
+          </tr>
+          <tr>
+            <td className="account-label">last name: </td>
+            <td className="account-data"> {this.state.user.last_name} </td>
+          </tr>
+          <tr>
+            <td className="account-label">username: </td>
+            <td className="account-data"> {this.state.user.username} </td>
+          </tr>
+          <tr>
+            <td className="account-label">email: </td>
+            <td className="account-data"> {this.state.user.email} </td>
+          </tr>
+        </table>
+        <br />
+        <br />
+        <label> account statistics </label>
+        <table className="account-table">
+          <tr>
+            <td className="account-label">active portfolio: </td>
+            <td className="account-data"> { !!this.props.portfolio.subportfolios &&  this.props.portfolio.subportfolios.length === 0 ? "no" : "yes"} </td>
+          </tr>
+          <tr>
+            <td className="account-label">open trades: </td>
+            <td className="account-data"> { !!this.props.portfolio.subportfolios && this.props.portfolio.subportfolios.filter( p => !p.date_sold ).length} </td>
+          </tr>
+          <tr>
+            <td className="account-label">dashboards: </td>
+            <td className="account-data"> {this.props.dashboards.length} </td>
+          </tr>
+          <tr>
+            <td className="account-label"> account balance: </td>
+            <td className="account-data"> ${this.props.accountBalance }</td>
+          </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <button className="trade-btn" name="addMoney" onClick={this.toggleModal}> add money to your account </button>
         {
           this.state.addMoney ?
           this.renderAddMoney()
           :
           null
         }
+      </div>
       </div>
     )
   }
@@ -113,7 +162,9 @@ class Account extends Component {
 function mapStateToProps(state) {
   return {
     user_id: state.user_id,
+    dashboards: state.dashboards,
     portfolio: state.portfolio,
+    portfolioEquities: state.portfolioEquities,
     accountBalance: state.accountBalance
   }
 }

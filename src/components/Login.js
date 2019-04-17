@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
+import logo from '../assets/logo.png'
+
 class Login extends Component {
   state = {
     firstname: "",
@@ -46,17 +48,22 @@ class Login extends Component {
 
   handleCreateAccount = (e) => {
     e.preventDefault()
-    if (this.state.password === this.state.passwordConfirmation) {
-      let data = {
-        first_name: this.state.firstname,
-        last_name: this.state.lastname,
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password
-      }
-      this.fetchCreateUser(data)
+    console.log("state in create", this.state);
+    if (this.state.firstname === "" || this.state.lastname === "" || this.state.username === "" || this.state.password === "" || this.state.passwordConfirmation === "") {
+      alert("please fill out all fields")
     } else {
-      alert("passwords don't match")
+      if (this.state.password === this.state.passwordConfirmation) {
+        let data = {
+          first_name: this.state.firstname,
+          last_name: this.state.lastname,
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password
+        }
+        this.fetchCreateUser(data)
+      } else {
+        alert("passwords don't match")
+      }
     }
   }
 
@@ -85,32 +92,30 @@ class Login extends Component {
     return (
       <div className="login">
         <form onSubmit={this.handleSubmit}>
-          <label> Username </label>
-          <input
-            value={this.state.username}
-            name="username"
-            onChange={this.handleChange}
-            type="text"
-          />
-          <br />
-          <label> Password </label>
-          <input
+        <br />
+
+        <table className="login-table">
+          <tr>
+            <td><label> Username </label></td>
+            <td><input value={this.state.username} name="username" onChange={this.handleChange} type="text" /> </td>
+          </tr>
+          <tr>
+          <td><label> Password </label></td>
+          <td><input
             value={this.state.password}
             name="password"
             onChange={this.handleChange}
             type="password"
-          />
-          <br />
-          <br />
-          <input type="submit" value="login" />
-          <br />
-          <br />
+          /></td>
+          </tr>
+          </table>
 
-          <NavLink
-          className="navlink"
-          activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
-          to={"/login/signup"}>create an account</NavLink>
+          <button className="login-btn">login</button>
+          <div className="login-div">
+            <span> don't have an account? </span>
 
+            <NavLink className="sm-link" to={"/login/signup"}>create an account</NavLink>
+          </div>
         </form>
       </div>
     )
@@ -118,68 +123,78 @@ class Login extends Component {
 
   renderSignupForm() {
     return (
-      <div className="signup">
+      <div className="login">
         <form onSubmit={this.handleCreateAccount}>
-          <label> First Name </label>
-          <input
+          <table className="signup-table">
+          <tr>
+          <td><label> First Name </label></td>
+          <td><input
             value={this.state.firstname}
             name="firstname"
             onChange={this.handleChange}
             type="text"
-          />
-          <br />
-          <label> Last Name </label>
-          <input
+          /></td>
+          </tr>
+          <tr>
+          <td><label> Last Name </label></td>
+          <td><input
             value={this.state.lastname}
             name="lastname"
             onChange={this.handleChange}
             type="text"
-          />
-          <br />
-          <label> Email </label>
-          <input
+          /></td>
+          </tr>
+          <tr>
+          <td><label> Email </label></td>
+          <td><input
             value={this.state.email}
             name="email"
             onChange={this.handleChange}
             type="text"
-          />
-          <br />
-          <label> Username </label>
-          <input
+          /></td>
+          </tr>
+          <tr>
+          <td><label> Username </label></td>
+          <td><input
             value={this.state.username}
             name="username"
             onChange={this.handleChange}
             type="text"
-          />
-          <br />
-          <label> Password </label>
-          <input
+          /></td>
+          </tr>
+          <tr>
+          <td><label> Password </label></td>
+          <td><input
             value={this.state.password}
             name="password"
             onChange={this.handleChange}
             type="password"
-          />
-          <br />
-          <label> Confirm Password </label>
-          <input
+          /></td>
+          </tr>
+          <tr>
+          <td><label> Confirm Password </label></td>
+          <td><input
             value={this.state.passwordConfirmation}
             name="passwordConfirmation"
             onChange={this.handleChange}
             type="password"
-          />
+          /></td>
+          </tr>
+          </table>
           <br />
-          <button onClick={this.handleCreateAccount}> create account </button>
+
+          <button className="login-btn" onClick={this.handleCreateAccount}> create account </button>
         </form>
         <br />
-
+        <NavLink className="sm-link" to={"/login"}>go back to login</NavLink>
       </div>
     )
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state);
     return (
-      <Fragment>
+      <div className="landing-login">
         {
           this.props.view ?
           this.renderSignupForm()
@@ -187,7 +202,7 @@ class Login extends Component {
           this.renderLoginForm()
         }
 
-      </Fragment>
+      </div>
     )
   }
 }

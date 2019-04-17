@@ -151,18 +151,14 @@ class App extends Component {
           <div id="mySideNav" className="sidenav">
             <button className="closebtn" onClick={this.hideNavBar}>&#9664;</button>
             <div className="nav">
-              <NavLink
-                className="navlink"
-                activeStyle={{ color: "white"}}
-                to="/home">Home</NavLink>
-              <NavLink
-                className="navlink"
-                activeStyle={{ color: "white"}}
-                to="/equities">EQUITIES</NavLink>
-              <NavLink
-                className="navlink"
-                activeStyle={{ color: "white"}}
-                to="/login">Login</NavLink>
+              <NavLink className="navlink" activeStyle={{ color: "white"}}
+                to="/home">HOME</NavLink>
+
+              <NavLink className="navlink" activeStyle={{ color: "white"}}
+                to="/login">LOGIN</NavLink>
+
+              <NavLink className="navlink" activeStyle={{ color: "white"}}
+                to="/equities">EXPLORE</NavLink>
             </div>
           </div>
         }

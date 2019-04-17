@@ -135,7 +135,6 @@ class EquityContainer extends Component {
               />
           </form>
         </div>
-
       </div>
     )
   }
