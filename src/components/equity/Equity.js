@@ -228,10 +228,20 @@ class Equity extends Component {
   fetchCurrentPrice = () => {
     // console.log("will fetch price?");
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/price`)
+    .then(this.handleErrors)
     .then(res => res.json())
     .then(json => {
+      // debugger
       this.setState({ currentPrice: json })
     })
+    .catch(error => console.log(error))
+  }
+
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusTet);
+    }
+    return response;
   }
 
   updateAccountBalance = (value, newSubportfolio) => {
