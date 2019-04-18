@@ -4,11 +4,15 @@ import { NavLink } from 'react-router-dom';
 
 class Home extends Component {
 
+  componentDidMount() {
+    this.props.hideNavBar()
+  }
+
   render() {
     return (
       <div className="landing">
         <div className="blurb">
-          build customized watchlists for your stocks
+          a modular financial dashboard to monitor <br /> trends, trade equities, and track performance
         </div>
 
         <div className="landing-buttons">

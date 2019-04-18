@@ -93,7 +93,8 @@ class DetailCard extends Component {
     } else {
       this.fetchFiveYearTradingData()
     }
-    window.setInterval(this.fetchPrice, 5000)
+    // window.setInterval(this.fetchPrice, 5000)
+    this.fetchPrice()
   }
 
   /**********************************************

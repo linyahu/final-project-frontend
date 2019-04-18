@@ -65,6 +65,10 @@ class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.hideNavBar()
+  }
+
   fetchCreateUser(data) {
     fetch("http://localhost:3000/api/v1/users", {
       method: "POST",

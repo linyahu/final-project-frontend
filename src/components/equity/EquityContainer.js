@@ -47,6 +47,8 @@ class EquityContainer extends Component {
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
+    this.props.hideNavBar()
+    
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()

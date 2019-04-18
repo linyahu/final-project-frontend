@@ -73,7 +73,8 @@ class Equity extends Component {
       this.fetchPostCloseTradeData()
     }
     this.fetchStatsData()
-    window.setInterval(this.fetchCurrentPrice, 5000)
+    // window.setInterval(this.fetchCurrentPrice, 5000)
+    this.fetchCurrentPrice()
   }
 
   /**********************************************

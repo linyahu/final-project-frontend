@@ -12,11 +12,13 @@ class SmallCard extends Component {
   }
 
   fetchStats = () => {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
-    .then(res => res.json())
-    .then(summary => {
-      this.setState({ summary })
-    })
+    if(!this.state.summary.length){
+      fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
+      .then(res => res.json())
+      .then(summary => {
+        this.setState({ summary })
+      })
+    }
   }
 
   renderDetails() {

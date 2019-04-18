@@ -33,6 +33,7 @@ class DashboardContainer extends Component {
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
+    // this.props.hideNavBar()
     this.fetchDashboards()
   }
 
@@ -100,7 +101,6 @@ class DashboardContainer extends Component {
   }
 
   renderDashboards = () => {
-
     if (!!this.props.match.params.name) {
       let dashboard = this.props.dashboards.find( d => d.name === this.props.match.params.name)
       // console.log("%c dashboard?", "color:pink", dashboard);

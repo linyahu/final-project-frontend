@@ -34,6 +34,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 function reducer(state = initialState, action) {
+  // debugger
   switch (action.type) {
     case "TOGGLE_NAVBAR":
       return { ...state, navbar: !state.navbar }

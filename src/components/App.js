@@ -171,13 +171,13 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route exact path="/home" render={() => <Home />} />
+          <Route exact path="/home" render={props => <Home {...props} hideNavBar={this.hideNavBar} /> } />
 
-          <Route path="/login/signup" component={props => <Login {...props} view="signup" setCurrentUser={this.setCurrentUser} />} />
-          <Route path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} />} />
+          <Route path="/login/signup" component={props => <Login {...props} view="signup" setCurrentUser={this.setCurrentUser} hideNavBar={this.hideNavBar} />} />
+          <Route path="/login" component={props => <Login {...props} setCurrentUser={this.setCurrentUser} hideNavBar={this.hideNavBar} />} />
 
-          <Route path="/equities/:view" component={ props => <EquityContainer {...props}/>} />
-          <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
+          <Route path="/equities/:view" component={ props => <EquityContainer {...props} hideNavBar={this.hideNavBar} />}  />
+          <Route path="/equities" component={ props => <EquityContainer {...props} view="top" hideNavBar={this.hideNavBar} />} />
 
         </Switch>
       </Fragment>
@@ -189,17 +189,15 @@ class App extends Component {
       <Fragment>
         <Switch>
           <Route exact path="/dashboards/:name/edit" component={EditDashboard} />
-          <Route path="/dashboards/:name" component={DashboardContainer} />
-          <Route path="/dashboards" component={DashboardContainer} />
+          <Route exact path="/dashboards/:name" component={DashboardContainer} />
+          <Route exact path="/dashboards" component={DashboardContainer} />
 
-          <Route path="/equities/:view" component={ props => <EquityContainer {...props} hideNavBar={this.hideNavBar}/>} />
-          <Route path="/equities" component={ props => <EquityContainer {...props} view="top"/>} />
+          <Route exact path="/equities/:view" component={ props => <EquityContainer {...props} hideNavBar={this.hideNavBar}/>} />
+          <Route exact path="/equities" component={ props => <EquityContainer {...props} hideNavBar={this.hideNavBar} view="top"/>} />
 
-          <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
+          <Route exact path="/portfolio" component={ props => <PortfolioContainer {...props} hideNavBar={this.hideNavBar}/>} />
 
-          <Route path="/account" component={ props => <Account {...props} />} />
-
-
+          <Route exact path="/account" component={ props => <Account {...props} hideNavBar={this.hideNavBar}/>} />
 
         </Switch>
       </Fragment>
