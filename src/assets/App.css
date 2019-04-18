@@ -840,6 +840,59 @@
   display: none;
 }
 
+/********************* SECTORS **********************/
+.sector-nav {
+  margin: 0.5%;
+}
+
+.sector-nav button {
+  background-color: rgba(0,0,0,0.2);
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  width: 10%;
+  padding: 3px;
+  border-radius: 5px;
+  color: rgb(103, 175, 169);
+  border-color: rgb(103, 175, 169);
+}
+.sectors-container {
+  margin-top: 6%;
+}
+
+.sector {
+  width: 93%;
+  padding: 0.5%;
+  margin-left: 1.5%;
+  height: 860px;
+}
+
+.sector-equities {
+  overflow-y: auto;
+  height: 780px;
+  padding: 0.5%;
+}
+
+.simple-equity {
+  float: left;
+  width: 22%;
+  height: 100px;
+  margin: 0.5%;
+  padding: 1%;
+  background-color: rgba(0,0,0,0.3);
+  overflow: auto;
+  vertical-align: middle;
+}
+
+.simple-equity p {
+  font-size: 12px;
+  padding: 2px;
+  margin: 2px;
+  color: rgba(166, 188, 185, 0.6);
+}
+
+.simple-equity a:hover {
+  color: rgb(216, 179, 179);
+}
 /************************************
             ACCOUNT
 *************************************/

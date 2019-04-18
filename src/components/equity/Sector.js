@@ -56,31 +56,41 @@ class Sector extends Component {
 
   renderSectorBar = () => {
     return (
-      <Fragment>
-        <button onClick={this.changePage} name="technology" value="technology">Technology</button>
-        <button onClick={this.changePage} name="healthcare" value="healthcare">Healthcare</button>
-        <button onClick={this.changePage} name="energy" value="energy">Energy</button>
-        <button onClick={this.changePage} name="industrials" value="industrials">Industrials</button>
-        <button onClick={this.changePage} name="financialServices" value="financialServices">Financial Services</button>
-        <button onClick={this.changePage} name="basicMaterials" value="basicMaterials">Basic Materials</button>
-        <button onClick={this.changePage} name="consumerCyclical" value="consumerCyclical">Consumer Cyclical</button>
-        <button onClick={this.changePage} name="consumerDefensive" value="consumerDefensive">Consumer Defensive</button>
-        <button onClick={this.changePage} name="realEstate" value="realEstate">Real Estate</button>
-      </Fragment>
+      <div className="sector-nav">
+        <div>
+          <button onClick={this.changePage} name="technology" value="technology">Technology</button>
+          <button onClick={this.changePage} name="healthcare" value="healthcare">Healthcare</button>
+          <button onClick={this.changePage} name="energy" value="energy">Energy</button>
+          <button onClick={this.changePage} name="industrials" value="industrials">Industrials</button>
+          <button onClick={this.changePage} name="financialServices" value="financialServices">Financial Services</button>
+          <button onClick={this.changePage} name="basicMaterials" value="basicMaterials">Basic Materials</button>
+          <button onClick={this.changePage} name="consumerCyclical" value="consumerCyclical">Consumer Cyclical</button>
+          <button onClick={this.changePage} name="consumerDefensive" value="consumerDefensive">Consumer Defensive</button>
+          <button onClick={this.changePage} name="realEstate" value="realEstate">Real Estate</button>
+        </div>
+        <br />
+        <div>
+          <form>
+            <input type="text" placeholder="quick search" />
+          </form>
+        </div>
+      </div>
     )
   }
 
   renderSector = () => {
     return (
-      <Fragment>
+      <div className="sector-equities">
         {
           this.state[this.state.currentPage].map( equity => {
             return (
-              <SimpleEquity />
+              <SimpleEquity
+                equity={equity}
+              />
             )
           })
         }
-      </Fragment>
+      </div>
     )
   }
 
@@ -89,7 +99,7 @@ class Sector extends Component {
     return (
       <div className="sectors-container">
         <div className="sector grey-border">
-          { this.renderSectorBar() }
+        { this.renderSectorBar() }
 
           {
             this.state[this.state.currentPage] != "" ?

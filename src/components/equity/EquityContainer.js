@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
-// import { NavLink, Switch } from 'react-router-dom';
+import React, { Component, Fragment } from 'react'
 
-// import Equity from './Equity'
-// import EquityProfile from './EquityProfile'
 import Top from './Top'
 import Search from './Search'
+import Sector from './Sector'
 
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -123,6 +121,11 @@ class EquityContainer extends Component {
         activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/infocus"> in focus </NavLink>
 
+        <NavLink
+        className="navlink-dash"
+        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
+        to="/equities/sectors"> sectors </NavLink>
+
         <div className="searchform">
           <form onSubmit={this.handleSearch}>
             <input
@@ -153,10 +156,17 @@ class EquityContainer extends Component {
             term={this.props.location.search.substring(2)}
           />
           :
-          <Top
+          <Fragment>
+          {
+            this.props.match.params.view === "sectors" ?
+            <Sector />
+            :
+            <Top
             equities={this.state[this.props.match.params.view]}
             title={this.props.match.params.view}
-          />
+            />
+          }
+          </Fragment>
         }
         </div>
       </div>
