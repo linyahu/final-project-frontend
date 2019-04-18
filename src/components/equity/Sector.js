@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 
 import SimpleEquity from './SimpleEquity'
 
+import { NavLink } from 'react-router-dom';
+
 class Sector extends Component {
   state = {
     technology: [],
@@ -14,10 +16,21 @@ class Sector extends Component {
     consumerDefensive: [],
     realEstate: [],
     currentPage: "technology",
+    filtered: [],
+    search: "",
   }
 
   changePage = (e) => {
-    this.setState({ currentPage: e.target.value })
+    this.setState({
+      currentPage: e.target.value,
+      filtered: this.state[e.target.value]
+    })
+  }
+
+  handleSearch = (e) => {
+    let newEquities = this.state[this.state.currentPage].filter( eq => eq.company_name.toLowerCase().includes(e.target.value))
+    console.log("after filtering", newEquities)
+    this.setState({ search: e.target.value, filtered: newEquities })
   }
 
   componentDidMount() {
@@ -47,7 +60,8 @@ class Sector extends Component {
         basicMaterials,
         consumerCyclical,
         consumerDefensive,
-        realEstate
+        realEstate,
+        filtered: technology,
       })
 
     })
@@ -70,19 +84,20 @@ class Sector extends Component {
         </div>
         <br />
         <div>
-          <form>
-            <input type="text" placeholder="quick search" />
-          </form>
+          <input onChange={this.handleSearch} value={this.state.search} type="text" placeholder="quick search" />
         </div>
       </div>
+
     )
   }
 
   renderSector = () => {
+
     return (
       <div className="sector-equities">
+
         {
-          this.state[this.state.currentPage].map( equity => {
+          this.state.filtered.map( equity => {
             return (
               <SimpleEquity
                 equity={equity}
@@ -95,7 +110,7 @@ class Sector extends Component {
   }
 
   render() {
-    console.log("state?", this.state);
+    console.log("props here?", this.props);
     return (
       <div className="sectors-container">
         <div className="sector grey-border">

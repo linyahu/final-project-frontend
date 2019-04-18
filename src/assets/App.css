@@ -855,6 +855,17 @@
   color: rgb(103, 175, 169);
   border-color: rgb(103, 175, 169);
 }
+
+.sector-nav button:hover {
+  background-color: rgba(103, 175, 169, 0.8);
+  color: rgba(0,0,0,0.8);
+  border-color: rgba(0,0,0,0.8);
+}
+
+.sector-nav button:focus {
+  outline-color: rgba(103, 175, 169, 0.2);
+}
+
 .sectors-container {
   margin-top: 6%;
 }

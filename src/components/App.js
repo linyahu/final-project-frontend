@@ -9,6 +9,7 @@ import DashboardContainer from './dashboard/DashboardContainer'
 import EditDashboard from './dashboard/EditDashboard'
 
 import EquityContainer from './equity/EquityContainer'
+import Sector from './equity/Sector'
 
 import PortfolioContainer from './portfolio/PortfolioContainer'
 // import PortfolioDetailsContainer from './portfolio/PortfolioDetailsContainer'
@@ -196,9 +197,9 @@ class App extends Component {
 
           <Route path="/portfolio" component={ props => <PortfolioContainer {...props}/>} />
 
-          <Route
-            path="/account"
-            component={ props => <Account {...props} />} />
+          <Route path="/account" component={ props => <Account {...props} />} />
+
+
 
         </Switch>
       </Fragment>

@@ -181,6 +181,7 @@ class Equity extends Component {
     .then(res => res.json())
     .then( json => {
       // console.log("after creating subportfolio", json);
+      this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: [...this.props.portfolioEquities, json] })
       this.updateAccountBalance(json.initial_value, json)
     })
   }
