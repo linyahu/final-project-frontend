@@ -839,7 +839,7 @@
   margin-right: 0.5%;
   margin-left: 0.5%;
   width: 10%;
-  padding: 3px;
+  padding: 6px;
   border-radius: 5px;
   color: rgb(103, 175, 169);
   border-color: rgb(103, 175, 169);
@@ -852,6 +852,22 @@
 }
 
 .sector-nav button:focus {
+  outline-color: rgba(103, 175, 169, 0.2);
+}
+
+.sector-nav input {
+  width: 30%;
+  background-color: rgba(0,0,0,0);
+  height: 18px;
+  padding: 2px;
+  border-color: rgba(103, 175, 169, 0.4);
+  color: white;
+  border-style: groove;
+  font-size: 16px;
+  text-align: center;
+}
+
+.sector-nav input:focus {
   outline-color: rgba(103, 175, 169, 0.2);
 }
 
@@ -868,7 +884,7 @@
 
 .sector-equities {
   overflow-y: auto;
-  height: 780px;
+  height: 760px;
   padding: 0.5%;
 }
 
