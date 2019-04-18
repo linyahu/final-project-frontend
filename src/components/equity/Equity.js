@@ -260,13 +260,10 @@ class Equity extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("did it patch through?", json);
 
       // let newPortfolioEquities = [...this.props.portfolioEquities, newSubportfolio]
       this.props.dispatch({ type: "SET_PORTFOLIO", payload: json })
       this.props.dispatch({ type: "SET_ACCOUNT_BALANCE", payload: data.account_balance })
-
-      // window.location.reload()
 
     })
   }
@@ -287,50 +284,86 @@ class Equity extends Component {
             dashboardIds.includes(id) || this.state.addedToDashboard ?
             null
             :
-            <div>
-              <h5> add to a dashboard </h5>
-              <select onChange={this.addEquityId}>
+            <div className="modal-content-div">
               {
-                this.props.dashboards.map( dashboard => {
-                  if (dashboard.name === "main") {
-                    return <option value="">Select</option>
-                  } else {
-                    return <option value={dashboard.id}>{dashboard.name}</option>
+                this.props.dashboards.length === 1 ?
+                <div>
+                  <span> you currently don't have any dashboards! </span>
+                  <br />
+                  <br />
+                  <NavLink
+                    className="eq-navlink"
+                    to="/dashboards/main">go to dashboards</NavLink>
+                </div>
+                :
+                <Fragment>
+                  <span> add to a dashboard </span>
+                  <select onChange={this.addEquityId}>
+                  {
+                    this.props.dashboards.map( dashboard => {
+                      if (dashboard.name === "main") {
+                        return <option value="">Select</option>
+                      } else {
+                        return <option value={dashboard.id}>{dashboard.name}</option>
+                      }
+                    })
                   }
-                })
+                  </select>
+                  <button className="add-btn" onClick={this.addToDashboard}>+</button>
+                </Fragment>
               }
-              </select>
-              <button onClick={this.addToDashboard}> add to dashboard </button>
+              <br />
+              <p> - - - - - - - - - - -  or  - - - - - - - - - - -</p>
             </div>
           }
-          <h6> trading fee: $5 </h6>
-          <h6> cost of trade: ${Math.round(this.state.currentPrice * this.state.quantity * 100)/100 + 5}</h6>
-          <h6> account balance: {this.props.accountBalance} </h6>
-          <label> quantity </label>
-          <input name="quantity" onChange={this.handleTrade} value={this.state.quantity} type="text" /><br />
-          <label> buy/sell </label>
-            <select onChange={this.handleDirection} value={this.state.direction}>
-              <option value="buy">buy</option>
-              <option value="sell">sell</option>
-            </select><br />
-          {
-            (this.state.quantity * this.state.currentPrice + 5)> this.props.accountBalance ?
-            <h5> you don't have anough in your account to cover this trade </h5>
-            :
-            null
-          }
-          {
-            this.state.quantity < 0 && !portfolioIds.includes(id) ?
-            <h5> warning: you currently don't have this stock
+          <div className="modal-content-div">
+            <span> trading fee: $5 </span>
             <br />
-            in your portfolio, please proceed only if you
+            <span> cost of trade: ${Math.round(this.state.currentPrice * this.state.quantity * 100)/100 + 5}</span>
             <br />
-            understand the risks of short-selling
-           </h5>
-            :
-            null
-          }
-          <button onClick={this.addToPortfolio}> trade </button>
+            <span> account balance: {this.props.accountBalance} </span>
+            <br />
+            <br />
+            <label> quantity </label>
+            <input name="quantity" onChange={this.handleTrade} value={this.state.quantity} type="text" /><br />
+            <br />
+              <label> buy/sell </label>
+              <select onChange={this.handleDirection} value={this.state.direction}>
+                <option value="buy">buy</option>
+                <option value="sell">sell</option>
+              </select><br />
+            <br />
+              {
+                isNaN(this.state.quantity) ?
+                <span> please enter a valid number </span>
+                :
+                null
+              }
+              {
+                (this.state.quantity * this.state.currentPrice + 5)> this.props.accountBalance ?
+                <div>
+                  <h5> you don't have anough in your account to cover this trade </h5>
+                  <NavLink
+                    className="eq-navlink"
+                    to="/account">go to account</NavLink>
+                </div>
+                :
+                <div>
+                  <button className="search-btn" onClick={this.addToPortfolio}> trade </button>
+                </div>
+              }
+              {
+                this.state.quantity < 0 && !portfolioIds.includes(id) ?
+                <h5> warning: you currently don't have this stock
+                <br />
+                in your portfolio, please proceed only if you
+                <br />
+                understand the risks of short-selling
+               </h5>
+                :
+                null
+              }
+          </div>
         </div>
       </div>
     )

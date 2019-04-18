@@ -57,13 +57,10 @@ class Breakdown extends Component {
       }],
       labels: Object.keys(this.props.sectorData)
     }
-    console.log("is this data?", data);
     return data
   }
 
   render() {
-    console.log("props in breakdown", this.props);
-    // console.log("what is my state", this.state);
     return (
       <div className="grey-border portfolio-card col-1">
         <h4>Breakdown Component </h4>

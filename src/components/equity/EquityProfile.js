@@ -60,7 +60,6 @@ class EquityProfile extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("added equity to dashboard", json);
       this.props.dispatch({ type: "SET_DASHBOARD_EQUITIES", payload: [...this.props.dashboardEquities, json] })
       this.props.addEquityToDashboard()
     })
@@ -122,7 +121,6 @@ class EquityProfile extends Component {
   }
 
   render() {
-    console.log();
     return (
       <Fragment>
         { this.renderProfile() }

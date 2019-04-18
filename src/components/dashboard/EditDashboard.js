@@ -28,17 +28,14 @@ class EditDashboard extends Component {
   }
 
   handleNameChange = (e) => {
-    console.log(e.target.value);
     let name = e.target.value.replace(/[^\w\s]/gi, '')
 
     this.setState( prevState => {
-      // console.log(name);
       return { dashboard: {...prevState.dashboard, name } }
     })
   }
 
   handleChange = (e) => {
-    // console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -82,7 +79,6 @@ class EditDashboard extends Component {
   }
 
   saveDashboard = () => {
-    console.log("clicked save button, will save dashboard", this.state);
 
     let data = {
       name: this.state.dashboard.name.replace(/^\s+/g, '').replace(/\s+$/g, ''),
@@ -132,7 +128,7 @@ class EditDashboard extends Component {
     fetch("http://localhost:3000/api/v1/dashboards")
     .then(res => res.json() )
     .then(json => {
-      // console.log("%c ***i fetched!", "color: green");
+
       let dashboards = json.filter( d => d.user_id === this.props.user_id)
       let equities = dashboards.map( d => d.equities ).flat()
       let dashboard = dashboards.find(d => d.name === this.props.match.params.name )
@@ -151,7 +147,6 @@ class EditDashboard extends Component {
     .then(res => res.json() )
     .then(json => {
       let currentEquityDashoards = json.filter( a => a.dashboard_id === this.state.dashboard.id)
-      console.log("%c what is happening here", "color: pink", currentEquityDashoards);
       this.setState({ currentEquityDashoards })
     })
   }
@@ -198,7 +193,6 @@ class EditDashboard extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      // console.log("edited the dashboard", json);
       this.props.history.push(`/dashboards/${json.name}`)
     })
   }
@@ -218,7 +212,7 @@ class EditDashboard extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("added equity to dashboard", json);
+      // console.log("added equity to dashboard", json);
     })
   }
 
@@ -347,7 +341,7 @@ class EditDashboard extends Component {
 
   renderDashboardForm = () => {
     // let dashboard = this.props.dashboards.find(d => d.name === this.props.match.params.name )
-    // console.log("this is my dashboard", this.state.dashboard);
+
     return (
       <div className="inner-container">
         { this.renderNewsfeed() }
@@ -434,7 +428,7 @@ class EditDashboard extends Component {
   }
 
   render() {
-    console.log("state in edit dashboard", this.state)
+
     return (
       <div className="main-container">
         { this.renderDashboardNav() }

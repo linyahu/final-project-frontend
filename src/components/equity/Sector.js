@@ -29,7 +29,7 @@ class Sector extends Component {
 
   handleSearch = (e) => {
     let newEquities = this.state[this.state.currentPage].filter( eq => eq.company_name.toLowerCase().includes(e.target.value))
-    console.log("after filtering", newEquities)
+    
     this.setState({ search: e.target.value, filtered: newEquities })
   }
 
@@ -110,7 +110,6 @@ class Sector extends Component {
   }
 
   render() {
-    console.log("props here?", this.props);
     return (
       <div className="sectors-container">
         <div className="sector grey-border">

@@ -143,7 +143,6 @@ class EquityContainer extends Component {
   }
 
   render() {
-    console.log("%c props in equity container", "color: pink", this.props);
     return (
       <div className="main-container">
         { this.renderEquityNavBar() }

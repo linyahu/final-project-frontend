@@ -137,10 +137,9 @@ class CreateNewDashboard extends Component {
       <Fragment>
         { this.state.addedEquities.map( equity => {
             return (
-              <span key={equity.id}>
+              <div className="modal-equity-block" onClick={() => this.removeFromAddedEquities(equity)} >
                 <h5>{equity.symbol} - {equity.company_name}</h5>
-                <button onClick={() => this.removeFromAddedEquities(equity)}>remove</button>
-              </span>
+              </div>
             )
           })
         }
@@ -155,13 +154,16 @@ class CreateNewDashboard extends Component {
 
       return this.state.searchResults.map(equity => {
         return (
-          <Fragment key={equity.id}>
-          <h5>{equity.symbol} - {equity.company_name}</h5>
+          <Fragment>
           {
             !currentIds.includes(equity.id) ?
-            <button onClick={() => this.addEquity(equity)}>add</button>
+            <div onClick={() => this.addEquity(equity)} className="modal-equity-block" key={equity.id}>
+              <h5>{equity.symbol} - {equity.company_name}</h5>
+            </div>
             :
-            <h6>[cannot add: already existing on another dashboard]</h6>
+            <div className="modal-equity-block-added" key={equity.id}>
+              <h5>{equity.symbol} - {equity.company_name}</h5>
+            </div>
           }
           </Fragment>
         )
@@ -170,43 +172,57 @@ class CreateNewDashboard extends Component {
   }
 
   render() {
-    console.log("%c what is my current state", "color: green", this.state);
-    // console.log("%c what are my props", "color: green", this.props);
     return (
       <div className="modal">
         <div className="modal-content">
           <button onClick={this.props.closeForm} className="close">X</button>
-          <h4>create new dashboard</h4>
 
-          <form onSubmit={this.createNewDashboard} className="new-dash">
-            <input
-              onChange={this.handleChange}
-              type="text"
-              name="dashName"
-              value={this.state.dashName}
-              placeholder="enter dashboard name"
-            />
-            <br />
-            <br />
-            <label>add newsfeed</label>
-            <input
-              onChange={this.toggleNewsfeed}
-              type="checkbox"
-              name="addNewsfeed"
-              value={this.state.addNewsfeed}
-            />
-            <div>
+          <div className="modal-create-new">
+            <form onSubmit={this.createNewDashboard} className="new-dash">
+              <label>enter dashboard name</label>
+              <input
+                className="light-input"
+                onChange={this.handleChange}
+                type="text"
+                name="dashName"
+                value={this.state.dashName}
+              />
+              <br />
+              <span>add newsfeed</span>
+              <input
+                onChange={this.toggleNewsfeed}
+                type="checkbox"
+                name="addNewsfeed"
+                value={this.state.addNewsfeed}
+              />
+
+
+
+            <div className="modal-new-equities">
               {
                 this.state.addedEquities == "" ?
-                <h5>search for equities</h5>
+                <Fragment>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <p> search for equities on the right  </p>
+                  <p> by entering a ticker or company name. </p>
+                  <p> click on the equity to add or remove </p>
+                  <p> from your dashboard </p>
+                </Fragment>
                 :
                 this.renderAddedEquities()
               }
-
             </div>
-            <input type="submit" value="create dashboard" />
-          </form>
 
+            <input className="search-btn" type="submit" value="create dashboard" />
+          </form>
+          </div>
+
+          <div className="modal-search">
           <form onSubmit={this.searchEquities}>
 
             <label>filter sector </label>
@@ -223,21 +239,24 @@ class CreateNewDashboard extends Component {
               <option value="Consumer Defensive">Consumer Defensive</option>
               <option value="Real Estate">Real Estate</option>
             </select>
-
             <br />
             <label>search for equities</label>
             <input
+              className="light-input"
               onChange={this.handleChange}
               type="text"
               name="search"
               value={this.state.search}
-              placeholder="type ticker or company name" />
-            <input type="submit" value="search" />
+            />
+            <br />
+            <input className="search-btn" type="submit" value="search" />
           </form>
 
-          { this.renderSearchResults() }
-          { this.state.noResults ? <h5> no results </h5> : null }
-
+            <div className="modal-results">
+            { this.renderSearchResults() }
+            { this.state.noResults ? <h5> no results </h5> : null }
+            </div>
+          </div>
         </div>
       </div>
     )

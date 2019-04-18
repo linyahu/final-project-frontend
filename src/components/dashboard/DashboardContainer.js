@@ -130,7 +130,6 @@ class DashboardContainer extends Component {
 
 
   render() {
-    console.log("%c dashboards", "color: blue", this.props);
     return (
       <div className="main-container">
         {this.renderDashboardNav()}

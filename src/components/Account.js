@@ -42,7 +42,6 @@ class Account extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("did it patch through?", json);
 
       this.setState({ addMoney: false, amount: 0 })
 
@@ -99,7 +98,6 @@ class Account extends Component {
 
 
   render() {
-    console.log("props?", this.props);
     return (
       <div className="landing-plain">
       <div className="account-details">

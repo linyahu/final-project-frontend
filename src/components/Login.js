@@ -22,7 +22,6 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("did this hit??");
 
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
@@ -48,7 +47,6 @@ class Login extends Component {
 
   handleCreateAccount = (e) => {
     e.preventDefault()
-    console.log("state in create", this.state);
     if (this.state.firstname === "" || this.state.lastname === "" || this.state.username === "" || this.state.password === "" || this.state.passwordConfirmation === "") {
       alert("please fill out all fields")
     } else {
@@ -192,7 +190,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="landing-login">
         {

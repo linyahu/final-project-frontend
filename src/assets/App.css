@@ -350,6 +350,22 @@
 /********************************************
                   all my buttons
 ********************************************/
+.add-btn {
+  background-color: rgba(111, 188, 184, 0.6);
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 1px 3px 1px 3px;
+  width: 20px;
+  margin: 0% 2% 0% 2%;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.add-btn:hover {
+  background-color: rgb(95, 183, 170);
+}
+
 .simple-btn {
   background-color: rgba(0,0,0,0);
   border: none;
@@ -407,17 +423,17 @@
 }
 
 .search-btn {
-  background-color: rgba(111, 188, 184, 0.6);
+  background-color: rgba(111, 188, 184, 0.8);
   border: none;
   color: white;
-  font-size: 13px;
-  padding: 2px 7px 2px 7px;
+  font-size: 14px;
+  padding: 5px 10px 5px 10px;
   margin-top: 10px;
   border-radius: 5px;
 }
 
 .search-btn:hover {
-  background-color: rgba(111, 188, 184, 0.9);
+  background-color: rgb(67, 168, 163);
 }
 
 .search-btn:focus {
@@ -769,8 +785,6 @@
   margin: auto;
 }
 
-
-
 .navbar {
   padding: 10px;
   margin: 10px;
@@ -779,8 +793,6 @@
 .nav-dash {
   padding: 10px;
 }
-
-
 
 .navlink-dash  {
   margin: auto;
@@ -795,29 +807,6 @@
 
 .navlink-dash:hover {
   color: rgb(232, 199, 199);
-}
-
-.new-dash {
-  /* background-color: rgba(228, 241, 254, 1); */
-  padding: 25px;
-  margin: 25px;
-}
-
-.new-dash input {
-  width: 200px;
-  margin: 5px;
-}
-
-.new-dash div {
-  border-color: black;
-  border-style: dashed;
-  border-radius: 1px;
-  min-height: 200px;
-  width: 750px;
-  padding: 10px;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .sm-card {
@@ -1071,6 +1060,14 @@
 /************************************
             MODAL STYLING
 *************************************/
+.light-input {
+  background-color: rgba(0,0,0,0);
+  border-color: rgba(111, 188, 184, 0.5);
+  border-style: groove;
+  margin: 1%;
+  height: 16px;
+  width: 35%;
+}
 /* The Modal (background) */
 .modal {
   display: block; /* Hidden by default */
@@ -1088,20 +1085,120 @@
 /* Modal Content/Box */
 .modal-content {
   background-color: rgba(255,255,255,0.9);
-  margin: 12% auto; /* 15% from the top and centered */
-  padding: 20px;
-  color: black;
-  /* border: 1px solid #888; */
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 2%;
+  color: rgb(120, 150, 146);
   width: 60%; /* Could be more or less, depending on screen size */
+  height: 600px;
+}
+
+.modal-content input:focus {
+  outline-color: rgba(175, 211, 209, 0.2);
+}
+
+.modal-content select {
+  background-color: rgba(0,0,0,0);
+}
+
+.modal-content select:focus {
+  outline-color: rgba(175, 211, 209, 0.2);
+}
+
+.modal-create-new {
+  border-color: rgba(175, 211, 209, 0.4);
+  border-style: solid;
+  height: 560px;
+  margin-right: 2%;
+  width: 50%;
+  padding: 2%;
+  float: left;
+}
+
+.modal-search {
+  border-color: rgba(175, 211, 209, 0.4);
+  border-style: solid;
+  height: 560px;
+  float: left;
+  padding: 2%;
+  width: 36%;
+}
+
+.modal-new-equities {
+  height: 450px;
+  /* background-color: rgba(175, 211, 209, 0.3); */
+  padding: 1%;
+  margin: 1%;
+  overflow: auto;
+}
+
+.modal-results {
+  height: 450px;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.modal-equity-block {
+  background-color: rgba(175, 211, 209, 0.3);
+  margin: 5px;
+  padding: 2px;
+}
+
+.modal-equity-block-added {
+  text-decoration: line-through;
+  color: rgb(90, 117, 115);
 }
 
 .modal-content-sm {
   background-color: rgba(255,255,255,0.9);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  color: black;
+  color: rgb(120, 150, 146);
   width: 25%;
   min-height: 250px;
+}
+
+.modal-content-sm h4 {
+  color: rgb(40, 54, 56);
+  font-size: 20px;
+}
+
+.modal-content-sm h5 {
+  color: rgb(40, 54, 56);
+  font-weight: bolder;
+}
+
+.modal-content-sm p {
+  color: rgb(40, 54, 56);
+  font-weight: bold;
+  padding: 3%;
+}
+
+
+.modal-content-div {
+  margin: 5px;
+  padding: 5px;
+}
+
+.modal-content-div span {
+  padding: 10px;
+  margin: 10px;
+}
+
+.modal-content-div select {
+  min-width: 120px;
+  height: 20px;
+  background-color: rgba(0,0,0,0);
+}
+
+.modal-content-div select:focus {
+  outline-color: rgba(90, 173, 162,0.2);
+}
+
+.modal-content-div input {
+  width: 120px;
+  border-color: rgba(90, 173, 162,0.4);
+  border-style: groove;
+  background-color: rgba(0,0,0,0);
 }
 
 .modal-news a {

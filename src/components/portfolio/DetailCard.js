@@ -160,7 +160,6 @@ class DetailCard extends Component {
     let data ={
       account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) + parseFloat(value) - 5)*100)/100
     }
-    console.log("what is my data", data);
 
     fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
       method: "PATCH",
@@ -172,8 +171,6 @@ class DetailCard extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("did it patch through?", json);
-
       window.location.reload()
     })
   }
@@ -182,8 +179,6 @@ class DetailCard extends Component {
                 RENDER FUNCTIONS
   **********************************************/
   render() {
-    // console.log("props in detailcard", this.props);
-    // console.log("%c state", "color: pink", this.state);
     return (
       <div className="details">
         <h5>{this.props.subportfolio.equity.company_name} - {this.props.subportfolio.equity.sector}</h5>
@@ -206,7 +201,7 @@ class DetailCard extends Component {
             <h6>date bought: {this.props.subportfolio.date_bought}</h6>
 
             <button className="pf-btn" onClick={this.closePosition}> close this position </button>
-            
+
           </Fragment>
           :
           <Fragment>
