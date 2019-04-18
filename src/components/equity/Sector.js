@@ -29,7 +29,7 @@ class Sector extends Component {
 
   handleSearch = (e) => {
     let newEquities = this.state[this.state.currentPage].filter( eq => eq.company_name.toLowerCase().includes(e.target.value))
-    
+
     this.setState({ search: e.target.value, filtered: newEquities })
   }
 
