@@ -75,6 +75,9 @@ class EquityProfile extends Component {
         <div className="eq-profile-details">
           <p>Sector: {this.props.equity.sector} </p>
           <p>Industry: {this.props.equity.industry} </p>
+          <p>CEO: {this.props.equity.ceo} </p>
+          <p>Website: <a className="sm-link" href={this.props.equity.website}>{this.props.equity.website}</a> </p>
+          <p>Exchange: {this.props.equity.exchange} </p>
           <p>{this.props.equity.description}</p>
         </div>
 

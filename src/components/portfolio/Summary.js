@@ -132,8 +132,8 @@ class Summary extends Component {
     return (
       <div className="grey-border portfolio-card col-2">
         <h4>Portfolio Snapshot</h4>
-        <h6>current value: {this.state.currentValue} |
-        account balance: {this.props.accountBalance} </h6>
+        <h6>current value: ${this.state.currentValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} |
+        account balance: ${this.props.accountBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </h6>
         <EquityChart
           data={this.state.data}
           legend={this.state.legend}

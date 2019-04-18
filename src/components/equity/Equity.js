@@ -165,7 +165,7 @@ class Equity extends Component {
       portfolio_id: this.props.portfolio.id,
       equity_id: this.props.id,
       initial_px: parseFloat(this.state.currentPrice),
-      date_bought: (new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + new Date().getDate()),
+      date_bought: (new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + (new Date().getDate() - 14)),
       quantity: parseFloat(this.state.quantity),
       initial_value: parseFloat(Math.round(this.state.quantity * this.state.currentPrice * 100)/100)
     }
@@ -319,9 +319,9 @@ class Equity extends Component {
           <div className="modal-content-div">
             <span> trading fee: $5 </span>
             <br />
-            <span> cost of trade: ${Math.round(this.state.currentPrice * this.state.quantity * 100)/100 + 5}</span>
+            <span> cost of trade: ${ (Math.round(this.state.currentPrice * this.state.quantity * 100)/100 + 5).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
             <br />
-            <span> account balance: {this.props.accountBalance} </span>
+            <span> account balance: ${this.props.accountBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span>
             <br />
             <br />
             <label> quantity </label>

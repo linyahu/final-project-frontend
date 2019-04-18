@@ -138,7 +138,7 @@ class Account extends Component {
           </tr>
           <tr>
             <td className="account-label"> account balance: </td>
-            <td className="account-data"> ${this.props.accountBalance }</td>
+            <td className="account-data"> ${this.props.accountBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</td>
           </tr>
         </table>
         <br />

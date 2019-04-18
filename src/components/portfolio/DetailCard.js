@@ -192,9 +192,11 @@ class DetailCard extends Component {
         <h6>
         last px: ${this.state.currentPrice} |
         quantity: {this.props.subportfolio.quantity} |
-        value: ${this.state.currentValue} |
+        value: ${this.state.currentValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        <br/>
         $change: { Math.round((this.state.currentValue - this.props.subportfolio.initial_value)*100)/100 } |
         %change: {Math.round((this.state.currentPrice/this.props.subportfolio.initial_px - 1)*10000)/100} </h6 >
+
         {
           Math.abs(this.props.subportfolio.quantity) > 0 ?
           <Fragment>
@@ -217,11 +219,16 @@ class DetailCard extends Component {
               <button onClick={this.closePosition} className="close">X</button>
 
               <h4>{this.props.subportfolio.equity.symbol} - ${this.state.currentPrice}</h4>
-              <h5> trading fee: $5 </h5>
-              <h5> initial value: ${this.props.subportfolio.initial_value}</h5>
-              <h5> current value: ${this.state.currentValue}</h5>
-              <h5> realized gain/loss: ${Math.round((this.state.currentValue - this.props.subportfolio.initial_value - 5)*100)/100}</h5>
-              <button onClick={this.confirmTrade}> confirm trade </button>
+              <br />
+              <br />
+              <span> trading fee: $5 </span><br />
+              <span> initial value: ${this.props.subportfolio.initial_value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span><br />
+              <span> current value: ${this.state.currentValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span><br />
+              <span> realized gain/loss: ${ (Math.round((this.state.currentValue - this.props.subportfolio.initial_value - 5)*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span><br />
+              <br />
+              <br />
+              <br />
+              <button className="search-btn" onClick={this.confirmTrade}> confirm trade </button>
             </div>
           </div>
           :

@@ -72,18 +72,16 @@ class Sector extends Component {
     return (
       <div className="sector-nav">
         <div>
-          <button onClick={this.changePage} name="technology" value="technology">Technology</button>
-          <button onClick={this.changePage} name="healthcare" value="healthcare">Healthcare</button>
-          <button onClick={this.changePage} name="energy" value="energy">Energy</button>
-          <button onClick={this.changePage} name="industrials" value="industrials">Industrials</button>
-          <button onClick={this.changePage} name="financialServices" value="financialServices">Financial Services</button>
-          <button onClick={this.changePage} name="basicMaterials" value="basicMaterials">Basic Materials</button>
-          <button onClick={this.changePage} name="consumerCyclical" value="consumerCyclical">Consumer Cyclical</button>
-          <button onClick={this.changePage} name="consumerDefensive" value="consumerDefensive">Consumer Defensive</button>
-          <button onClick={this.changePage} name="realEstate" value="realEstate">Real Estate</button>
-        </div>
-        <br />
-        <div>
+          <button className="trade-btn" onClick={this.changePage} name="technology" value="technology">Technology</button>
+          <button className="trade-btn" onClick={this.changePage} name="healthcare" value="healthcare">Healthcare</button>
+          <button className="trade-btn" onClick={this.changePage} name="energy" value="energy">Energy</button>
+          <button className="trade-btn" onClick={this.changePage} name="industrials" value="industrials">Industrials</button>
+          <button className="trade-btn" onClick={this.changePage} name="financialServices" value="financialServices">Financial Services</button>
+          <button className="trade-btn" onClick={this.changePage} name="basicMaterials" value="basicMaterials">Basic Materials</button>
+          <button className="trade-btn" onClick={this.changePage} name="consumerCyclical" value="consumerCyclical">Consumer Cyclical</button>
+          <button className="trade-btn" onClick={this.changePage} name="consumerDefensive" value="consumerDefensive">Consumer Defensive</button>
+          <button className="trade-btn" onClick={this.changePage} name="realEstate" value="realEstate">Real Estate</button>
+
           <input onChange={this.handleSearch} value={this.state.search} type="text" placeholder="quick search" />
         </div>
       </div>
