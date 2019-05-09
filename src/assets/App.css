@@ -1120,6 +1120,7 @@
   color: rgb(120, 150, 146);
   width: 60%; /* Could be more or less, depending on screen size */
   height: 600px;
+  overflow-y: auto;
 }
 
 .modal-content h4 {
@@ -1244,6 +1245,25 @@
 .modal-news a {
   color: black;
   overflow-y: auto;
+}
+
+.new-user-btn {
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding:5px 15px 5px 15px;
+  margin: 15px;
+  font-size: 14px;
+  background-color: rgb(120, 190, 190);
+  color: rgba(255,255,255,0.9);
+}
+
+.new-user-btn:hover {
+  background-color: rgb(120, 150, 146);
+}
+
+.new-user-btn:focus {
+  outline-color: rgba(120, 190, 190, 0.2);
 }
 
 /* The Close Button */

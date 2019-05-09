@@ -89,11 +89,17 @@ class Financials extends Component {
   }
 
   render() {
+    console.log(this.state.data);
     return (
       <div className="modal">
         <div className="modal-content">
           <button name="showFinancials" onClick={this.props.closeDetails} className="close">X</button>
-          { this.renderTable() }
+          {
+            !!this.state.data && this.state.data.length != 0 ?
+            this.renderTable()
+            :
+            <h4> historic financial data not available </h4>
+          }
         </div>
       </div>
     )

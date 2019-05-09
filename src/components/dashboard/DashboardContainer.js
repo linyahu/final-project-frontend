@@ -128,7 +128,24 @@ class DashboardContainer extends Component {
     }
   }
 
-
+  renderNewUserPopup() {
+    return (
+      <div className="modal">
+        <div className="modal-content-sm">
+          <h3> Welcome to Stock Overflow! </h3>
+          <br />
+          <span>To create a new dashboard, click on the "Create New Dashboard"
+          button below. Explore different equities by clicking on the "Explore Equities"
+          button.</span>
+          <br />
+          <br />
+          <br />
+          <button onClick={this.showForm} className="new-user-btn">Create New Dashboard</button>
+          <NavLink className="new-user-btn" to="/equities">Explore Equities</NavLink>
+        </div>
+      </div>
+    )
+  }
 
 
   render() {
@@ -136,6 +153,12 @@ class DashboardContainer extends Component {
       <div className="main-container">
         {this.renderDashboardNav()}
         {this.renderDashboards()}
+        {
+          this.props.dashboardEquities.length === 0 && this.state.showNewForm === false ?
+          this.renderNewUserPopup()
+          :
+          null
+        }
       </div>
     )
   }

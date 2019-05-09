@@ -136,7 +136,7 @@ class Account extends Component {
           </tr>
           <tr>
             <td className="account-label">dashboards: </td>
-            <td className="account-data"> {this.props.dashboards.length} </td>
+            <td className="account-data"> {this.props.dashboards.length - 1} </td>
           </tr>
           <tr>
             <td className="account-label"> account balance: </td>
