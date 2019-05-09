@@ -200,7 +200,7 @@ class Equity extends Component {
       portfolio_id: this.props.portfolio.id,
       equity_id: this.props.id,
       initial_px: parseFloat(this.state.currentPrice),
-      date_bought: (new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + (new Date().getDate() - 14)),
+      date_bought: (new Date().getFullYear() + "-" + (new Date().getMonth()+1) + "-" + (new Date().getDate())),
       quantity: parseFloat(this.state.quantity),
       initial_value: parseFloat(Math.round(this.state.quantity * this.state.currentPrice * 100)/100)
     }
