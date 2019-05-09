@@ -67,7 +67,41 @@ class Equity extends Component {
     let close = t + ' 16:00:00 GMT-0400'
     let now = new Date()
 
-    if (Date.parse(now) >= Date.parse(open) && Date.parse(now) <= Date.parse(close)) {
+    if (now.getDay() > 5) {
+      if (now.getDay() === 6 ) {
+        if (now.getMonth() + 1 < 10) {
+          if (now.getDate() < 11) {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}0${now.getDate()-1}`
+            this.fetchFromDate(date)
+          } else {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}${now.getDate()-1}`
+            this.fetchFromDate(date)
+          }
+        } else {
+          if (now.getDate() < 11) {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}0${now.getDate()-1}`
+            this.fetchFromDate(date)
+          } else {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}${now.getDate()-1}`
+            this.fetchFromDate(date)
+          }
+        }
+      } else if (now.getDay() === 7 ) {
+        if (now.getMonth() + 1 < 10) {
+          if (now.getDate() < 11) {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}0${now.getDate()-2}`
+          } else {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}${now.getDate()-2}`
+          }
+        } else {
+          if (now.getDate() < 11) {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}0${now.getDate()-2}`
+          } else {
+            let date = `${now.getFullYear()}0${now.getMonth()+1}${now.getDate()-2}`
+          }
+        }
+      }
+    } else if (Date.parse(now) >= Date.parse(open) && Date.parse(now) <= Date.parse(close)) {
       this.fetchIntradayData()
     } else {
       this.fetchPostCloseTradeData()
@@ -190,6 +224,14 @@ class Equity extends Component {
   /**********************************************
                   FETCH FUNCTIONS
   **********************************************/
+  fetchFromDate(date) {
+    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/date/${date}`)
+    .then(res => res.json())
+    .then( json => {
+      this.setDatapoints(json)
+    })
+  }
+
   fetchPostCloseTradeData() {
     fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`)
     .then(res => res.json())
@@ -399,7 +441,7 @@ class Equity extends Component {
 
   render() {
     // console.log("what are my props in equity", this.props);
-    // console.log("state stuff", this.state);
+    console.log("state stuff", this.state);
     return (
       <div className={this.props.class}>
         {

@@ -22,7 +22,7 @@ class PortfolioContainer extends Component {
   }
 
   componentDidMount() {
-    // this.props.hideNavBar()
+    this.props.hideNavBar()
     if (!!this.props.portfolio.subportfolios) {
       this.props.portfolio.subportfolios.map(sub => {
         this.fetchEquityData(sub)

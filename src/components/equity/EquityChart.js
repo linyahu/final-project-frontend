@@ -10,6 +10,7 @@ class EquityChart extends Component {
 
   render() {
     // console.log("props in equity chart", this.props);
+    // debugger
     return(
       <div className="eq-chart">
         <Line

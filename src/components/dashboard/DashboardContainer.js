@@ -33,7 +33,7 @@ class DashboardContainer extends Component {
                 LIFECYCLE FUNCTIONS
   **********************************************/
   componentDidMount() {
-    // this.props.hideNavBar()
+    this.props.hideNavBar()
     this.fetchDashboards()
   }
 
@@ -127,6 +127,8 @@ class DashboardContainer extends Component {
       this.props.history.push("/dashboards/main")
     }
   }
+
+
 
 
   render() {
