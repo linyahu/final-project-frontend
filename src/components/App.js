@@ -189,6 +189,7 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
+          <Route exact path="/" render={props => <DashboardContainer {...props} hideNavBar={this.hideNavBar} />} />
           <Route exact path="/dashboards/:name/edit" component={EditDashboard} />
           <Route exact path="/dashboards/:name" render={props => <DashboardContainer {...props} hideNavBar={this.hideNavBar} />} />
           <Route exact path="/dashboards" render={props => <DashboardContainer {...props} hideNavBar={this.hideNavBar} />} />
