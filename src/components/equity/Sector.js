@@ -4,6 +4,8 @@ import SimpleEquity from './SimpleEquity'
 
 import { NavLink } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 class Sector extends Component {
   state = {
     technology: [],
@@ -38,7 +40,7 @@ class Sector extends Component {
   }
 
   fetchEquities = () => {
-    fetch("http://localhost:3000/api/v1/equities")
+    fetch(`${this.props.url}/api/v1/equities`)
     .then(res => res.json())
     .then(json => {
       let technology = json.filter(e => e.sector === "Technology")
@@ -126,4 +128,13 @@ class Sector extends Component {
   }
 }
 
-export default Sector
+
+function mapStateToProps(state) {
+  return {
+    url: state.url
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(Sector);

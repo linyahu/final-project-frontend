@@ -23,6 +23,7 @@ const initialState = {
   portfolioEquities: [],
   search: "",
   accountBalance: 0,
+  url: "https://stockoverflow-api.herokuapp.com",
 }
 
 const persistConfig = {

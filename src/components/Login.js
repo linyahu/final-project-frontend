@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 import logo from '../assets/logo.png'
 
+import { connect } from 'react-redux';
+
 class Login extends Component {
   state = {
     firstname: "",
@@ -23,7 +25,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch(`${this.props.url}/api/v1/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +72,8 @@ class Login extends Component {
   }
 
   fetchCreateUser(data) {
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch(`${this.props.url}/api/v1/users`, {
+    // fetch(`http://localhost:3000/api/v1/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,4 +211,12 @@ class Login extends Component {
   }
 }
 
-export default Login
+function mapStateToProps(state) {
+  return {
+    url: state.url
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(Login);

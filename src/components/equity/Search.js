@@ -11,7 +11,7 @@ class Search extends Component {
 
   componentDidMount() {
     let search = this.props.term.split('%20').join(' ')
-    fetch("http://localhost:3000/api/v1/equities")
+    fetch(`${this.props.url}/api/v1/equities`)
     .then(res => res.json())
     .then(json => {
       let equities = json.filter( eq => eq.symbol.toLowerCase().includes(search) || eq.company_name.toLowerCase().includes(search))
@@ -43,6 +43,7 @@ function mapStateToProps(state) {
   return {
     user_id: state.user_id,
     search: state.search,
+    url: state.url
   }
 }
 

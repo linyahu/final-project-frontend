@@ -125,7 +125,7 @@ class EditDashboard extends Component {
                 FETCH FUNCTIONS
   **********************************************/
   fetchDashboards() {
-    fetch("http://localhost:3000/api/v1/dashboards")
+    fetch(`${this.props.url}/api/v1/dashboards`)
     .then(res => res.json() )
     .then(json => {
 
@@ -143,7 +143,7 @@ class EditDashboard extends Component {
   }
 
   fetchEquityDashboards() {
-    fetch("http://localhost:3000/api/v1/equity_dashboards")
+    fetch(`${this.props.url}/api/v1/equity_dashboards`)
     .then(res => res.json() )
     .then(json => {
       let currentEquityDashoards = json.filter( a => a.dashboard_id === this.state.dashboard.id)
@@ -154,7 +154,7 @@ class EditDashboard extends Component {
   searchEquities = (e) => {
     e.preventDefault()
 
-    fetch("http://localhost:3000/api/v1/equities")
+    fetch(`${this.props.url}/api/v1/equities`)
     .then(res => res.json())
     .then(json => {
       let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search) )
@@ -183,7 +183,7 @@ class EditDashboard extends Component {
   }
 
   fetchEditDashboard = (data) => {
-    fetch(`http://localhost:3000/api/v1/dashboards/${this.state.dashboard.id}`, {
+    fetch(`${this.props.url}/api/v1/dashboards/${this.state.dashboard.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -202,7 +202,7 @@ class EditDashboard extends Component {
       dashboard_id: this.state.dashboard.id,
       equity_id: equity.id
     }
-    fetch(`http://localhost:3000/api/v1/equity_dashboards`, {
+    fetch(`${this.props.url}/api/v1/equity_dashboards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -219,7 +219,7 @@ class EditDashboard extends Component {
   fetchDeleteEquities = (id) => {
     let eqdId = this.state.currentEquityDashoards.find(a => a.equity_id === id)
 
-    fetch(`http://localhost:3000/api/v1/equity_dashboards/${eqdId.id}`, {
+    fetch(`${this.props.url}/api/v1/equity_dashboards/${eqdId.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -229,7 +229,7 @@ class EditDashboard extends Component {
   }
 
   fetchDeleteDashboard = () => {
-    fetch(`http://localhost:3000/api/v1/dashboards/${this.state.dashboard.id}`, {
+    fetch(`${this.props.url}/api/v1/dashboards/${this.state.dashboard.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -442,7 +442,8 @@ function mapStateToProps(state) {
   return {
     user_id: state.user_id,
     dashboards: state.dashboards,
-    dashboardEquities: state.dashboardEquities
+    dashboardEquities: state.dashboardEquities,
+    url: state.url,
   }
 }
 

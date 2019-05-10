@@ -41,7 +41,7 @@ class App extends Component {
     const jwt = localStorage.getItem('jwt')
 
     if (jwt){
-      fetch("http://localhost:3000/api/v1/auto_login", {
+      fetch(`${this.props.url}/api/v1/auto_login`, {
         headers: {
           "Authorization": jwt
         }
@@ -91,7 +91,7 @@ class App extends Component {
 
 
   fetchPortfolioEquities(id) {
-    fetch("http://localhost:3000/api/v1/portfolios")
+    fetch(`${this.props.url}/api/v1/portfolios`)
     .then(res => res.json())
     .then( json => {
       let portfolio = json.find(p => p.user_id === id)
@@ -107,7 +107,7 @@ class App extends Component {
   }
 
   fetchDashboards() {
-    fetch("http://localhost:3000/api/v1/dashboards")
+    fetch(`${this.props.url}/api/v1/dashboards`)
     .then(res => res.json())
     .then( json => {
       // console.log("do i have user id?", this.props.user_id);
@@ -239,7 +239,8 @@ function mapStateToProps(state) {
     dashboards: state.dashboards,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
-    accountBalance: state.accountBalance
+    accountBalance: state.accountBalance,
+    url: state.url
   }
 }
 

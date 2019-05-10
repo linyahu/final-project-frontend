@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 
 import EquityChart from '../equity/EquityChart'
 
+import { connect } from 'react-redux';
+
 class DetailCard extends Component {
   state = {
     data: {
@@ -67,7 +69,7 @@ class DetailCard extends Component {
       initial_value: parseFloat(this.props.subportfolio.initial_value),
       end_value: this.state.currentValue
     }
-    fetch(`http://localhost:3000/api/v1/subportfolios/${this.props.subportfolio.id}`, {
+    fetch(`${this.props.url}/api/v1/subportfolios/${this.props.subportfolio.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -162,7 +164,7 @@ class DetailCard extends Component {
       account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) + parseFloat(value) - 5)*100)/100
     }
 
-    fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
+    fetch(`${this.props.url}/api/v1/portfolios/${this.props.portfolio.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -238,6 +240,14 @@ class DetailCard extends Component {
       </div>
     )
   }
+} // end of DetailCard component
+
+function mapStateToProps(state) {
+  return {
+    url: state.url
+  }
 }
 
-export default DetailCard
+const HOC = connect(mapStateToProps)
+
+export default HOC(DetailCard);

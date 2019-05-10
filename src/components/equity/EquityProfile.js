@@ -50,7 +50,7 @@ class EquityProfile extends Component {
       dashboard_id: this.state.dashboard_id,
       equity_id: this.state.equity_id
     }
-    fetch(`http://localhost:3000/api/v1/equity_dashboards`, {
+    fetch(`${this.props.url}/api/v1/equity_dashboards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +174,8 @@ class EquityProfile extends Component {
 function mapStateToProps(state) {
   return {
     dashboards: state.dashboards,
-    dashboardEquities: state.dashboardEquities
+    dashboardEquities: state.dashboardEquities,
+    url: state.url
   }
 }
 

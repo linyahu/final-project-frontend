@@ -48,7 +48,7 @@ class CreateNewDashboard extends Component {
   **********************************************/
   searchEquities = (e) => {
     e.preventDefault()
-    fetch("http://localhost:3000/api/v1/equities")
+    fetch(`${this.props.url}/api/v1/equities`)
     .then(res => res.json())
     .then(json => {
       let searchResults = json.filter( eq => eq.symbol.toLowerCase().includes(this.state.search) || eq.company_name.toLowerCase().includes(this.state.search) )
@@ -87,7 +87,7 @@ class CreateNewDashboard extends Component {
     }
 
     // console.log("does this work, what is data?", data);
-    fetch("http://localhost:3000/api/v1/dashboards", {
+    fetch(`${this.props.url}/api/v1/dashboards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -111,7 +111,7 @@ class CreateNewDashboard extends Component {
         dashboard_id: dashboard.id,
         equity_id: equity.id
       }
-      fetch("http://localhost:3000/api/v1/equity_dashboards", {
+      fetch(`${this.props.url}/api/v1/equity_dashboards`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -269,7 +269,8 @@ function mapStateToProps(state) {
   return {
     user_id: state.user_id,
     dashboards: state.dashboards,
-    dashboardEquities: state.dashboardEquities
+    dashboardEquities: state.dashboardEquities,
+    url: state.url
   }
 }
 

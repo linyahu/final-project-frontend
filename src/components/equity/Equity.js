@@ -176,7 +176,7 @@ class Equity extends Component {
       dashboard_id: parseInt(this.state.addDashboardId),
       equity_id: this.state.addEquityId
     }
-    fetch("http://localhost:3000/api/v1/equity_dashboards", {
+    fetch(`${this.props.url}/api/v1/equity_dashboards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,7 +205,7 @@ class Equity extends Component {
       initial_value: parseFloat(Math.round(this.state.quantity * this.state.currentPrice * 100)/100)
     }
 
-    fetch("http://localhost:3000/api/v1/subportfolios", {
+    fetch(`${this.props.url}/api/v1/subportfolios`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -293,7 +293,7 @@ class Equity extends Component {
       account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) - value - 5)*100)/100
     }
 
-    fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
+    fetch(`${this.props.url}/api/v1/portfolios/${this.props.portfolio.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -441,7 +441,7 @@ class Equity extends Component {
 
   render() {
     // console.log("what are my props in equity", this.props);
-    console.log("state stuff", this.state);
+    // console.log("state stuff", this.state);
     return (
       <div className={this.props.class}>
         {
@@ -526,7 +526,8 @@ function mapStateToProps(state) {
     dashboardEquities: state.dashboardEquities,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
-    accountBalance: state.accountBalance
+    accountBalance: state.accountBalance,
+    url: state.url
   }
 }
 

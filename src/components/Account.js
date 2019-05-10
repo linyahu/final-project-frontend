@@ -32,7 +32,7 @@ class Account extends Component {
       account_balance: Math.round((parseFloat(this.props.portfolio.account_balance) + parseFloat(this.state.amount))*100)/100
     }
 
-    fetch(`http://localhost:3000/api/v1/portfolios/${this.props.portfolio.id}`, {
+    fetch(`${this.props.url}/api/v1/portfolios/${this.props.portfolio.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ class Account extends Component {
   componentDidMount() {
     this.props.hideNavBar()
 
-    fetch("http://localhost:3000/api/v1/users")
+    fetch(`${this.props.url}/api/v1/users`)
     .then(res => res.json())
     .then(json => {
       let user = json.find(u => u.id === this.props.user_id)
@@ -165,7 +165,8 @@ function mapStateToProps(state) {
     dashboards: state.dashboards,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
-    accountBalance: state.accountBalance
+    accountBalance: state.accountBalance,
+    url: state.url,
   }
 }
 

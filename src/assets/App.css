@@ -468,8 +468,8 @@
 ********************************************/
 .summary-card-container {
   width: 62.5%;
-  height: 860px;
-  padding: 0% 2% 0% 2%;
+  height: 840px;
+  padding: 0% 2% 3% 2%;
   margin: auto;
   margin-left: 2.5%;
   margin-top: 4%;
@@ -489,8 +489,8 @@
 
 .newsfeed {
   width: 20%;
-  height: 860px;
-  padding: 0% 2% 0% 2%;
+  height: 840px;
+  padding: 0% 2% 3% 2%;
   margin: auto;
   margin-left: 2%;
   margin-top: 4%;
@@ -502,8 +502,8 @@
 
 .dashboard-equities {
   width: 62.5%;
-  height: 860px;
-  padding: 0% 2% 0% 2%;
+  height: 840px;
+  padding: 0% 2% 3% 2%;
   margin: auto;
   margin-left: 2.5%;
   margin-top: 4%;
@@ -514,8 +514,8 @@
 
 .dashboard-equities-full {
   width: 89.1%;
-  height: 860px;
-  padding: 0% 2% 0% 2%;
+  height: 840px;
+  padding: 0% 2% 3% 2%;
   margin: auto;
   margin-left: 2%;
   margin-top: 4%;
@@ -566,8 +566,8 @@
 /********************* EDIT **********************/
 .dashboard-equities-edit {
   width: 35%;
-  height: 860px;
-  padding: 0% 2% 0% 2%;
+  height: 840px;
+  padding: 0% 2% 3% 2%;
   margin: auto;
   margin-left: 2.5%;
   margin-top: 4%;
@@ -608,8 +608,8 @@
 
 .search-form-container {
   width: 21%;
-  height: 860px;
-  padding: 0% 1% 0% 1%;
+  height: 840px;
+  padding: 1% 1% 2% 1%;
   margin: auto;
   margin-left: 2.5%;
   margin-top: 4%;
@@ -887,7 +887,7 @@
   width: 93%;
   padding: 0.5%;
   margin-left: 1.5%;
-  height: 860px;
+  height: 840px;
 }
 
 .sector-equities {

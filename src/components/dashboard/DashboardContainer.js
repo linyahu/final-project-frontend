@@ -43,7 +43,7 @@ class DashboardContainer extends Component {
   // fetch dashboards that belong to the user
   // // pass it up through dispatch
   fetchDashboards() {
-    fetch("http://localhost:3000/api/v1/dashboards")
+    fetch(`${this.props.url}/api/v1/dashboards`)
     .then(res => res.json())
     .then( json => {
       let dashboards = json.filter( d => d.user_id === this.props.user_id)
@@ -172,6 +172,7 @@ function mapStateToProps(state) {
     dashboardEquities: state.dashboardEquities,
     portfolioEquities: state.portfolioEquities,
     portfolio: state.portfolio,
+    url: state.url
   }
 }
 
