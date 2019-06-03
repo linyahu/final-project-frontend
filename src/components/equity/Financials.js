@@ -6,7 +6,7 @@ class Financials extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/financials`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/financials?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -89,7 +89,7 @@ class Financials extends Component {
   }
 
   render() {
-    console.log(this.state.data);
+    // console.log(this.state.data);
     return (
       <div className="modal">
         <div className="modal-content">

@@ -132,6 +132,7 @@ class EquityProfile extends Component {
           <Financials
             ticker={this.props.equity.symbol}
             closeDetails={this.closeDetails}
+            api={this.props.api}
           />
           :
           null
@@ -175,7 +176,8 @@ function mapStateToProps(state) {
   return {
     dashboards: state.dashboards,
     dashboardEquities: state.dashboardEquities,
-    url: state.url
+    url: state.url,
+    api: state.api
   }
 }
 

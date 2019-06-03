@@ -24,6 +24,9 @@ const initialState = {
   search: "",
   accountBalance: 0,
   url: "https://stockoverflow-api.herokuapp.com",
+  iex: "https://cloud.iexapis.com/stable",
+  version: "stable",
+  api: "pk_93e6657143424d38a96b399b21afad34",
 }
 
 const persistConfig = {

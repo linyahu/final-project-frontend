@@ -54,8 +54,6 @@ class Equity extends Component {
   }
 
 
-
-
   /**********************************************
                 LIFECYCLE FUNCTIONS
   **********************************************/
@@ -117,9 +115,9 @@ class Equity extends Component {
   setDatapoints = (json) => {
     // debugger
     let datapoints = json.map( d => {
-      if (d.average > -1) {
+      if (!!d.average && d.average > -1) {
         return d.average
-      } else if (d.marketAverage > -1){
+      } else if (!!d.marketAverage && d.marketAverage > -1){
         return d.marketAverage
       }
     })
@@ -241,12 +239,11 @@ class Equity extends Component {
   }
 
   fetchIntradayData() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/dynamic`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/intraday-prices?token=${this.props.api}`)
     .then(res => res.json())
     .then( json => {
-      if(!!json.data) {
-        this.setDatapoints(json.data)
-      }
+      console.log("???$$$$$$$$", json);
+      this.setDatapoints(json)
     })
   }
 
@@ -271,7 +268,7 @@ class Equity extends Component {
 
   fetchCurrentPrice = () => {
     // console.log("will fetch price?");
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/price`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/price?token=${this.props.api}`)
     .then(this.handleErrors)
     .then(res => res.json())
     .then(json => {
@@ -527,7 +524,10 @@ function mapStateToProps(state) {
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
     accountBalance: state.accountBalance,
-    url: state.url
+    url: state.url,
+    iex: state.iex,
+    version: state.version,
+    api: state.api
   }
 }
 

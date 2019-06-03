@@ -31,7 +31,7 @@ class PortfolioContainer extends Component {
   }
 
   fetchEquityData(sub) {
-    fetch(`https://api.iextrading.com/1.0/stock/${sub.equity.symbol}/price`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${sub.equity.symbol}/price?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState(prevState => {
@@ -165,7 +165,8 @@ function mapStateToProps(state) {
     user_id: state.user_id,
     portfolio: state.portfolio,
     portfolioEquities: state.portfolioEquities,
-    accountBalance: state.accountBalance
+    accountBalance: state.accountBalance,
+    api: state.api
   }
 }
 

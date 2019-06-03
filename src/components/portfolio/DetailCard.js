@@ -149,7 +149,7 @@ class DetailCard extends Component {
   }
 
   fetchPrice = () => {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/price`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.subportfolio.equity.symbol}/price?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -244,7 +244,8 @@ class DetailCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.url
+    url: state.url,
+    api: state.api
   }
 }
 

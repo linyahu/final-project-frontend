@@ -172,7 +172,10 @@ function mapStateToProps(state) {
     dashboardEquities: state.dashboardEquities,
     portfolioEquities: state.portfolioEquities,
     portfolio: state.portfolio,
-    url: state.url
+    url: state.url,
+    iex: state.iex,
+    version: state.version,
+    key: state.key
   }
 }
 
