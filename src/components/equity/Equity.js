@@ -231,7 +231,8 @@ class Equity extends Component {
   }
 
   fetchPostCloseTradeData() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`)
+    // fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1d`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/intraday-prices?token=${this.props.api}`)
     .then(res => res.json())
     .then( json => {
       this.setDatapoints(json)
@@ -248,19 +249,16 @@ class Equity extends Component {
   }
 
   fetchStatsData() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/ohlc?token=${this.props.api}`)
     .then(res => res.json())
     .then( json => {
+      // console.log(json.open.price)
       this.setState({
         stats: {
-          open: json.open,
-          close: json.close,
+          open: json.open.price,
+          close: json.close.price,
           high: json.high,
           low: json.low,
-          changeUSD: json.change,
-          changePercent: json.changePercent,
-          prevClose: json.previousClose,
-          sector: json.sector,
         }
       })
     })

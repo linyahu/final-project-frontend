@@ -48,18 +48,18 @@ class EquityContainer extends Component {
   **********************************************/
   componentDidMount() {
     this.props.hideNavBar()
-    
+
     this.fetchMostActive()
     this.fetchGainers()
     this.fetchLosers()
-    this.fetchInFocus()
+    // this.fetchInFocus() // actually iex volume
   }
 
   /**********************************************
                 FETCH FUNCTIONS
   **********************************************/
   fetchMostActive() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/mostactive")
+    fetch(`https://cloud.iexapis.com/stable/stock/market/list/mostactive?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState({ mostactive: json })
@@ -67,7 +67,7 @@ class EquityContainer extends Component {
   }
 
   fetchGainers() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/gainers")
+    fetch(`https://cloud.iexapis.com/stable/stock/market/list/gainers?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState({ gainers: json })
@@ -75,20 +75,20 @@ class EquityContainer extends Component {
   }
 
   fetchLosers() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/losers")
+    fetch(`https://cloud.iexapis.com/stable/stock/market/list/losers?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       this.setState({ losers: json })
     })
   }
 
-  fetchInFocus() {
-    fetch("https://api.iextrading.com/1.0/stock/market/list/infocus")
-    .then(res => res.json())
-    .then(json => {
-      this.setState({ infocus: json })
-    })
-  }
+  // fetchInFocus() {
+  //   fetch(`https://cloud.iexapis.com/stable/stock/market/list/iexvolume?token=${this.props.api}`)
+  //   .then(res => res.json())
+  //   .then(json => {
+  //     this.setState({ infocus: json })
+  //   })
+  // }
 
 
   /**********************************************
@@ -117,11 +117,6 @@ class EquityContainer extends Component {
         className="navlink-dash"
         activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
         to="/equities/mostactive"> most active </NavLink>
-
-        <NavLink
-        className="navlink-dash"
-        activeStyle={{ fontWeight: "bold", color: "rgba(192, 247, 244, 1)"}}
-        to="/equities/infocus"> in focus </NavLink>
 
         <NavLink
         className="navlink-dash"
@@ -180,7 +175,8 @@ class EquityContainer extends Component {
 function mapStateToProps(state) {
   return {
     search: state.search,
-    user_id: state.user_id
+    user_id: state.user_id,
+    api: state.api,
   }
 }
 

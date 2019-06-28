@@ -2,9 +2,11 @@ import React, { Component, Fragment } from 'react'
 
 import Equity from '../equity/Equity'
 
+import { connect } from 'react-redux';
+
 class SmallCard extends Component {
   state = {
-    summary: [],
+    stats: {},
   }
 
   componentDidMount() {
@@ -12,11 +14,20 @@ class SmallCard extends Component {
   }
 
   fetchStats = () => {
-    if(!this.state.summary.length){
-      fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
+    if(!this.state.stats.length){
+      // fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
+      fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/ohlc?token=${this.props.api}`)
       .then(res => res.json())
-      .then(summary => {
-        this.setState({ summary })
+      .then(json => {
+        // console.log("wtf!??!??!", json);
+        this.setState({
+          stats: {
+            open: json.open.price,
+            close: json.close.price,
+            high: json.high,
+            low: json.low,
+          }
+        })
       })
     }
   }
@@ -25,24 +36,20 @@ class SmallCard extends Component {
     return (
       <div className="back">
         <h6>
-          Avg Volume: {Math.round(this.state.summary.avgTotalVolume/100000)/10}m
+          Open: {this.state.stats.open}
           <br />
-          Change: {this.state.summary.change} | {Math.round(this.state.summary.changePercent*1000)/10}%
+          Close: {this.state.stats.close}
           <br />
-          Last px: {this.state.summary.latestPrice}
+          High: {this.state.stats.high}
           <br />
-          High: {this.state.summary.high} | Low: {this.state.summary.low}
-          <br />
-          52 wk high: {this.state.summary.week52High} | 52 wk low: {this.state.summary.week52Low}
-          <br />
-          Ytd Change: {Math.round(this.state.summary.ytdChange*1000)/10}%
+          Low: {this.state.stats.low}
         </h6>
       </div>
     )
   }
 
   render() {
-    // console.log("state in small card", this.state.summary);
+    console.log("state in small card", this.state.stats);
     return (
       <div className="sm-card">
         <h5>{this.props.name}</h5>
@@ -66,4 +73,12 @@ class SmallCard extends Component {
 
 }
 
-export default SmallCard
+function mapStateToProps(state) {
+  return {
+    api: state.api
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(SmallCard);
