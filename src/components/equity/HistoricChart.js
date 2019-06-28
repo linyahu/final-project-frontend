@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { Line } from 'react-chartjs-2';
 
+import { connect } from 'react-redux';
+
 class HistoricChart extends Component {
   state ={
     view: "1m",
@@ -45,7 +47,7 @@ class HistoricChart extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/${this.state.view}`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/chart/${this.state.view}?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       let datapoints = json.map( d => d[this.state.price] )
@@ -68,7 +70,8 @@ class HistoricChart extends Component {
   }
 
   getNewData = (view) => {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/${view}`)
+    // fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/${view}`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/chart/${view}?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       let datapoints = json.map( d => d[this.state.price] )
@@ -143,4 +146,12 @@ class HistoricChart extends Component {
 
 }
 
-export default HistoricChart
+function mapStateToProps(state) {
+  return {
+    api: state.api
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(HistoricChart);
