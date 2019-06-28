@@ -103,7 +103,7 @@ class DetailCard extends Component {
                 FETCH FUNCTIONS
   **********************************************/
   fetchFiveYearTradingData() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/chart/5y`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.subportfolio.equity.symbol}/chart/5y?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       let data = json.filter(data => data.date >= this.props.subportfolio.date_bought)
@@ -125,7 +125,7 @@ class DetailCard extends Component {
   }
 
   fetchOneYearTradingData() {
-    fetch(`https://api.iextrading.com/1.0/stock/${this.props.subportfolio.equity.symbol}/chart/1y`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.subportfolio.equity.symbol}/chart/1y?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       let data = json.filter(data => data.date >= this.props.subportfolio.date_bought)

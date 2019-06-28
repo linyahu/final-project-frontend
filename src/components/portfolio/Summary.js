@@ -1,4 +1,3 @@
-// summary of portfolio performance history
 import React, { Component, Fragment } from 'react';
 
 // fetch the data for each equity that's there
@@ -7,6 +6,9 @@ import React, { Component, Fragment } from 'react';
 
 import EquityChart from '../equity/EquityChart'
 
+import { connect } from 'react-redux';
+
+// summary of portfolio performance history
 class Summary extends Component {
   state = {
     dataArray: [],
@@ -73,7 +75,8 @@ class Summary extends Component {
               FETCH FUNCTIONS
 **********************************************/
   fetchOneYearTradingData = (eq) => {
-    fetch(`https://api.iextrading.com/1.0/stock/${eq.equity.symbol}/chart/1y`)
+    // fetch(`https://api.iextrading.com/1.0/stock/${eq.equity.symbol}/chart/1y`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${eq.equity.symbol}/chart/1y?token=${this.props.api}`)
     .then(res => res.json())
     .then(json => {
       let filteredData = json.filter( d => d.date >= eq.date_bought)
@@ -146,4 +149,12 @@ class Summary extends Component {
   }
 }
 
-export default Summary
+function mapStateToProps(state) {
+  return {
+    api: state.api
+  }
+}
+
+const HOC = connect(mapStateToProps)
+
+export default HOC(Summary);
