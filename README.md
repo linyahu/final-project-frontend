@@ -10,9 +10,9 @@ This app was inspired by the Bloomberg Terminal dashboard.
 
 ![stock-overflow image](landingpage.png)
 
-![stock-overflow image](public/dashboardpage.png)
+![stock-overflow image](dashboardpage.png)
 
-![stock-overflow image](public/equitypage.png)
+![stock-overflow image](equitypage.png)
 
 View the demo of the app [here](https://www.youtube.com/watch?v=IaRqunF6-Y0&t=100s)
 
