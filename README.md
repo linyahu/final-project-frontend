@@ -8,7 +8,7 @@ Stock Overflow is a portfolio management app that allows users to create custom 
 
 This app was inspired by the Bloomberg Terminal dashboard.
 
-![stock-overflow image](public/landingpage.png)
+![stock-overflow image](landingpage.png)
 
 ![stock-overflow image](public/dashboardpage.png)
 
