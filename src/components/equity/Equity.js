@@ -213,7 +213,6 @@ class Equity extends Component {
     })
     .then(res => res.json())
     .then( json => {
-      // console.log("after creating subportfolio", json);
       this.props.dispatch({ type: "SET_PORTFOLIO_EQUITIES", payload: [...this.props.portfolioEquities, json] })
       this.updateAccountBalance(json.initial_value, json)
     })
@@ -243,7 +242,6 @@ class Equity extends Component {
     fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/intraday-prices?token=${this.props.api}`)
     .then(res => res.json())
     .then( json => {
-      console.log("???$$$$$$$$", json);
       this.setDatapoints(json)
     })
   }
@@ -435,8 +433,6 @@ class Equity extends Component {
   }
 
   render() {
-    // console.log("what are my props in equity", this.props);
-    // console.log("state stuff", this.state);
     return (
       <div className={this.props.class}>
         {

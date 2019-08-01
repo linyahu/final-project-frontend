@@ -15,11 +15,9 @@ class SmallCard extends Component {
 
   fetchStats = () => {
     if(!this.state.stats.length){
-      // fetch(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/quote`)
       fetch(`https://cloud.iexapis.com/stable/stock/${this.props.ticker}/ohlc?token=${this.props.api}`)
       .then(res => res.json())
       .then(json => {
-        // console.log("wtf!??!??!", json);
         this.setState({
           stats: {
             open: json.open.price,
@@ -49,7 +47,6 @@ class SmallCard extends Component {
   }
 
   render() {
-    console.log("state in small card", this.state.stats);
     return (
       <div className="sm-card">
         <h5>{this.props.name}</h5>
